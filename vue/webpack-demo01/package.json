@@ -1,0 +1,53 @@
+{
+  "name": "webpack-demo01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx webpack --config webpack.config.js",
+    "watch": "npx webpack --watch",
+    "start": "webpack-dev-server --open",
+    "start-dev": "webpack-dev-server --open --config dev.config.js",
+    "build-dev": "npx webpack --config dev.config.js",
+    "start-prod": "webpack-dev-server --open --config prod.config.js",
+    "build-prod": "npx webpack --config prod.config.js",
+    "build-es5": "babel src/js/print.ts -o src/js/es5/print.js",
+    "trc": "trc -p tsconfig.json",
+    "ts-build": "npx webpack --config webpack.tsconfig.js",
+    "ts-server": "webpack-dev-server --open --config webpack.tsconfig.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@types/node": "^12.12.14",
+    "@types/webpack": "^4.41.0",
+    "@types/webpack-dev-server": "^3.9.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-es2015": "^6.24.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "csv-loader": "^3.0.2",
+    "file-loader": "^4.3.0",
+    "html-webpack-plugin": "^3.2.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.0.0",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
