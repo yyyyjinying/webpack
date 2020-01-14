@@ -15,12 +15,13 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"]
+    extensions: ['.js', '.jsx','.ts','.tsx', '.scss','.json','.css']
   },
   module: {
     rules: [     
         {
             test: /\.html$/,
+            exclude: /node_modules/,
             use: [
                 {
                     loader: "html-loader",
@@ -30,6 +31,7 @@ module.exports = {
         },
         {
             test: /\.css$/,
+            exclude: /node_modules/,
             use: [
               {
                 loader: "style-loader"
@@ -41,24 +43,28 @@ module.exports = {
         },
         {
             test: /\.(png|svg|jpg|gif)$/,
+            exclude: /node_modules/,
             use: [
               'file-loader'
             ]
         },
         {
             test: /\.(woff|woff2|eot|ttf|otf)$/,
+            exclude: /node_modules/,
             use: [
                 'file-loader'
             ]
         },
         {
             test: /\.(csv|tsv)$/,
+            exclude: /node_modules/,
             use: [
               'csv-loader'
             ]
         },
         {
             test: /\.xml$/,
+            exclude: /node_modules/,
             use: [
               'xml-loader'
             ]

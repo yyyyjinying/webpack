@@ -10,6 +10,7 @@ module.exports = merge(common, {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, '../dist')
   },
+  mode: "development",
   devServer: {
     contentBase: path.resolve(__dirname, '../dist'),
     open: true,
@@ -17,9 +18,14 @@ module.exports = merge(common, {
     compress: true,
     port: 9000
   },
-  mode: "development",
   resolve: {
-    extensions: [".tsx", ".js", ".json"]
+    extensions: [".js", ".tsx", ".ts", ".json", ".scss", "css"],
+    alias: {
+      src: path.resolve(__dirname, '../src'),
+      components: path.resolve(__dirname, '../src/components'),
+      utils: path.resolve(__dirname, '../src/utils'),
+    },
+    modules: ['node_modules']
   },
   module: {
     rules: [

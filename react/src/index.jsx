@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Test from "./component/test"
 
 class App extends React.Component {
     
     render() {
-        const arr = [1,2,3,4,5];
+        const arr = [4,5];
         return (
             <div>
+                <Test/>
                 {arr.map((item, index) => {
                     return <div key={index}>{item*2}</div>;
                 })}
