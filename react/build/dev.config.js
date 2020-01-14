@@ -4,7 +4,7 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   entry: {
-    app: './src/index.js'
+    app: './src/index.jsx'
   },
   output: {
     filename: '[name].bundle.js',
@@ -22,7 +22,17 @@ module.exports = merge(common, {
     extensions: [".tsx", ".js", ".json"]
   },
   module: {
-    rules: []
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: [
+            {
+              loader: "babel-loader"
+            }
+        ]
+      }
+    ]
   },
   plugins: []
 })

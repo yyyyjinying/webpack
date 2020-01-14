@@ -8,7 +8,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin({protectWebpackAssets: ['dist']}),
     new HtmlWebpackPlugin({
-        title: 'react'
+        title: 'react',
+        template:'./src/index.html'
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
@@ -17,7 +18,16 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".json"]
   },
   module: {
-    rules: [
+    rules: [     
+        {
+            test: /\.html$/,
+            use: [
+                {
+                    loader: "html-loader",
+                    options: { minimize: true }
+                }
+            ]
+        },
         {
             test: /\.css$/,
             use: [
