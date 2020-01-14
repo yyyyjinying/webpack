@@ -2,9 +2,9 @@
     "presets": [
         "@babel/preset-react", 
         [
-            "@babel/preset-env", 
-            {
-                "loose": true,
+            "@babel/preset-env", // 配置名
+            { // options
+                "loose": false, // 低版本的浏览器开启true
                 "modules": false
             }
         ]
