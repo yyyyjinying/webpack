@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Test from "./component/test"
+import Test from "./component/test";
 
 class App extends React.Component {
     

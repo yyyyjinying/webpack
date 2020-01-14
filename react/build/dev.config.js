@@ -10,6 +10,7 @@ module.exports = merge(common, {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, '../dist')
   },
+  devtool: 'inline-source-map', // 打包后是否可以定位bug
   mode: "development",
   devServer: {
     contentBase: path.resolve(__dirname, '../dist'),
