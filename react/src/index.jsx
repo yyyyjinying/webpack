@@ -5,7 +5,7 @@ import Test from "./component/test";
 class App extends React.Component {
     
     render() {
-        const arr = [4,5];
+        const arr = [4,6,5];
         return (
             <div>
                 <Test/>
