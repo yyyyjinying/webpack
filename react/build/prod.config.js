@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
@@ -57,7 +58,21 @@ module.exports = merge(common, {
               loader: "babel-loader"
             }
         ]
-      }
+      },
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   use:[
+      //       {
+      //         loader: 'eslint-loader'
+      //       }
+      //   ],
+      //   enforce: "pre", // 编译前检查
+      //   exclude: /node_modules/, // 不检测的文件
+      //   include: [path.resolve(__dirname, '../src')], // 指定检查的目录
+      //   options: { // 这里的配置项参数将会被传递到 eslint 的 CLIEngine 
+      //       formatter: require('eslint-friendly-formatter') // 指定错误报告的格式规范
+      //   }
+      // }
     ]
   },
   plugins: []

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
@@ -17,7 +18,7 @@ module.exports = merge(common, {
     open: true,
     hot: true,
     compress: true,
-    port: 9000
+    port: 3030
   },
   resolve: {
     extensions: [".js", ".tsx", ".ts", ".json", ".scss", "css"],
@@ -38,6 +39,22 @@ module.exports = merge(common, {
               loader: "babel-loader"
             }
         ]
+      },      
+      {
+        test: /\.(js|jsx)$/,
+        use:[
+            {
+              loader: 'eslint-loader'
+            }
+        ],
+        enforce: "pre", // 编译前检查
+        exclude: /node_modules/, // 不检测的文件
+        include: [path.resolve(__dirname, '../src')], // 指定检查的目录
+        // options: { 
+          // emitError: true,
+          // formatter: "stylish"         
+        //   formatter: require("eslint-friendly-formatter") // community formatter
+        // }
       }
     ]
   },
