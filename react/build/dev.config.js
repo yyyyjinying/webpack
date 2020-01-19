@@ -25,7 +25,7 @@ module.exports = merge(common, {
     extensions: [".js", ".tsx", ".ts", ".json", ".scss", "css"],
     alias: {
       src: path.resolve(__dirname, '../src'),
-      components: path.resolve(__dirname, '../src/components'),
+      component: path.resolve(__dirname, '../src/component'),
       utils: path.resolve(__dirname, '../src/utils'),
     },
     modules: ['node_modules']
