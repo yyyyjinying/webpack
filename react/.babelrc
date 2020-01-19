@@ -10,6 +10,7 @@
         ]
     ],
     "plugins": [
+        ["@babel/plugin-proposal-decorators",{ "legacy": true }], // 配置支持装饰器
         [
             "import", {
                 "libraryName": "antd",
