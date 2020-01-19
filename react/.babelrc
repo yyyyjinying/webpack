@@ -9,6 +9,16 @@
             }
         ]
     ],
+    "plugins": [
+        [
+            "import", {
+                "libraryName": "antd",
+                "libraryDirectory": "es",
+                "style": true
+            }
+        ]
+      
+    ],
     "env": {
         "development": {
             "presets": [

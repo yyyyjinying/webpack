@@ -2,6 +2,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+// const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 module.exports = merge(common, {
   entry: {
@@ -58,5 +59,7 @@ module.exports = merge(common, {
       }
     ]
   },
-  plugins: []
+  plugins: [
+    // new AntdDayjsWebpackPlugin()
+  ]
 })

@@ -27,6 +27,8 @@ module.exports = {
             "warn" 或1 - 开启规则, 使用警告 程序不会退出
             "error"或2 - 开启规则, 使用错误 程序退出
         */ 
-        "no-debugger": 1
+        "no-debugger": 1, // debugger提示
+        "no-unused-vars": 2, // 变量underfined
+        "no-multi-spaces": 1,//不能用多余的空格
     }
 };

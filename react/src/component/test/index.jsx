@@ -1,15 +1,15 @@
 import React from 'react';
+import "./index.less";
+import {Button} from "antd";
 
 export default class Test extends React.Component {
     
     render() {
-        // if (foo) {
-        // }
-       
-        debugger;
-        console.log(3223);
         return (
-            <div>test</div>
+            <div className="div">
+                <span className="less-test">less</span>
+                <Button type="primary">fdf</Button>
+            </div>
         );
     }
 }
