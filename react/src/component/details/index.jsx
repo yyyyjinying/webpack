@@ -70,7 +70,7 @@ class Details extends React.Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         const {spanColumn} = this.columnRefs();
-        const dom = (item) => {            
+        const domType = (item) => {            
             const {dataIndex, props, decorator} = item;
 
             // 展示detail
@@ -95,7 +95,7 @@ class Details extends React.Component {
         }
         const items = () => {
             return spanColumn().map((item, index) => { 
-                return item.visible && <Col span={item.span} key={index}><Form.Item className="item" label={item.title}>{dom(item)}</Form.Item></Col>;
+                return item.visible && <Col span={item.span} key={index}><Form.Item className="item" label={item.title}>{domType(item)}</Form.Item></Col>;
             })
         }
         return <Modal
