@@ -12,7 +12,7 @@ class App extends React.Component {
         this.state = {
             detail: {
                 isShow: false,
-                sign: "add",
+                sign: "add", // "add" "edit" "detail"
                 value: {
                     "01": "01",
                     "02": "02",
