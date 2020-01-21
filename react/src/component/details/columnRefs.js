@@ -1,5 +1,5 @@
 const COLUMNTYPE = {timeType: "time", inputType: "input", selectType: "select"};
-const SPAN_COLUMN_NUM = 12;
+const SPAN_COLUMN_NUM = 8;
 function columnRefs() {
     const columns = [
         {
@@ -8,10 +8,16 @@ function columnRefs() {
             type: COLUMNTYPE.timeType,
             visible: true,
             props: {
-                disabled: false, // true:禁用 false:开启
+                disabled: this.isDisabled(), // true:禁用 false:开启
                 onChange: (date, dateString) => {
                     console.log(date, dateString)
                 }
+            },
+            decorator: {
+                initialValue: this.props.detail["01"],
+                rules: [
+                    {required: false, message: "必填11"}
+                ]
             }
         },
         {
@@ -21,7 +27,7 @@ function columnRefs() {
             visible: true,
             options: this.state.options,
             props: {
-                disabled: false, // true:禁用 false:开启
+                disabled: this.isDisabled(), // true:禁用 false:开启
                 showSearch: true,
                 defaultValue: "jack",
                 placeholder: "Select a person",
@@ -41,6 +47,12 @@ function columnRefs() {
                 onSearch: (val) => {
                     console.log('search:', val);
                 }
+            },
+            decorator: {
+                initialValue: this.props.detail["02"],
+                rules: [
+                    {required: false, message: "必填11"}
+                ]
             }
         },
         {
@@ -51,10 +63,10 @@ function columnRefs() {
             props: {
                 placeholder: "请输入",
                 allowClear: true,
-                disabled: false, // true:禁用 false:开启
+                disabled: this.isDisabled(), // true:禁用 false:开启
             },
             decorator: {
-                initialValue: this.state.detailValue["03"],
+                initialValue: this.props.detail["03"],
                 rules: [
                     {required: true, message: "必填11"}
                 ]
@@ -63,13 +75,18 @@ function columnRefs() {
         {
             title: "04",
             dataIndex: "04",
-            type: COLUMNTYPE.timeType,
+            type: COLUMNTYPE.inputType,
             visible: true,
             props: {
-                disabled: false, // true:禁用 false:开启
-                onChange: (date, dateString) => {
-                    console.log(date, dateString)
-                }
+                placeholder: "请输入",
+                allowClear: true,
+                disabled: this.isDisabled(), // true:禁用 false:开启
+            },
+            decorator: {
+                initialValue: this.props.detail["04"],
+                rules: [
+                    {required: true, message: "必填11"}
+                ]
             }
         },
         {
@@ -78,11 +95,12 @@ function columnRefs() {
             type: COLUMNTYPE.inputType,
             visible: true,
             props: {
+                placeholder: "请输入",
                 allowClear: true,
-                disabled: false, // true:禁用 false:开启
+                disabled: this.isDisabled(), // true:禁用 false:开启
             },
             decorator: {
-                initialValue: this.state.detailValue["05"],
+                initialValue: this.props.detail["05"],
                 rules: [
                     {required: true, message: "必填11"}
                 ]
@@ -94,11 +112,12 @@ function columnRefs() {
             type: COLUMNTYPE.inputType,
             visible: true,
             props: {
+                placeholder: "请输入",
                 allowClear: true,
-                disabled: false, // true:禁用 false:开启
+                disabled: this.isDisabled(), // true:禁用 false:开启
             },
             decorator: {
-                initialValue: this.state.detailValue["06"],
+                initialValue: this.props.detail["06"],
                 rules: [
                     {required: true, message: "必填11"}
                 ]
@@ -110,32 +129,17 @@ function columnRefs() {
             type: COLUMNTYPE.inputType,
             visible: true,
             props: {
+                placeholder: "请输入",
                 allowClear: true,
-                disabled: false, // true:禁用 false:开启
+                disabled: this.isDisabled(), // true:禁用 false:开启
             },
             decorator: {
-                initialValue: this.state.detailValue["07"],
+                initialValue: this.props.detail["07"],
                 rules: [
-                    {required: true, message: "必填11"}
+                    {required: false, message: "必填11"}
                 ]
             }
         },
-        {
-            title: "08",
-            dataIndex: "08",
-            type: COLUMNTYPE.inputType,
-            visible: false,
-            props: {
-                allowClear: true,
-                disabled: true, // true:禁用 false:开启
-            },
-            decorator: {
-                initialValue: this.state.detailValue["08"],
-                rules: [
-                    {required: true, message: "必填11"}
-                ]
-            }
-        }
     ];
     return {        
         spanColumn: () => {
