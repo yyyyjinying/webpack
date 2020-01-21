@@ -32,5 +32,11 @@ module.exports = {
         "no-debugger": 1, // debugger提示
         "no-unused-vars": 2, // 变量underfined
         "no-multi-spaces": 1,//不能用多余的空格
+        //禁止使用没有定义的变量，除非在／＊global＊／已经申明
+        "no-undef": 1,
+        //禁止把undefined赋值给一个变量
+        "no-undef-init": 2,
+        //操作符前后需要加空格
+        "space-infix-ops": 2,
     }
 };
