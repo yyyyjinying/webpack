@@ -66,8 +66,7 @@ class App extends React.Component {
               sign: "edit",
               value: this.state.detail.value,
             })
-          }
-        >
+          }>
           edit
         </Button>
         <Button
@@ -77,8 +76,7 @@ class App extends React.Component {
               sign: "add",
               value: {},
             })
-          }
-        >
+          }>
           add
         </Button>
         <Button
@@ -88,8 +86,7 @@ class App extends React.Component {
               sign: "detail",
               value: this.state.detail.value,
             })
-          }
-        >
+          }>
           detail
         </Button>
         <Detail

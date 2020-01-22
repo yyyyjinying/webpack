@@ -6,6 +6,7 @@ import { Row, Col, Form, Modal, Input, DatePicker, Select } from "antd";
 const { Option } = Select;
 
 import "./style.less";
+// import "./style.css";
 @observer
 class Details extends React.Component {
   constructor(props) {
@@ -127,8 +128,10 @@ class Details extends React.Component {
         width="1000px"
         className="detail"
       >
-        <Form className="detail-form" layout="inline">
-          <Row className="detail-row" gutter={24}>
+        <Form styleName="detailForm" layout="inline">
+          <Row styleName="detailRow" gutter={24}>
+        {/* <Form className="detailForm" layout="inline"> */}
+          {/* <Row className="detailRow" gutter={24}> */}
             {items()}
           </Row>
         </Form>

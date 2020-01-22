@@ -1,5 +1,5 @@
 const COLUMNTYPE = {
-  timeType: "time",
+  timeType: 'time',
   inputType: "input",
   selectType: "select",
 };
