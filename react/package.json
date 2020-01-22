@@ -55,7 +55,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx webpack-dev-server --config ./build/dev.config.js",
-    "start": "npx webpack --config ./build/dev.config1.js",
+    "start": "npx webpack --config ./build/dev.config.js",
     "prod": "npx webpack --config ./build/prod.config.js"
   },
   "author": "",
