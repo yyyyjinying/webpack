@@ -7,6 +7,9 @@ const { Option } = Select;
 
 import "./style.less";
 // import "./style.css";
+
+// import Json from "./index.json";
+// const Json = require("./index.json");
 @observer
 class Details extends React.Component {
   constructor(props) {
@@ -39,6 +42,7 @@ class Details extends React.Component {
 
   // 提交
   submit(e) {
+    // console.log(Json);
     // 提交按钮是编辑的状态时不能提交
     if (this.hasEditStatus()) return;
 

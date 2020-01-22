@@ -37,17 +37,19 @@ module.exports = {
           },
           {
             loader: "css-loader",
-            // options: {
-            //   importLoaders: 1,
-            //   modules: true,
-            //   localIndexName: "[name]__[local]___[hash:base64:5]", //配置class的名字
-            // },
+            options: {
+              importLoaders: 2,
+              // modules: true,
+              // localIndexName: "[name]__[local]__[hash:base64:5]", //配置class的名字
+            },
           },
           {
             loader: "postcss-loader",
             options: {
+              parser: 'postcss-less',
+              syntax: "postcss-less",
               ident: "postcss",
-              plugins: () => [
+              plugins: (loader) => [
                 require("postcss-flexbugs-fixes"),
                 require("autoprefixer")({
                   browsers: [
@@ -58,6 +60,8 @@ module.exports = {
                   ],
                   flexbox: "no-2009",
                 }),
+                require('postcss-import')({ root: loader.resourcePath }),
+                require('cssnano')()
               ],
             },
           },
