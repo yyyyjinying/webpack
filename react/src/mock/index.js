@@ -9,8 +9,6 @@ export function home() {
     })
 }
 export function mockTest() {
-
-    
     return axios({
         method: "get",
         url: `${mockUrl}/mock/5e28fc699ac87461cb753414/example/mock`
