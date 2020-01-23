@@ -63,6 +63,7 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.ROOT_URL': JSON.stringify("http://localhost:3030"),
+      'process.env.MOCK_URL': JSON.stringify("https://easy-mock.com"),
     })
   ],
 });
