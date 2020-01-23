@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
+const webpack = require("webpack");
 const path = require("path");
 const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
-// const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 module.exports = merge(common, {
   entry: {
@@ -26,6 +26,7 @@ module.exports = merge(common, {
     alias: {
       src: path.resolve(__dirname, "../src"),
       component: path.resolve(__dirname, "../src/component"),
+      mock: path.resolve(__dirname, "../src/mock"),
       utils: path.resolve(__dirname, "../src/utils"),
     },
     modules: ["node_modules"],
@@ -60,6 +61,8 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    // new AntdDayjsWebpackPlugin()
+    new webpack.DefinePlugin({
+      'process.env.ROOT_URL': JSON.stringify("http://localhost:3030"),
+    })
   ],
 });

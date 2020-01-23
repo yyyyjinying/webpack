@@ -21,7 +21,11 @@ module.exports = {
         title: 'HMR22'
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
+    })
   ],
   devServer: {
     contentBase: './dist',

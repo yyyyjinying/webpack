@@ -16,7 +16,14 @@ module.exports = {
         title: 'HMR22'
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify("dddddd"),
+      VERSION: JSON.stringify("5fa3b9"),
+      BROWSER_SUPPORTS_HTML5: true,
+      TWO: "1+1",
+      "typeof window": JSON.stringify("object")
+    })
   ],
   output: {
     filename: '[name].bundle.js',
