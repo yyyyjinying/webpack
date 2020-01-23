@@ -42,7 +42,7 @@ class Details extends React.Component {
 
   // 提交
   submit(e) {
-    // console.log(Json);
+    // ˇ(Json);
     // 提交按钮是编辑的状态时不能提交
     if (this.hasEditStatus()) return;
 
