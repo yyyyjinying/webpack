@@ -29,7 +29,7 @@ class Details extends React.Component {
   }
 
   hasEditStatus() {
-    if (!this.state.editStatus) {
+    if (this.props.sign == "edit" && !this.state.editStatus) {
       this.setState({
         editStatus: true,
       });
@@ -131,12 +131,14 @@ class Details extends React.Component {
         className="detail"
       >
         <Form styleName="detailForm" layout="inline">
-          {/* ww */}
+          {/* 1 */}
           <Row styleName="detailRow" gutter={24}>
-        {/* qq */}
+        {/* 2 */}
             {items()}
           </Row>
+        {/* 3 */}
         </Form>
+        
       </Modal>
     );
   }
