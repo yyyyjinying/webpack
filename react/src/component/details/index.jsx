@@ -130,6 +130,7 @@ class Details extends React.Component {
         className="detail"
       >
         <Form styleName="detailForm" layout="inline">
+          {/* 333434 */}
           <Row styleName="detailRow" gutter={24}>
             {items()}
           </Row>
