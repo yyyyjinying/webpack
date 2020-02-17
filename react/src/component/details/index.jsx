@@ -117,6 +117,7 @@ class Details extends React.Component {
         );
       });
     };
+    // ddd
     return (
       <Modal
         centered
@@ -129,10 +130,10 @@ class Details extends React.Component {
         width="1000px"
         className="detail"
       >
-        {/* e */}
         <Form styleName="detailForm" layout="inline">
+          {/* ww */}
           <Row styleName="detailRow" gutter={24}>
-        {/* 23 */}
+        {/* qq */}
             {items()}
           </Row>
         </Form>
