@@ -29,7 +29,7 @@ class Details extends React.Component {
   }
 
   hasEditStatus() {
-    if (!this.state.editStatus) {
+    if (this.props.sign == "edit" && !this.state.editStatus) {
       this.setState({
         editStatus: true,
       });
@@ -131,8 +131,6 @@ class Details extends React.Component {
       >
         <Form styleName="detailForm" layout="inline">
           <Row styleName="detailRow" gutter={24}>
-        {/* <Form className="detailForm" layout="inline"> */}
-          {/* <Row className="detailRow" gutter={24}> */}
             {items()}
           </Row>
         </Form>
