@@ -64,6 +64,9 @@ function columnRefs() {
         placeholder: "请输入",
         allowClear: true,
         disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (e) => {
+          console.log("onChange", e.target.value);
+        }
       },
       decorator: {
         initialValue: this.props.detail["03"],

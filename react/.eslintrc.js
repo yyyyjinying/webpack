@@ -38,5 +38,6 @@ module.exports = {
         "no-undef-init": 2,
         //操作符前后需要加空格
         "space-infix-ops": 2,
+        "no-string-refs": 0,
     }
 };

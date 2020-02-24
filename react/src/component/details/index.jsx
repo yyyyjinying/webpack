@@ -2,7 +2,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { columnRefs, COLUMNTYPE } from "./columnRefs";
-import { Row, Col, Form, Modal, Input, DatePicker, Select } from "antd";
+import { Row, Col, Checkbox, Form, Modal, Input, DatePicker, Select } from "antd";
 const { Option } = Select;
 
 import "./style.less";
@@ -18,6 +18,7 @@ class Details extends React.Component {
     this.cancel = this.cancel.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
     this.hasEditStatus = this.hasEditStatus.bind(this);
+    this.onCheckChange = this.onCheckChange.bind(this);
     this.state = {
       editStatus: false, // 编辑按钮的状态 false：修改 true： 保存
       options: [
@@ -25,6 +26,7 @@ class Details extends React.Component {
         { title: "pic", value: "pic" },
         { title: "tom", value: "tom" },
       ],
+      checked: false
     };
   }
 
@@ -58,6 +60,9 @@ class Details extends React.Component {
   // 取消
   cancel() {
     this.props.openDialog({ isShow: false });
+    this.setState({
+      checked: false
+    })
   }
 
   // 重制
@@ -71,6 +76,13 @@ class Details extends React.Component {
   // 判断是否禁用
   isDisabled() {
     return this.props.sign == "edit" && !this.state.editStatus;
+  }
+
+  onCheckChange(e) {
+    this.setState({
+      checked: e.target.checked
+    })
+    console.log(`checked = ${e.target.checked}`);
   }
 
   render() {
@@ -117,7 +129,7 @@ class Details extends React.Component {
         );
       });
     };
-    // ddd
+    
     return (
       <Modal
         centered
@@ -130,13 +142,13 @@ class Details extends React.Component {
         width="1000px"
         className="detail"
       >
-        <Form styleName="detailForm" layout="inline">
-          {/* 1 */}
-          <Row styleName="detailRow" gutter={24}>
-        {/* 2 */}
+        <Form className="detailForm" layout="inline">          
+          <Row>
+            <Checkbox checked={this.state.checked} defaultChecked={this.state.checked} onChange={this.onCheckChange}>Checkbox</Checkbox>
+          </Row>
+          <Row className="detailRow" gutter={24}>
             {items()}
           </Row>
-        {/* 3 */}
         </Form>
         
       </Modal>
