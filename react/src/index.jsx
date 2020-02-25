@@ -16,7 +16,7 @@ class App extends React.Component {
         isShow: false,
         sign: "add", // "add" "edit" "detail"
         value: {
-          "01": "01",
+          "beginTime": 1322195034000,
           "02": "02",
           "03": "03666",
           "04": "04",

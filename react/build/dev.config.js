@@ -26,6 +26,7 @@ module.exports = merge(common, {
     alias: {
       src: path.resolve(__dirname, "../src"),
       component: path.resolve(__dirname, "../src/component"),
+      common: path.resolve(__dirname, "../src/common"),
       mock: path.resolve(__dirname, "../src/mock"),
       utils: path.resolve(__dirname, "../src/utils"),
     },

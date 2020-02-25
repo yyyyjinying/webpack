@@ -1,3 +1,5 @@
+import utils from "common/utils";
+
 const COLUMNTYPE = {
   timeType: 'time',
   inputType: "input",
@@ -7,8 +9,8 @@ const SPAN_COLUMN_NUM = 8;
 function columnRefs() {
   const columns = [
     {
-      title: "01",
-      dataIndex: "01",
+      title: "beginTime",
+      dataIndex: "beginTime",
       type: COLUMNTYPE.timeType,
       visible: true,
       props: {
@@ -16,10 +18,12 @@ function columnRefs() {
         onChange: (date, dateString) => {
           console.log(date, dateString);
         },
+        format: "YYYY-MM-DD",
+        placeholder: "自定义文本",
       },
       decorator: {
-        initialValue: this.props.detail["01"],
-        rules: [{ required: false, message: "必填11" }],
+        initialValue: utils.getDateFormat(this.props.detail["beginTime"], "YYYY-MM-DD"),
+        rules: [{ type: 'object', required: true, message: 'Please select time!' }]
       },
     },
     {
@@ -70,7 +74,7 @@ function columnRefs() {
       },
       decorator: {
         initialValue: this.props.detail["03"],
-        rules: [{ required: true, message: "必填11" }],
+        rules: [{ required: false, message: "必填11" }],
       },
     },
     {
@@ -85,7 +89,7 @@ function columnRefs() {
       },
       decorator: {
         initialValue: this.props.detail["04"],
-        rules: [{ required: true, message: "必填11" }],
+        rules: [{ required: false, message: "必填11" }],
       },
     },
     {
@@ -100,7 +104,7 @@ function columnRefs() {
       },
       decorator: {
         initialValue: this.props.detail["05"],
-        rules: [{ required: true, message: "必填11" }],
+        rules: [{ required: false, message: "必填11" }],
       },
     },
     {
@@ -115,7 +119,7 @@ function columnRefs() {
       },
       decorator: {
         initialValue: this.props.detail["06"],
-        rules: [{ required: true, message: "必填11" }],
+        rules: [{ required: false, message: "必填11" }],
       },
     },
     {

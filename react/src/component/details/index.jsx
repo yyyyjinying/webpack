@@ -3,6 +3,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { columnRefs, COLUMNTYPE } from "./columnRefs";
 import { Row, Col, Checkbox, Form, Modal, Input, DatePicker, Select } from "antd";
+import utils from "common/utils";
 const { Option } = Select;
 
 import "./style.less";
@@ -48,10 +49,12 @@ class Details extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
       if (!err) {
+        console.log(fieldsValue)
+        const beginTime = utils.getTimerFormat(fieldsValue["beginTime"], 'YYYY-MM-DD');
         this.props.openDialog({
           isShow: false,
           sign: this.props.sign,
-          value: { ...this.props.detail, ...fieldsValue },
+          value: { ...this.props.detail, ...fieldsValue, beginTime },
         });
       }
     });
@@ -100,7 +103,7 @@ class Details extends React.Component {
       const domObj = {
         [COLUMNTYPE.inputType]: () =>
           getFieldDecorator(dataIndex, decorator)(<Input {...props} />),
-        [COLUMNTYPE.timeType]: () => <DatePicker {...props} />,
+        [COLUMNTYPE.timeType]: () => getFieldDecorator(dataIndex, decorator)(<DatePicker {...props} />),
         [COLUMNTYPE.selectType]: () => {
           const children =
             item.options &&
