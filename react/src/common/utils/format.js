@@ -8,3 +8,11 @@ export const getDateFormat = (timer, format = "YYYY-MM-DD") => {
 export const getTimerFormat = (momentType, format = "YYYY-MM-DD") => {
     return moment(momentType.format(format)).valueOf() || null;
 }
+
+export const getYNFormat = (bol = true, val = {on: "Y", off: "N"}) => {
+    return bol ? val.on : val.off;
+}
+
+export const getYNBol = (val = "Y") => {
+    return val.toString().toUpperCase() == "Y"; 
+}

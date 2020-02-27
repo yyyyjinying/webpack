@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 import { columnRefs, COLUMNTYPE } from "./columnRefs";
 import { Row, Col, Checkbox, Form, Modal, Input, DatePicker, Select } from "antd";
 import utils from "common/utils";
+import moment from "moment";
 const { Option } = Select;
 
 import "./style.less";
@@ -19,15 +20,8 @@ class Details extends React.Component {
     this.cancel = this.cancel.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
     this.hasEditStatus = this.hasEditStatus.bind(this);
-    this.onCheckChange = this.onCheckChange.bind(this);
     this.state = {
       editStatus: false, // 编辑按钮的状态 false：修改 true： 保存
-      options: [
-        { title: "jack", value: "jack" },
-        { title: "pic", value: "pic" },
-        { title: "tom", value: "tom" },
-      ],
-      checked: false
     };
   }
 
@@ -49,12 +43,14 @@ class Details extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
       if (!err) {
-        console.log(fieldsValue)
         const beginTime = utils.getTimerFormat(fieldsValue["beginTime"], 'YYYY-MM-DD');
+        const check = utils.getYNFormat(fieldsValue["check"]);
+        fieldsValue = {...fieldsValue, beginTime, check };
+        console.log("fieldsValue", fieldsValue)
         this.props.openDialog({
           isShow: false,
           sign: this.props.sign,
-          value: { ...this.props.detail, ...fieldsValue, beginTime },
+          value: { ...this.props.detail, ...fieldsValue, beginTime, check },
         });
       }
     });
@@ -81,11 +77,11 @@ class Details extends React.Component {
     return this.props.sign == "edit" && !this.state.editStatus;
   }
 
-  onCheckChange(e) {
-    this.setState({
-      checked: e.target.checked
+  settimeHandle() {
+    this.props.form.setFieldsValue({
+      // "03": "setvalue"
+      "beginTime": moment(1322195034000)
     })
-    console.log(`checked = ${e.target.checked}`);
   }
 
   render() {
@@ -101,21 +97,19 @@ class Details extends React.Component {
 
       // 展示add和edit
       const domObj = {
-        [COLUMNTYPE.inputType]: () =>
-          getFieldDecorator(dataIndex, decorator)(<Input {...props} />),
+        [COLUMNTYPE.checkboxType]: () => getFieldDecorator(dataIndex, decorator)(<Checkbox {...props}>checked</Checkbox>),
+        [COLUMNTYPE.inputType]: () => getFieldDecorator(dataIndex, decorator)(<Input {...props} />),
+        [COLUMNTYPE.timeRangeType]: () => getFieldDecorator(dataIndex, decorator)(<DatePicker.RangePicker {...props} />),
         [COLUMNTYPE.timeType]: () => getFieldDecorator(dataIndex, decorator)(<DatePicker {...props} />),
-        [COLUMNTYPE.selectType]: () => {
-          const children =
-            item.options &&
-            item.options.map((itemOption, index) => {
-              return (
-                <Option key={index} value={itemOption.title}>
-                  {itemOption.value}
-                </Option>
-              );
-            });
-          return <Select {...props}>{children}</Select>;
-        },
+        [COLUMNTYPE.selectType]: () => getFieldDecorator(dataIndex, decorator)(
+          <Select {...props}>
+            {
+              item.options && item.options.map((itemOption, index) => {
+                return <Option key={index} value={itemOption.value}>{itemOption.text}</Option>
+              })
+            }
+          </Select>,
+        ),
       };
       return domObj[item.type]();
     };
@@ -145,10 +139,8 @@ class Details extends React.Component {
         width="1000px"
         className="detail"
       >
-        <Form className="detailForm" layout="inline">          
-          <Row>
-            <Checkbox checked={this.state.checked} defaultChecked={this.state.checked} onChange={this.onCheckChange}>Checkbox</Checkbox>
-          </Row>
+        <button onClick={this.settimeHandle.bind(this)}>设置时间</button>
+        <Form className="detailForm" layout="inline"> 
           <Row className="detailRow" gutter={24}>
             {items()}
           </Row>
@@ -161,9 +153,12 @@ class Details extends React.Component {
 
 export default Form.create({
   mapPropsToFields: props => {
-    console.log(props);
+    console.log("mapPropsToFields", props);
+  },
+  onFieldsChange: (props, fields) => {
+    console.log("onFieldsChange", props, fields);
   },
   onValuesChange: (props, fields) => {
-    console.log(props, fields);
+    console.log("onValuesChange", props, fields);
   },
 })(Details);

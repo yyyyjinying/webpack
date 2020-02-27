@@ -1,6 +1,8 @@
 import utils from "common/utils";
 
 const COLUMNTYPE = {
+  checkboxType: 'checkbox',
+  timeRangeType: "timeRange",
   timeType: 'time',
   inputType: "input",
   selectType: "select",
@@ -27,20 +29,41 @@ function columnRefs() {
       },
     },
     {
-      title: "02",
-      dataIndex: "02",
+      title: "timeRange",
+      dataIndex: "timeRange",
+      type: COLUMNTYPE.timeRangeType,
+      visible: true,
+      props: {
+        disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (date, dateString) => {
+          console.log(date, dateString);
+        },
+        format: "YYYY-MM-DD",
+        placeholder: "自定义文本",
+      },
+      decorator: {
+        // initialValue: utils.getDateFormat(this.props.detail["beginTime"], "YYYY-MM-DD"),
+        rules: [{ type: 'array', required: true, message: 'Please select time!' }]
+      },
+    },
+    {
+      title: "select",
+      dataIndex: "select",
       type: COLUMNTYPE.selectType,
       visible: true,
-      options: this.state.options,
+      options: [
+        { text: "jack", value: "01" },
+        { text: "pic", value: "02" },
+        { text: "tom", value: "03" },
+      ],
       props: {
         disabled: this.isDisabled(), // true:禁用 false:开启
         showSearch: true,
-        defaultValue: "jack",
         placeholder: "Select a person",
-        optionFilterProp: "children",
-        filterOption: (input, option) => {
-          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-        },
+        // optionFilterProp: "children",
+        // filterOption: (input, option) => {
+        //   option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+        // },
         onChange: value => {
           console.log(`selected ${value}`);
         },
@@ -55,8 +78,8 @@ function columnRefs() {
         },
       },
       decorator: {
-        initialValue: this.props.detail["02"],
-        rules: [{ required: false, message: "必填11" }],
+        initialValue: this.props.detail["select"],
+        rules: [{ required: true, message: "必填11" }],
       },
     },
     {
@@ -78,63 +101,19 @@ function columnRefs() {
       },
     },
     {
-      title: "04",
-      dataIndex: "04",
-      type: COLUMNTYPE.inputType,
+      title: null,
+      dataIndex: "check",
+      type: COLUMNTYPE.checkboxType,
       visible: true,
       props: {
-        placeholder: "请输入",
-        allowClear: true,
         disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (param) => {
+          console.log("checked", param.target.checked);
+        }
       },
       decorator: {
-        initialValue: this.props.detail["04"],
-        rules: [{ required: false, message: "必填11" }],
-      },
-    },
-    {
-      title: "05",
-      dataIndex: "05",
-      type: COLUMNTYPE.inputType,
-      visible: true,
-      props: {
-        placeholder: "请输入",
-        allowClear: true,
-        disabled: this.isDisabled(), // true:禁用 false:开启
-      },
-      decorator: {
-        initialValue: this.props.detail["05"],
-        rules: [{ required: false, message: "必填11" }],
-      },
-    },
-    {
-      title: "06",
-      dataIndex: "06",
-      type: COLUMNTYPE.inputType,
-      visible: true,
-      props: {
-        placeholder: "请输入",
-        allowClear: true,
-        disabled: this.isDisabled(), // true:禁用 false:开启
-      },
-      decorator: {
-        initialValue: this.props.detail["06"],
-        rules: [{ required: false, message: "必填11" }],
-      },
-    },
-    {
-      title: "07",
-      dataIndex: "07",
-      type: COLUMNTYPE.inputType,
-      visible: true,
-      props: {
-        placeholder: "请输入",
-        allowClear: true,
-        disabled: this.isDisabled(), // true:禁用 false:开启
-      },
-      decorator: {
-        initialValue: this.props.detail["07"],
-        rules: [{ required: false, message: "必填11" }],
+        valuePropName: 'checked',
+        initialValue: utils.getYNBol(this.props.detail["check"])
       },
     },
   ];
