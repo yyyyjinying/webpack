@@ -24,9 +24,9 @@ function columnRefs() {
         placeholder: "自定义文本",
       },
       decorator: {
-        initialValue: utils.getDateFormat(this.props.detail["beginTime"], "YYYY-MM-DD"),
+        initialValue: utils.getDateFormat(this.props.detail["beginTime"]),// utils.getDateFormat(this.props.detail["beginTime"], "YYYY-MM-DD"),
         rules: [{ type: 'object', required: true, message: 'Please select time!' }]
-      },
+      }
     },
     {
       title: "timeRange",
@@ -39,12 +39,12 @@ function columnRefs() {
           console.log(date, dateString);
         },
         format: "YYYY-MM-DD",
-        placeholder: "自定义文本",
+        placeholder: ["start01", "end01"],
       },
       decorator: {
-        // initialValue: utils.getDateFormat(this.props.detail["beginTime"], "YYYY-MM-DD"),
+        initialValue: utils.getArrayDateFormat(this.props.detail["timeRange"]),
         rules: [{ type: 'array', required: true, message: 'Please select time!' }]
-      },
+      }
     },
     {
       title: "select",

@@ -1,7 +1,9 @@
-import { getDateFormat, getTimerFormat, getYNFormat, getYNBol } from "./format.js";
+import { getDateFormat, getTimerArrayFormat, getArrayDateFormat, getTimerFormat, getYNFormat, getYNBol } from "./format.js";
 export default {
     getDateFormat,
     getTimerFormat,
     getYNFormat,
-    getYNBol
+    getYNBol,
+    getArrayDateFormat,
+    getTimerArrayFormat
 }

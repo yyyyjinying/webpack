@@ -1,12 +1,17 @@
 import moment from "moment";
-export const getDateFormat = (timer, format = "YYYY-MM-DD") => {
-    if (!timer) return null;
-    const time = new Date(Number(timer));
-    return moment(`${time.getFullYear()}${time.getMonth() + 1}${time.getDate()}`, format);
+export const getDateFormat = (timer) => {
+    return moment(timer) || null;
+}
+export const getArrayDateFormat = (Array = [1582732800000, 1585324800000]) => {
+    return Array.map(item => moment(item));
 }
 
-export const getTimerFormat = (momentType, format = "YYYY-MM-DD") => {
-    return moment(momentType.format(format)).valueOf() || null;
+export const getTimerArrayFormat = (momentArray = []) => {
+    return momentArray.map(item => getTimerFormat(item));
+}
+
+export const getTimerFormat = (momentType) => {
+    return moment(momentType).valueOf() || null;
 }
 
 export const getYNFormat = (bol = true, val = {on: "Y", off: "N"}) => {

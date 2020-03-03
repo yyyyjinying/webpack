@@ -4,8 +4,6 @@ import { observer } from "mobx-react";
 import { columnRefs, COLUMNTYPE } from "./columnRefs";
 import { Row, Col, Checkbox, Form, Modal, Input, DatePicker, Select } from "antd";
 import utils from "common/utils";
-import moment from "moment";
-const { Option } = Select;
 
 import "./style.less";
 // import "./style.css";
@@ -43,9 +41,10 @@ class Details extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
       if (!err) {
-        const beginTime = utils.getTimerFormat(fieldsValue["beginTime"], 'YYYY-MM-DD');
+        const beginTime = utils.getTimerFormat(fieldsValue["beginTime"]);
+        const timeRange = utils.getTimerArrayFormat(fieldsValue["timeRange"]);
         const check = utils.getYNFormat(fieldsValue["check"]);
-        fieldsValue = {...fieldsValue, beginTime, check };
+        fieldsValue = {...fieldsValue, beginTime, timeRange, check };
         console.log("fieldsValue", fieldsValue)
         this.props.openDialog({
           isShow: false,
@@ -80,7 +79,7 @@ class Details extends React.Component {
   settimeHandle() {
     this.props.form.setFieldsValue({
       // "03": "setvalue"
-      "beginTime": moment(1322195034000)
+      "beginTime": utils.getDateFormat(1322195034000)
     })
   }
 
@@ -105,7 +104,7 @@ class Details extends React.Component {
           <Select {...props}>
             {
               item.options && item.options.map((itemOption, index) => {
-                return <Option key={index} value={itemOption.value}>{itemOption.text}</Option>
+                return <Select.Option key={index} value={itemOption.value}>{itemOption.text}</Select.Option>
               })
             }
           </Select>,
@@ -113,6 +112,7 @@ class Details extends React.Component {
       };
       return domObj[item.type]();
     };
+
     const items = () => {
       return spanColumn().map((item, index) => {
         return (
@@ -126,7 +126,7 @@ class Details extends React.Component {
         );
       });
     };
-    
+
     return (
       <Modal
         centered
@@ -140,7 +140,7 @@ class Details extends React.Component {
         className="detail"
       >
         <button onClick={this.settimeHandle.bind(this)}>设置时间</button>
-        <Form className="detailForm" layout="inline"> 
+    <Form className="detailForm" layout="inline"> 
           <Row className="detailRow" gutter={24}>
             {items()}
           </Row>

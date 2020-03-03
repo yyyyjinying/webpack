@@ -19,6 +19,7 @@ class App extends React.Component {
           "beginTime": 1322195034000,
           "select": "02",
           "03": "03666",
+          "timeRange": [1582732800000, 1585324800000],
           "check": "Y",
           "05": "05",
           "06": "06",
