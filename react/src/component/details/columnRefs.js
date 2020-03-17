@@ -11,9 +11,10 @@ const SPAN_COLUMN_NUM = 8;
 function columnRefs() {
   const columns = [
     {
-      title: "beginTime",
+      title: "beginTim",
       dataIndex: "beginTime",
       type: COLUMNTYPE.timeType,
+      className: "beginTime",
       visible: true,
       props: {
         disabled: this.isDisabled(), // true:禁用 false:开启
@@ -32,7 +33,7 @@ function columnRefs() {
       title: "timeRange",
       dataIndex: "timeRange",
       type: COLUMNTYPE.timeRangeType,
-      visible: true,
+      visible: false,
       props: {
         disabled: this.isDisabled(), // true:禁用 false:开启
         onChange: (date, dateString) => {
@@ -60,10 +61,6 @@ function columnRefs() {
         disabled: this.isDisabled(), // true:禁用 false:开启
         showSearch: true,
         placeholder: "Select a person",
-        // optionFilterProp: "children",
-        // filterOption: (input, option) => {
-        //   option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-        // },
         onChange: value => {
           console.log(`selected ${value}`);
         },
@@ -85,6 +82,60 @@ function columnRefs() {
     {
       title: "03",
       dataIndex: "03",
+      type: COLUMNTYPE.inputType,
+      visible: true,
+      props: {
+        placeholder: "请输入",
+        allowClear: true,
+        disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (e) => {
+          console.log("onChange", e.target.value);
+        }
+      },
+      decorator: {
+        initialValue: this.props.detail["03"],
+        rules: [{ required: false, message: "必填11" }],
+      },
+    },
+    {
+      title: "03",
+      dataIndex: "03",
+      type: COLUMNTYPE.inputType,
+      visible: true,
+      props: {
+        placeholder: "请输入",
+        allowClear: true,
+        disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (e) => {
+          console.log("onChange", e.target.value);
+        }
+      },
+      decorator: {
+        initialValue: this.props.detail["03"],
+        rules: [{ required: false, message: "必填11" }],
+      },
+    },
+    {
+      title: "04",
+      dataIndex: "04",
+      type: COLUMNTYPE.inputType,
+      visible: true,
+      props: {
+        placeholder: "请输入",
+        allowClear: true,
+        disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (e) => {
+          console.log("onChange", e.target.value);
+        }
+      },
+      decorator: {
+        initialValue: this.props.detail["03"],
+        rules: [{ required: false, message: "必填11" }],
+      },
+    },
+    {
+      title: "05",
+      dataIndex: "05",
       type: COLUMNTYPE.inputType,
       visible: true,
       props: {

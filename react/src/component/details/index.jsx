@@ -20,6 +20,7 @@ class Details extends React.Component {
     this.hasEditStatus = this.hasEditStatus.bind(this);
     this.state = {
       editStatus: false, // 编辑按钮的状态 false：修改 true： 保存
+      test: ""
     };
   }
 
@@ -83,18 +84,27 @@ class Details extends React.Component {
     })
   }
 
+  test() {
+    this.setState({
+      test: "test2222"
+    }, () => {
+      console.log("22",this.state.test)
+    })
+    console.log("test");
+  }
+
   render() {
-    const { getFieldDecorator } = this.props.form;
     const { spanColumn } = this.columnRefs();
     const domType = item => {
       const { dataIndex, props, decorator } = item;
-
+      
       // 展示detail
       if (this.props.sign == "detail") {
         return <span>{decorator.initialValue}</span>;
       }
-
+      
       // 展示add和edit
+      const { getFieldDecorator } = this.props.form;
       const domObj = {
         [COLUMNTYPE.checkboxType]: () => getFieldDecorator(dataIndex, decorator)(<Checkbox {...props}>checked</Checkbox>),
         [COLUMNTYPE.inputType]: () => getFieldDecorator(dataIndex, decorator)(<Input {...props} />),
@@ -118,7 +128,7 @@ class Details extends React.Component {
         return (
           item.visible && (
             <Col span={item.span} key={index}>
-              <Form.Item className="item" label={item.title}>
+              <Form.Item style={item.style} className={item.className + " item"} label={item.title}>
                 {domType(item)}
               </Form.Item>
             </Col>
@@ -139,7 +149,7 @@ class Details extends React.Component {
         width="1000px"
         className="detail"
       >
-        <button onClick={this.settimeHandle.bind(this)}>设置时间</button>
+        {/* <button onClick={this.settimeHandle.bind(this)}>设置时间</button> */}
     <Form className="detailForm" layout="inline"> 
           <Row className="detailRow" gutter={24}>
             {items()}
@@ -158,7 +168,8 @@ export default Form.create({
   onFieldsChange: (props, fields) => {
     console.log("onFieldsChange", props, fields);
   },
-  onValuesChange: (props, fields) => {
-    console.log("onValuesChange", props, fields);
+  onValuesChange: (props, fields, a) => {
+    console.log("onValuesChange", props, fields, a);
+    
   },
 })(Details);
