@@ -6,10 +6,31 @@ const COLUMNTYPE = {
   timeType: 'time',
   inputType: "input",
   selectType: "select",
+  numberType: "number",
 };
 const SPAN_COLUMN_NUM = 8;
 function columnRefs() {
   const columns = [
+    {
+      title: "numbernumbe",
+      dataIndex: "number",
+      type: COLUMNTYPE.numberType,
+      visible: true,
+      className: "number",
+      props: {
+        disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (date, dateString) => {
+          console.log(date, dateString);
+        },
+        placeholder: "自定义number",
+        formatter: value => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+        parser: value => String(value).replace(/\$\s?|(,*)/g, ''),
+      },
+      decorator: {
+        initialValue: 2345,
+        rules: [{ type: 'number', required: true, message: 'Please input number!' }]
+      }
+    },
     {
       title: "beginTim",
       dataIndex: "beginTime",
@@ -33,7 +54,7 @@ function columnRefs() {
       title: "timeRange",
       dataIndex: "timeRange",
       type: COLUMNTYPE.timeRangeType,
-      visible: false,
+      visible: true,
       props: {
         disabled: this.isDisabled(), // true:禁用 false:开启
         onChange: (date, dateString) => {
@@ -61,6 +82,7 @@ function columnRefs() {
         disabled: this.isDisabled(), // true:禁用 false:开启
         showSearch: true,
         placeholder: "Select a person",
+        allowClear: true,
         onChange: value => {
           console.log(`selected ${value}`);
         },
@@ -169,6 +191,7 @@ function columnRefs() {
     },
   ];
   return {
+    COLUMNTYPE,
     spanColumn: () => {
       return columns.map(item => {
         item.span = SPAN_COLUMN_NUM;
@@ -180,5 +203,15 @@ function columnRefs() {
     },
   };
 }
-
-export { columnRefs, COLUMNTYPE };
+const mapFields = {
+  mapPropsToFields: props => {
+    console.log("mapPropsToFields", props);
+  },
+  onFieldsChange: (props, fields) => {
+    console.log("onFieldsChange", props, fields);
+  },
+  onValuesChange: (props, fields, a) => {
+    console.log("onValuesChange", props, fields, a);
+  },
+};
+export { columnRefs, mapFields };

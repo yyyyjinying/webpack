@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { observer } from "mobx-react";
-import { columnRefs, COLUMNTYPE } from "./columnRefs";
-import { Row, Col, Checkbox, Form, Modal, Input, DatePicker, Select } from "antd";
+import { columnRefs, mapFields } from "./columnRefs";
+import { Modal, Form } from "antd";
 import utils from "common/utils";
-
 import "./style.less";
-// import "./style.css";
-
+import Base from "component/base";
 @observer
 class Details extends React.Component {
   constructor(props) {
@@ -20,7 +18,7 @@ class Details extends React.Component {
     this.hasEditStatus = this.hasEditStatus.bind(this);
     this.state = {
       editStatus: false, // 编辑按钮的状态 false：修改 true： 保存
-      test: ""
+      test: "",
     };
   }
 
@@ -34,34 +32,48 @@ class Details extends React.Component {
     return false;
   }
 
+  _validateFields(e, backCallFn) {
+    e.preventDefault();
+    this.props.form.validateFields((err, fieldsValue) => {
+      if (!err) {
+        backCallFn(fieldsValue);
+      }
+    });
+  }
+
   // 提交
   submit(e) {
     // 提交按钮是编辑的状态时不能提交
     if (this.hasEditStatus()) return;
 
-    e.preventDefault();
-    this.props.form.validateFields((err, fieldsValue) => {
-      if (!err) {
-        const beginTime = utils.getTimerFormat(fieldsValue["beginTime"]);
-        const timeRange = utils.getTimerArrayFormat(fieldsValue["timeRange"]);
-        const check = utils.getYNFormat(fieldsValue["check"]);
-        fieldsValue = {...fieldsValue, beginTime, timeRange, check };
-        console.log("fieldsValue", fieldsValue)
-        this.props.openDialog({
-          isShow: false,
-          sign: this.props.sign,
-          value: { ...this.props.detail, ...fieldsValue, beginTime, check },
-        });
-      }
+    this._validateFields(e, fieldsValue => {
+      const beginTime = utils.getTimerFormat(fieldsValue["beginTime"]);
+      const timeRange = utils.getTimerArrayFormat(fieldsValue["timeRange"]);
+      const check = utils.getYNFormat(fieldsValue["check"]);
+      fieldsValue = { ...fieldsValue, beginTime, timeRange, check };
+      console.log("fieldsValue", fieldsValue);
+      this.props.openDialog({
+        isShow: false,
+        sign: this.props.sign,
+        value: { ...this.props.detail, ...fieldsValue, beginTime, check },
+      });
     });
   }
 
   // 取消
   cancel() {
+    console.log(
+      "moment",
+      utils.getDateFormat("2012-03-04").format("YYYY-MM-DD")
+    );
+    console.log(
+      "moment",
+      utils.getDateFormat(1582732800000).format("YYYY-MM-DD")
+    );
     this.props.openDialog({ isShow: false });
     this.setState({
-      checked: false
-    })
+      checked: false,
+    });
   }
 
   // 重制
@@ -80,63 +92,31 @@ class Details extends React.Component {
   settimeHandle() {
     this.props.form.setFieldsValue({
       // "03": "setvalue"
-      "beginTime": utils.getDateFormat(1322195034000)
-    })
+      beginTime: utils.getDateFormat(1322195034000),
+    });
   }
 
   test() {
-    this.setState({
-      test: "test2222"
-    }, () => {
-      console.log("22",this.state.test)
-    })
+    this.setState(
+      {
+        test: "test2222",
+      },
+      () => {
+        console.log("22", this.state.test);
+      }
+    );
     console.log("test");
   }
 
+  componentDidMount() {
+    console.log("details");
+  }
+
+  inputNumberOnChange(val, option) {
+    console.log(val, option);
+  }
+
   render() {
-    const { spanColumn } = this.columnRefs();
-    const domType = item => {
-      const { dataIndex, props, decorator } = item;
-      
-      // 展示detail
-      if (this.props.sign == "detail") {
-        return <span>{decorator.initialValue}</span>;
-      }
-      
-      // 展示add和edit
-      const { getFieldDecorator } = this.props.form;
-      const domObj = {
-        [COLUMNTYPE.checkboxType]: () => getFieldDecorator(dataIndex, decorator)(<Checkbox {...props}>checked</Checkbox>),
-        [COLUMNTYPE.inputType]: () => getFieldDecorator(dataIndex, decorator)(<Input {...props} />),
-        [COLUMNTYPE.timeRangeType]: () => getFieldDecorator(dataIndex, decorator)(<DatePicker.RangePicker {...props} />),
-        [COLUMNTYPE.timeType]: () => getFieldDecorator(dataIndex, decorator)(<DatePicker {...props} />),
-        [COLUMNTYPE.selectType]: () => getFieldDecorator(dataIndex, decorator)(
-          <Select {...props}>
-            {
-              item.options && item.options.map((itemOption, index) => {
-                return <Select.Option key={index} value={itemOption.value}>{itemOption.text}</Select.Option>
-              })
-            }
-          </Select>,
-        ),
-      };
-      return domObj[item.type]();
-    };
-
-    const items = () => {
-      return spanColumn().map((item, index) => {
-        return (
-          item.visible && (
-            <Col span={item.span} key={index}>
-              <Form.Item style={item.style} className={item.className + " item"} label={item.title}>
-                {domType(item)}
-              </Form.Item>
-            </Col>
-          )
-        );
-      });
-    };
-
     return (
       <Modal
         centered
@@ -146,30 +126,13 @@ class Details extends React.Component {
         onOk={e => this.submit(e)}
         onCancel={() => this.cancel()}
         afterClose={() => this.reset()}
-        width="1000px"
-        className="detail"
-      >
+        width="1200px"
+        className="detail">
+        <Base {...{ form: this.props.form, ...this.columnRefs() }} />
         {/* <button onClick={this.settimeHandle.bind(this)}>设置时间</button> */}
-    <Form className="detailForm" layout="inline"> 
-          <Row className="detailRow" gutter={24}>
-            {items()}
-          </Row>
-        </Form>
-        
       </Modal>
     );
   }
 }
 
-export default Form.create({
-  mapPropsToFields: props => {
-    console.log("mapPropsToFields", props);
-  },
-  onFieldsChange: (props, fields) => {
-    console.log("onFieldsChange", props, fields);
-  },
-  onValuesChange: (props, fields, a) => {
-    console.log("onValuesChange", props, fields, a);
-    
-  },
-})(Details);
+export default Form.create(mapFields)(Details);

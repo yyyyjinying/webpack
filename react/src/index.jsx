@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Detail from "component/details";
+// import Test from "component/test_component";
 import { Button } from "antd";
 
-import {home, mockTest} from "mock";
-
+// import {home, mockTest} from "mock";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -31,12 +31,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    home().then((data) => {
-      console.log(data);
-    })
-    mockTest().then((data) => {
-      console.log(data);
-    })
+    console.log("index")
+    // this.home();
+    // mockTest().then((data) => {
+    //   console.log(data);
+    // })
   }
 
   edit(param) {
@@ -71,6 +70,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {/* <Test/> */}
         <Button
           onClick={() =>
             this.openDialog({
