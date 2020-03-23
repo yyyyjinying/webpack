@@ -69,7 +69,7 @@ class Details extends React.Component {
     console.log(
       "moment",
       utils.getDateFormat(1582732800000).format("YYYY-MM-DD")
-    );
+    );  
     this.props.openDialog({ isShow: false });
     this.setState({
       checked: false,
