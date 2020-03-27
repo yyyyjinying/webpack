@@ -18,6 +18,7 @@ function columnRefs() {
       visible: true,
       className: "number",
       props: {
+        // readOnly: true, // 只读
         disabled: this.isDisabled(), // true:禁用 false:开启
         onChange: (date, dateString) => {
           console.log(date, dateString);

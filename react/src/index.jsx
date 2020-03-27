@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Detail from "component/details";
-// import Test from "component/test_component";
+import Test from "component/test_component";
 import { Button } from "antd";
-
+import AutoComponent from "component";
 // import {home, mockTest} from "mock";
 class App extends React.Component {
   constructor(props) {
@@ -30,12 +30,9 @@ class App extends React.Component {
     };
   }
 
+  
+
   componentDidMount() {
-    console.log("index")
-    // this.home();
-    // mockTest().then((data) => {
-    //   console.log(data);
-    // })
   }
 
   edit(param) {
@@ -70,7 +67,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <Test/> */}
+        <Test/>
+        <AutoComponent/>
         <Button
           onClick={() =>
             this.openDialog({

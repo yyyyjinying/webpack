@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.19.2",
+    "bignumber.js": "^9.0.0",
     "mobx": "^5.15.2",
     "mobx-react": "^5.0.0",
     "moment": "^2.24.0",
