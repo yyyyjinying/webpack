@@ -3,7 +3,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { Input, Tooltip } from "antd";
-
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 // import utils from "utils";
 
@@ -23,7 +23,7 @@ function columnRefs(props) {
     if (curColumn.renderElement) {
       element = curColumn.renderElement(text, record, index, curColumn);
     } else {
-      element = <span>{text}</span>;
+      element = <span className="span_text">{text}</span>;
     }
 
     if (curColumn.toolTip && curColumn.toolTip.visible) {
@@ -42,6 +42,7 @@ function columnRefs(props) {
       dataIndex: "name",
       key: "name",
       rules: [{ required: true, message: "Please number!" }],
+      width: 160,
       renderElement: text => {
         return (
           <Input
@@ -49,13 +50,13 @@ function columnRefs(props) {
             disabled={false}
             defaultValue={text}
             style={{ width: "140px" }}
-            allowClear={true}
+            // allowClear={true}
             onChange={() => {
               console.log("input");
             }}
             suffix={
-              <Tooltip title="Extra information">
-                {/* <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} /> */}
+              <Tooltip title="提示信息" placement="rightTop">
+                <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
               </Tooltip>
             }
           />
@@ -69,8 +70,13 @@ function columnRefs(props) {
       toolTip: {
         visible: true,
       },
-      renderElement: text => {
-        return <span style={{ color: "red" }}>{text}</span>;
+      width: 200,
+      renderElement: () => {
+        return (
+          <span className="span_text">
+            zhaojinying赵晋英zhaojinying赵晋英zhaojinying赵晋英zhaojinying赵晋英zhaojinying赵晋英
+          </span>
+        );
       },
     },
     {

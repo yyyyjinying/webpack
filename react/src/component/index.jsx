@@ -2,6 +2,7 @@
 import React from "react";
 import { Table, Form } from "antd";
 import columnRefs from "./columnRefs";
+import "./index.less";
 
 class Index extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Index extends React.Component {
           key: "1",
           name: "胡彦斌",
           age: 32,
-          address: "西湖区湖底公园1号",
+          address: "西湖区湖底公园1号span_textspan_textspan_textspan_textspan_textspan_textspan_textspan_textspan_textspan_textspan_textspan_textspan_textspan_textspan_textspan_textspan_text",
         },
         {
           key: "2",
@@ -42,7 +43,7 @@ class Index extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="component_table">
         <Table
           bordered
           pagination={false}
@@ -50,6 +51,7 @@ class Index extends React.Component {
           columns={this.columns}
           rowKey={(record, i) => i}
           dataSource={this.state.dataSource}
+          scroll={{x: "100%"}}
         />
       </div>
     );
