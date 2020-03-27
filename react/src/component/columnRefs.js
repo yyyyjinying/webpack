@@ -1,10 +1,14 @@
+/* eslint-disable react/display-name */
 // 修复React属性丢失
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { Tooltip } from "antd";
+import { Input, Tooltip } from "antd";
+
+
 // import utils from "utils";
 
-function columnRefs() {
+// eslint-disable-next-line no-unused-vars
+function columnRefs(props) {
   const render = (text, record, index, curColumn) => {
     // tip位置
     let placement = curColumn.toolTip && curColumn.toolTip.placement;
@@ -23,25 +27,39 @@ function columnRefs() {
     }
 
     if (curColumn.toolTip && curColumn.toolTip.visible) {
-        element = <Tooltip key={index} {...{ placement, title }}>
+      element = (
+        <Tooltip key={index} {...{ placement, title }}>
           {element}
         </Tooltip>
+      );
     }
-    return (element);
+    return element;
   };
+
   const columns = [
     {
       title: "姓名",
       dataIndex: "name",
       key: "name",
-      toolTip: {
-        visible: true,
-        placement: "right",
-        title: "提示信息test",
-      },
-      // eslint-disable-next-line react/display-name
+      rules: [{ required: true, message: "Please number!" }],
       renderElement: text => {
-        return <span style={{color: "red"}}>{text}</span>;
+        return (
+          <Input
+            placeholder="请输入"
+            disabled={false}
+            defaultValue={text}
+            style={{ width: "140px" }}
+            allowClear={true}
+            onChange={() => {
+              console.log("input");
+            }}
+            suffix={
+              <Tooltip title="Extra information">
+                {/* <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} /> */}
+              </Tooltip>
+            }
+          />
+        );
       },
     },
     {
@@ -50,7 +68,10 @@ function columnRefs() {
       key: "age",
       toolTip: {
         visible: true,
-      }
+      },
+      renderElement: text => {
+        return <span style={{ color: "red" }}>{text}</span>;
+      },
     },
     {
       title: "住址",
@@ -58,17 +79,15 @@ function columnRefs() {
       key: "address",
       toolTip: {
         visible: true,
-      }
+      },
     },
   ];
-
-  const { selectedRowKeys } = this.state;
 
   return {
     rowSelection: {
       type: "checkbox",
       columnWidth: "60px",
-      selectedRowKeys,
+      selectedRowKeys: this.state.selectedRowKeys,
       onChange: (selectedRowKeys, selectedRow) => {
         this.setState({
           selectedRowKeys,
@@ -76,7 +95,7 @@ function columnRefs() {
         });
       },
     },
-    spanColumn: () => {
+    getColumns: () => {
       return columns.map(item => {
         if (typeof item.render != "function") {
           item.render = (text, record, index) => {

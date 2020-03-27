@@ -1,46 +1,46 @@
+/* eslint-disable react/prop-types */
 import React from "react";
-import { Table } from "antd";
+import { Table, Form } from "antd";
 import columnRefs from "./columnRefs";
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        selectedRowKeys: [],
-        dataSource: [
-            {
-                key: "1",
-                name: "胡彦斌",
-                age: 32,
-                address: "西湖区湖底公园1号",
-            },
-            {
-                key: "2",
-                name: "胡彦祖",
-                age: 42,
-                address: "西湖区湖底公园1号",
-            },
-        ],
+      selectedRowKeys: [],
+      dataSource: [
+        {
+          key: "1",
+          name: "胡彦斌",
+          age: 32,
+          address: "西湖区湖底公园1号",
+        },
+        {
+          key: "2",
+          name: "胡彦祖",
+          age: 42,
+          address: "西湖区湖底公园1号",
+        },
+      ],
     };
     this.columnRefs = columnRefs.bind(this);
-    this.columns = this.columnRefs().spanColumn();
-    this.rowSelection = this.columnRefs().rowSelection;
+    this.columns = this.columnRefs(this.props).getColumns();
+    this.rowSelection = this.columnRefs(this.props).rowSelection;
   }
 
   componentDidUpdate() {
-      console.log("componentDidUpdate")
+    console.log("componentDidUpdate");
   }
 
   componentWillUnmount() {
-      console.log("componentWillUnmount")
+    console.log("componentWillUnmount");
   }
 
-//   shouldComponentUpdate() {
-//     console.log("shouldComponentUpdate")
-//   }
+  //   shouldComponentUpdate() {
+  //     console.log("shouldComponentUpdate")
+  //   }
 
   render() {
-    
     return (
       <div>
         <Table
@@ -55,5 +55,4 @@ class Index extends React.Component {
     );
   }
 }
-
-export default Index;
+export default Form.create({})(Index);
