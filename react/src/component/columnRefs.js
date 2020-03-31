@@ -79,12 +79,8 @@ function columnRefs(props) {
     rowSelection: {
       type: "checkbox",
       columnWidth: "60px",
-      selectedRowKeys: this.state.selectedRowKeys,
       onChange: (selectedRowKeys, selectedRow) => {
-        this.setState({
-          selectedRowKeys,
-          selectedRow,
-        });
+        this._rowSelectionChange(selectedRowKeys, selectedRow);
       },
     },
     getColumns: () => {

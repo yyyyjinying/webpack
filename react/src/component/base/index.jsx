@@ -10,6 +10,7 @@ import {
   Select,
   Tooltip,
 } from "antd";
+import "./style.less";
 
 const FormItem = Props => {
   const { spanColumn, COLUMNTYPE } = Props;

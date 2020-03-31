@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Table, Form } from "antd";
+import { Table, Form, Button } from "antd";
 import columnRefs from "./columnRefs";
 import "./index.less";
 
@@ -25,6 +25,8 @@ class Index extends React.Component {
       ],
     };
 
+    this._rowSelectionChange = this._rowSelectionChange.bind(this);
+
     // this.state状态申明之后
     this.columnRefs = columnRefs.bind(this);
     this.columns = this.columnRefs(this.props).getColumns();
@@ -42,10 +44,22 @@ class Index extends React.Component {
   //   shouldComponentUpdate() {
   //     console.log("shouldComponentUpdate")
   //   }
+  _rowSelectionChange(selectedRowKeys, selectedRow) {
+    this.rowSelection.selectedRowKeys = selectedRowKeys;
+    this.setState({
+      selectedRowKeys: selectedRowKeys,
+      selectedRow: selectedRow,
+    })
+  }
+
+  resetRowSelection() {
+    this._rowSelectionChange([], []);
+  }
 
   render() {
     return (
       <div className="component_table">
+        <Button onClick={this.resetRowSelection.bind(this)}>重置复选框</Button>
         <Table
           bordered
           pagination={false}
