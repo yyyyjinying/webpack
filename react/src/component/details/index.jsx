@@ -5,7 +5,7 @@ import { columnRefs, mapFields } from "./columnRefs";
 import { Modal, Form } from "antd";
 import utils from "common/utils";
 import "./style.less";
-import Base from "component/base";
+import { FormItem } from "component/base";
 @observer
 class Details extends React.Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class Details extends React.Component {
     console.log(
       "moment",
       utils.getDateFormat(1582732800000).format("YYYY-MM-DD")
-    );  
+    );
     this.props.openDialog({ isShow: false });
     this.setState({
       checked: false,
@@ -128,7 +128,7 @@ class Details extends React.Component {
         afterClose={() => this.reset()}
         width="1200px"
         className="detail">
-        <Base {...{ form: this.props.form, ...this.columnRefs() }} />
+        <FormItem {...{ form: this.props.form, ...this.columnRefs() }} />
         {/* <button onClick={this.settimeHandle.bind(this)}>设置时间</button> */}
       </Modal>
     );

@@ -5,51 +5,24 @@ import React from "react";
 import { Input, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 
-// import utils from "utils";
+import utils from "utils";
+import { Render } from "component/base";
 
 // eslint-disable-next-line no-unused-vars
 function columnRefs(props) {
-  const render = (text, record, index, curColumn) => {
-    // tip位置
-    let placement = curColumn.toolTip && curColumn.toolTip.placement;
-
-    // tip信息
-    let title = curColumn.toolTip && curColumn.toolTip.title;
-    placement = placement || "rightTop";
-    title = title || text;
-
-    // content内容
-    let element = null;
-    if (curColumn.renderElement) {
-      element = curColumn.renderElement(text, record, index, curColumn);
-    } else {
-      element = <span className="span_text">{text}</span>;
-    }
-
-    if (curColumn.toolTip && curColumn.toolTip.visible) {
-      element = (
-        <Tooltip key={index} {...{ placement, title }}>
-          {element}
-        </Tooltip>
-      );
-    }
-    return element;
-  };
-
   const columns = [
     {
       title: "姓名",
       dataIndex: "name",
       key: "name",
       rules: [{ required: true, message: "Please number!" }],
-      width: 160,
+      width: 180,
       renderElement: text => {
         return (
           <Input
             placeholder="请输入"
             disabled={false}
             defaultValue={text}
-            style={{ width: "140px" }}
             // allowClear={true}
             onChange={() => {
               console.log("input");
@@ -71,12 +44,11 @@ function columnRefs(props) {
         visible: true,
       },
       width: 200,
-      renderElement: () => {
-        return (
-          <span className="span_text">
-            zhaojinying赵晋英zhaojinying赵晋英zhaojinying赵晋英zhaojinying赵晋英zhaojinying赵晋英
-          </span>
-        );
+      format: text => {
+        return utils.thousandSeparatorFormat(text);
+      },
+      renderElement: (text, curColumn) => {
+        return <span className="span_text">{curColumn.format(text)}</span>;
       },
     },
     {
@@ -85,6 +57,20 @@ function columnRefs(props) {
       key: "address",
       toolTip: {
         visible: true,
+      },
+      onCell: (record, rowIndex) => {
+        return {
+          onClick: e => {
+            console.log(e, record, rowIndex);
+          }, // 点击行
+          // onDoubleClick: event => {},
+          // onContextMenu: event => {},
+          // onMouseEnter: event => {}, // 鼠标移入行
+          // onMouseLeave: event => {},
+        };
+      },
+      renderElement: text => {
+        return <span className="span_text">{text}</span>;
       },
     },
   ];
@@ -105,7 +91,7 @@ function columnRefs(props) {
       return columns.map(item => {
         if (typeof item.render != "function") {
           item.render = (text, record, index) => {
-            return render(text, record, index, item);
+            return Render(text, record, index, item);
           };
           return item;
         }
