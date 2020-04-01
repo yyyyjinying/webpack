@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Form, InputNumber, Select } from "antd";
+import { Form, InputNumber, Select, Input } from "antd";
 import NumberFormat from "react-number-format";
 class Test extends React.Component {
+
+  onInputChange(event) {
+    // event.persist()
+    console.log(event);
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
@@ -14,7 +19,31 @@ class Test extends React.Component {
           prefix={"$"}
           renderText={value => <span>{value}</span>}
         />
+        <Input
+          placeholder="请输入"
+          disabled={false}
+          // defaultValue={12434}
+          // allowClear={true}
+          // eslint-disable-next-line no-unused-vars
+          onChange={(e) => setTimeout(() => {
+            console.log(e)
+            console.log(event.type); // => "click"
+            this.onInputChange(e.target.value)
+        },200)}
+        />
         <Form>
+          <Form.Item label="input">
+            {getFieldDecorator("input", {             
+              rules: [{ required: true, message: "Please number!" }],
+            })(
+              <Input
+                onChange={(e) => {
+                  e.persist()
+                  console.log(e)
+                }}
+              />
+            )}
+          </Form.Item>
           <Form.Item label="MonthPicker">
             {getFieldDecorator("number", {
               initialValue: 23,
@@ -25,6 +54,7 @@ class Test extends React.Component {
                   String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 }
                 parser={value => String(value).replace(/\$\s?|(,*)/g, "")}
+                onChange={this.onInputChange.bind(this)}
               />
             )}
           </Form.Item>

@@ -1,15 +1,11 @@
 /* eslint-disable react/display-name */
-// 修复React属性丢失
-// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { Input, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
-
 import utils from "utils";
 import { Render } from "component/base";
 
-// eslint-disable-next-line no-unused-vars
-function columnRefs(props) {
+function columnRefs() {
   const columns = [
     {
       title: "姓名",
@@ -17,15 +13,17 @@ function columnRefs(props) {
       key: "name",
       rules: [{ required: true, message: "Please number!" }],
       width: 180,
-      renderElement: text => {
+      // eslint-disable-next-line no-unused-vars
+      renderElement: (text, curColumn, record, index) => {
         return (
           <Input
             placeholder="请输入"
             disabled={false}
             defaultValue={text}
             // allowClear={true}
-            onChange={() => {
-              console.log("input");
+            onChange={(e) => {
+              e.persist();
+              this.debounce(curColumn.dataIndex, index, e);
             }}
             suffix={
               <Tooltip title="提示信息" placement="rightTop">

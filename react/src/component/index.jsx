@@ -1,20 +1,23 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Table, Form, Button } from "antd";
+import { Table, Form } from "antd";
 import columnRefs from "./columnRefs";
 import "./index.less";
+import _ from "lodash";
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedRowKeys: [],
+      selectedRowKeys: [], // 选项下标标示
+      selectedRow: [], // 勾选的数据
       dataSource: [
         {
           key: "1",
           name: "胡彦斌",
           age: 3454.54434,
-          address: "西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号",
+          address:
+            "西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号",
         },
         {
           key: "2",
@@ -23,14 +26,17 @@ class Index extends React.Component {
           address: "西湖区湖底公园1号",
         },
       ],
+      saveData: [],
     };
 
     this._rowSelectionChange = this._rowSelectionChange.bind(this);
 
-    // this.state状态申明之后
+    // 置于状态申明之后
     this.columnRefs = columnRefs.bind(this);
     this.columns = this.columnRefs(this.props).getColumns();
     this.rowSelection = this.columnRefs(this.props).rowSelection;
+
+    this.debounce = _.debounce(this.onInputChange, 500);
   }
 
   componentDidUpdate() {
@@ -44,22 +50,30 @@ class Index extends React.Component {
   //   shouldComponentUpdate() {
   //     console.log("shouldComponentUpdate")
   //   }
-  _rowSelectionChange(selectedRowKeys, selectedRow) {
+  _rowSelectionChange(selectedRowKeys = [], selectedRow = []) {
     this.rowSelection.selectedRowKeys = selectedRowKeys;
     this.setState({
       selectedRowKeys: selectedRowKeys,
       selectedRow: selectedRow,
-    })
+    });
   }
 
-  resetRowSelection() {
-    this._rowSelectionChange([], []);
+  onInputChange(key, index, e) {
+    let { saveData } = this.state;
+    saveData[index] = { [key]: e.target.value };
+    this.setState(
+      {
+        saveData,
+      },
+      () => {
+        console.log(this.state.saveData);
+      }
+    );
   }
 
   render() {
     return (
       <div className="component_table">
-        <Button onClick={this.resetRowSelection.bind(this)}>重置复选框</Button>
         <Table
           bordered
           pagination={false}
@@ -67,8 +81,8 @@ class Index extends React.Component {
           columns={this.columns}
           rowKey={(record, i) => i}
           dataSource={this.state.dataSource}
-          scroll={{x: "100%"}}
-          hideOnSinglePage={true} // 一页数据隐藏分页
+          scroll={{ x: "100%" }}
+          hideOnSinglePage={true} // 只有一页数据隐藏分页
         />
       </div>
     );
