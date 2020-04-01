@@ -40,12 +40,12 @@ function columnRefs() {
       toolTip: {
         visible: true,
       },
-      width: 200,
+      width: 400,
       format: text => {
         return utils.thousandSeparatorFormat(text);
       },
-      renderElement: (text, curColumn) => {
-        return <span className="span_text">{curColumn.format(text)}</span>;
+      renderElement: (text) => {
+        return <span className="span_text">{text}</span>;
       },
     },
     {

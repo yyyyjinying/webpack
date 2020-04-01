@@ -93,6 +93,7 @@ const Render = (text, record, index, curColumn) => {
 
   // content内容
   let element = null;
+  text = curColumn.format ? curColumn.format(text) : text;
   if (curColumn.renderElement) {
     element = curColumn.renderElement(text, curColumn, record, index);
   } else {
