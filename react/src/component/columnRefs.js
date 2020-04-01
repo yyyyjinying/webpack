@@ -21,7 +21,7 @@ function columnRefs() {
             defaultValue={text}
             // allowClear={true}
             onChange={(e) => {
-              e.persist();
+              e.persist(); // 开启nativeEvent
               this._debounce(index, {[curColumn.dataIndex]: e.target.value});
             }}
             suffix={
