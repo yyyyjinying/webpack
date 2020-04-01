@@ -4,6 +4,7 @@ import { Table, Form } from "antd";
 import columnRefs from "./columnRefs";
 import "./index.less";
 import _ from "lodash";
+// import Immutable from "immutable";
 
 class Index extends React.Component {
   constructor(props) {
@@ -47,9 +48,11 @@ class Index extends React.Component {
     console.log("componentWillUnmount");
   }
 
+
   //   shouldComponentUpdate() {
   //     console.log("shouldComponentUpdate")
   //   }
+
   _rowSelectionChange(selectedRowKeys = [], selectedRow = []) {
     this.rowSelection.selectedRowKeys = selectedRowKeys;
     this.setState({
@@ -58,20 +61,24 @@ class Index extends React.Component {
     });
   }
 
-  onInputChange(index, item) {
-    let { saveData } = this.state;
-    saveData[index] = item;
+  onInputChange(index, key, value) {
+    let { saveData, dataSource } = this.state;
+    saveData[index] = { [key]: value };
+    dataSource[index][key] = value;
     this.setState(
       {
         saveData,
+        dataSource,
       },
       () => {
         console.log(this.state.saveData);
+        console.log(this.state.dataSource);
       }
     );
   }
 
   render() {
+    console.log("render");
     return (
       <div className="component_table">
         <Table

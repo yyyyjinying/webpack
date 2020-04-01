@@ -22,10 +22,10 @@ function columnRefs() {
             // allowClear={true}
             onChange={(e) => {
               e.persist(); // 开启nativeEvent
-              this._debounce(index, {[curColumn.dataIndex]: e.target.value});
+              this._debounce(index, [curColumn.dataIndex], e.target.value);
             }}
             suffix={
-              <Tooltip title="提示信息" placement="rightTop">
+              <Tooltip title="提示信息" placement="right">
                 <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
               </Tooltip>
             }

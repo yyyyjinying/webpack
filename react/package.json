@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "bignumber.js": "^9.0.0",
     "core-js": "^3.6.4",
+    "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.15",
     "mobx": "^5.15.2",
     "mobx-react": "^5.0.0",
