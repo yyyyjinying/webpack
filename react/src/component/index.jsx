@@ -36,7 +36,7 @@ class Index extends React.Component {
     this.columns = this.columnRefs(this.props).getColumns();
     this.rowSelection = this.columnRefs(this.props).rowSelection;
 
-    this.debounce = _.debounce(this.onInputChange, 500);
+    this._debounce = _.debounce(this.onInputChange, 500);
   }
 
   componentDidUpdate() {
@@ -58,9 +58,9 @@ class Index extends React.Component {
     });
   }
 
-  onInputChange(key, index, e) {
+  onInputChange(index, item) {
     let { saveData } = this.state;
-    saveData[index] = { [key]: e.target.value };
+    saveData[index] = item;
     this.setState(
       {
         saveData,

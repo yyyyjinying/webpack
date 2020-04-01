@@ -13,7 +13,6 @@ function columnRefs() {
       key: "name",
       rules: [{ required: true, message: "Please number!" }],
       width: 180,
-      // eslint-disable-next-line no-unused-vars
       renderElement: (text, curColumn, record, index) => {
         return (
           <Input
@@ -23,7 +22,7 @@ function columnRefs() {
             // allowClear={true}
             onChange={(e) => {
               e.persist();
-              this.debounce(curColumn.dataIndex, index, e);
+              this._debounce(index, {[curColumn.dataIndex]: e.target.value});
             }}
             suffix={
               <Tooltip title="提示信息" placement="rightTop">
