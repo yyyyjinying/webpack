@@ -4,7 +4,6 @@ import { Table, Form } from "antd";
 import columnRefs from "./columnRefs";
 import "./index.less";
 import _ from "lodash";
-// import Immutable from "immutable";
 
 class Index extends React.Component {
   constructor(props) {
@@ -17,14 +16,22 @@ class Index extends React.Component {
           key: "1",
           name: "胡彦斌",
           age: 3454.54434,
+          street: "Lake Park1212",
+          building: "a",
           address:
             "西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号",
+          description:
+            "My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.",
         },
         {
           key: "2",
           name: "胡彦祖",
           age: 0.678,
           address: "西湖区湖底公园1号",
+          street: "Lake Park",
+          building: "C",
+          description:
+            "My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.",
         },
       ],
       saveData: [],
@@ -47,11 +54,6 @@ class Index extends React.Component {
   componentWillUnmount() {
     console.log("componentWillUnmount");
   }
-
-
-  //   shouldComponentUpdate() {
-  //     console.log("shouldComponentUpdate")
-  //   }
 
   _rowSelectionChange(selectedRowKeys = [], selectedRow = []) {
     this.rowSelection.selectedRowKeys = selectedRowKeys;
@@ -77,15 +79,28 @@ class Index extends React.Component {
     );
   }
 
+  editChange(index, key, value) {
+    let { dataSource } = this.state;
+    dataSource[index][key] = value;
+    this.setState({ dataSource });
+  }
+
   render() {
     console.log("render");
+
     return (
       <div className="component_table">
         <Table
+          // components={components}
+          rowClassName={() => "editable-row"}
           bordered
+          size="small"
           pagination={false}
           rowSelection={this.rowSelection}
           columns={this.columns}
+          // expandedRowRender={(record) => {
+          //   return <p style={{ margin: 0 }}>{record.description}</p>
+          // }}
           rowKey={(record, i) => i}
           dataSource={this.state.dataSource}
           scroll={{ x: "100%" }}
