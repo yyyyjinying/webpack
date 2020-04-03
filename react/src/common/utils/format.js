@@ -24,7 +24,7 @@ export const getYNBol = (val = "Y", equalValue = "Y") => {
 
 export const thousandSeparatorFormat = (str, thousandSeparator = ",") => {
   const thousandsGroupRegex = /(\d)(?=(\d{3})+(?!\d))/g;
-  str = str != null ? String(str) : "";
+  str = str != null ? String(str) : "0";
 
   let beforeDecimal = "";
   let lastDecimal = "00";
@@ -39,9 +39,9 @@ export const thousandSeparatorFormat = (str, thousandSeparator = ",") => {
   let strRes = beforeDecimal
     .substring(index, str.length)
     .replace(thousandsGroupRegex, "$1" + thousandSeparator);
-
-  return [strRes]
+  return strRes ? [strRes]
     .concat(".")
     .concat(lastDecimal)
-    .join("");
+    .join("")
+    : null;
 };
