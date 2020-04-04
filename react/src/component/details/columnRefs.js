@@ -8,6 +8,7 @@ const COLUMNTYPE = {
   selectType: "select",
   numberType: "number",
 };
+
 const SPAN_COLUMN_NUM = 8;
 function columnRefs() {
   const columns = [

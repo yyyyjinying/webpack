@@ -1,11 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import React from "react";
 import { Input, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import utils from "utils";
 import { AutoToolTip } from "component/base";
-import SpanInput from "component/base/spanText";
-import SpanText from "./base/spanText";
+import { SpanText } from "component/base";
 
 function columnRefs() {
   const columns = [
@@ -38,23 +38,26 @@ function columnRefs() {
       key: "name",
       rules: [{ required: true, message: "Please number!" }],
       width: 180,
-      renderElement: (text, curColumn, record, index) => (
-        <Input
-          placeholder="请输入"
-          disabled={false}
-          defaultValue={text}
-          // allowClear={true}
-          onChange={e => {
-            e.persist(); // 开启nativeEvent
-            this._debounce(index, [curColumn.dataIndex], e.target.value);
-          }}
-          suffix={
-            <Tooltip title="提示信息" placement="right">
-              <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
-            </Tooltip>
-          }
-        />
-      ),
+      renderElement: props => {
+        const { text, curColumn, index } = props;
+        return (
+          <Input
+            placeholder="请输入"
+            disabled={false}
+            defaultValue={text}
+            // allowClear={true}
+            onChange={e => {
+              e.persist(); // 开启nativeEvent
+              this._debounce(index, [curColumn.dataIndex], e.target.value);
+            }}
+            suffix={
+              <Tooltip title="提示信息" placement="right">
+                <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
+              </Tooltip>
+            }
+          />
+        );
+      },
     },
     {
       title: "年龄",
@@ -68,12 +71,15 @@ function columnRefs() {
       format: text => {
         return utils.thousandSeparatorFormat(text);
       },
-      renderElement: (text, curColumn, record, index) => (
-        <SpanText
-          type="input"
-          editChange={this.editChange.bind(this)}
-          {...{ text, curColumn, record, index }}></SpanText>
-      ),
+      renderElement: props => {
+        // debugger;
+        return (
+          <SpanText
+            displayType="text"
+            editChange={this.editChange.bind(this)}
+            {...{ props }}></SpanText>
+        );
+      },
     },
     {
       title: "住址",
@@ -92,7 +98,7 @@ function columnRefs() {
         // onMouseEnter: event => {}, // 鼠标移入行
         // onMouseLeave: event => {},
       }),
-      renderElement: text => <SpanInput type="text">{text}</SpanInput>,
+      renderElement: props => <SpanText type="text">{props.text}</SpanText>,
     },
     {
       title: "Action",

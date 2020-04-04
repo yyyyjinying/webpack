@@ -22,8 +22,8 @@ const AutoToolTip = (text, record, index, curColumn) => {
     // content内容
     let formatText = curColumn.format ? curColumn.format(text) : text;
     let element = <SpanText>{formatText}</SpanText>;
-    if (curColumn.renderElement) {
-      element = curColumn.renderElement(text, curColumn, record, index);
+    if (typeof curColumn.renderElement == "function") {
+      element = curColumn.renderElement({...{text, curColumn, record, index}});
     }
   
     if (!curColumn.editable && curColumn.toolTip && curColumn.toolTip.visible) {

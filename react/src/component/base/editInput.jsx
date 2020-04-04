@@ -25,14 +25,18 @@ class EditInput extends React.Component {
 
   inputChange(index, key, e) {
     this._clickHandle(false);
-    const {props} = this.props;
+    const { props } = this.props;
     props.editChange(index, key, e.currentTarget.value);
   }
 
   render() {
-    let { SpanText, props} = this.props;
-    // eslint-disable-next-line no-unused-vars
-    const {text, curColumn, record, index} = props;
+    const {
+      SpanText,
+      props: {
+        props: { text, curColumn, index },
+      },
+    } = this.props;
+
     if (!curColumn.editable)
       return <SpanText>{curColumn.format(text)}</SpanText>;
 

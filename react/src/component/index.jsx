@@ -44,6 +44,7 @@ class Index extends React.Component {
     this.columns = this.columnRefs(this.props).getColumns();
     this.rowSelection = this.columnRefs(this.props).rowSelection;
 
+    // 防抖动
     this._debounce = _.debounce(this.onInputChange, 500);
   }
 
