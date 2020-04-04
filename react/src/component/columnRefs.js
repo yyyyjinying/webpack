@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import React from "react";
-import { Input, Tooltip } from "antd";
-import { InfoCircleOutlined } from "@ant-design/icons";
-import utils from "utils";
+import * as utils from "utils";
 import { AutoToolTip } from "component/base";
 import { SpanText } from "component/base";
 
@@ -34,7 +32,7 @@ function columnRefs() {
           },
           editable: true, // 表格编辑框没有提示toolTip
           renderElement: props => {
-            const {curColumn, index} = props;
+            const { curColumn, index } = props;
             return (
               <SpanText
                 displayType="select"
@@ -43,9 +41,11 @@ function columnRefs() {
                   { value: "02", text: "zhao1" },
                 ]}
                 onSelect={(index, value, option) => {
-                  console.log(index, value, option)
+                  console.log(index, value, option);
                 }}
-                onSearch={value => this._debounce(index, curColumn.dataIndex, value)}
+                onSearch={value =>
+                  this._debounce(index, curColumn.dataIndex, value)
+                }
                 {...{ props }}
               />
             );
@@ -59,26 +59,23 @@ function columnRefs() {
       key: "name",
       rules: [{ required: true, message: "Please number!" }],
       width: 180,
-      renderElement: props => {
-        const { text, curColumn, index } = props;
-        return (
-          <Input
-            placeholder="请输入"
-            disabled={false}
-            defaultValue={text}
-            // allowClear={true}
-            onChange={e => {
-              e.persist(); // 开启nativeEvent
-              this._debounce(index, curColumn.dataIndex, e.target.value);
-            }}
-            suffix={
-              <Tooltip title="提示信息" placement="right">
-                <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
-              </Tooltip>
-            }
-          />
-        );
+      editable: true, // 表格编辑框没有提示toolTip
+      format: text => {
+        return utils.thousandSeparatorFormat(text);
       },
+      renderElement: props => (
+        <SpanText
+          displayType="text"
+          onChange={(index, e) =>
+            this._debounce(
+              index,
+              props.curColumn.dataIndex,
+              e.currentTarget.value
+            )
+          }
+          {...{ props }}
+        />
+      ),
     },
     {
       title: "年龄",
@@ -95,7 +92,13 @@ function columnRefs() {
       renderElement: props => (
         <SpanText
           displayType="text"
-          onChange={(index, e) => this._debounce(index, props.curColumn.dataIndex, e.currentTarget.value)}
+          onChange={(index, e) =>
+            this._debounce(
+              index,
+              props.curColumn.dataIndex,
+              e.currentTarget.value
+            )
+          }
           {...{ props }}
         />
       ),

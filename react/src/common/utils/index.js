@@ -7,7 +7,7 @@ import {
   getYNFormat,
   getYNBol,
 } from "./format.js";
-export default {
+export {
   thousandSeparatorFormat,
   getDateFormat,
   getTimerFormat,
