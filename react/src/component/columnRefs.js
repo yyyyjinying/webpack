@@ -29,6 +29,27 @@ function columnRefs() {
           toolTip: {
             visible: true,
           },
+          format: text => {
+            return utils.thousandSeparatorFormat(text);
+          },
+          editable: true, // 表格编辑框没有提示toolTip
+          renderElement: props => {
+            const {curColumn, index} = props;
+            return (
+              <SpanText
+                displayType="select"
+                options={[
+                  { value: "01", text: "zhao" },
+                  { value: "02", text: "zhao1" },
+                ]}
+                onSelect={(index, value, option) => {
+                  console.log(index, value, option)
+                }}
+                onSearch={value => this._debounce(index, curColumn.dataIndex, value)}
+                {...{ props }}
+              />
+            );
+          },
         },
       ],
     },
@@ -48,7 +69,7 @@ function columnRefs() {
             // allowClear={true}
             onChange={e => {
               e.persist(); // 开启nativeEvent
-              this._debounce(index, [curColumn.dataIndex], e.target.value);
+              this._debounce(index, curColumn.dataIndex, e.target.value);
             }}
             suffix={
               <Tooltip title="提示信息" placement="right">
@@ -71,15 +92,13 @@ function columnRefs() {
       format: text => {
         return utils.thousandSeparatorFormat(text);
       },
-      renderElement: props => {
-        // debugger;
-        return (
-          <SpanText
-            displayType="text"
-            editChange={this.editChange.bind(this)}
-            {...{ props }}></SpanText>
-        );
-      },
+      renderElement: props => (
+        <SpanText
+          displayType="text"
+          onChange={(index, e) => this._debounce(index, props.curColumn.dataIndex, e.currentTarget.value)}
+          {...{ props }}
+        />
+      ),
     },
     {
       title: "住址",
@@ -112,6 +131,21 @@ function columnRefs() {
     },
   ];
 
+  const getColumns = columns => {
+    return columns.map(item => {
+      if (typeof item.render != "function") {
+        item.render = (text, record, index) => {
+          return AutoToolTip(text, record, index, item);
+        };
+      }
+
+      if (Array.isArray(item.children)) {
+        getColumns(item.children);
+      }
+      return item;
+    });
+  };
+
   return {
     rowSelection: {
       type: "checkbox",
@@ -121,16 +155,7 @@ function columnRefs() {
         this._rowSelectionChange(selectedRowKeys, selectedRow);
       },
     },
-    getColumns: () => {
-      return columns.map(item => {
-        if (typeof item.render != "function") {
-          item.render = (text, record, index) => {
-            return AutoToolTip(text, record, index, item);
-          };
-        }
-        return item;
-      });
-    },
+    getColumns: () => getColumns(columns),
   };
 }
 

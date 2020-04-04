@@ -17,7 +17,7 @@ class Index extends React.Component {
           name: "胡彦斌",
           age: 3454.54434,
           street: "Lake Park1212",
-          building: "a",
+          building: "01",
           address:
             "西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号",
           description:
@@ -29,7 +29,7 @@ class Index extends React.Component {
           age: 0.678,
           address: "西湖区湖底公园1号",
           street: "Lake Park",
-          building: "C",
+          building: "02",
           description:
             "My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.",
         },
@@ -45,7 +45,7 @@ class Index extends React.Component {
     this.rowSelection = this.columnRefs(this.props).rowSelection;
 
     // 防抖动
-    this._debounce = _.debounce(this.onInputChange, 500);
+    this._debounce = _.debounce(this.onChange, 500).bind(this);
   }
 
   componentDidUpdate() {
@@ -64,7 +64,7 @@ class Index extends React.Component {
     });
   }
 
-  onInputChange(index, key, value) {
+  onChange(index, key, value) {
     let { saveData, dataSource } = this.state;
     saveData[index] = { [key]: value };
     dataSource[index][key] = value;
@@ -78,12 +78,6 @@ class Index extends React.Component {
         console.log(this.state.dataSource);
       }
     );
-  }
-
-  editChange(index, key, value) {
-    let { dataSource } = this.state;
-    dataSource[index][key] = value;
-    this.setState({ dataSource });
   }
 
   render() {

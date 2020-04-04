@@ -1,5 +1,6 @@
 import React from "react";
-import EditInput from "./editInput";
+import Input from "./input";
+import Select from "./select";
 
 const ele = props => {
   // eslint-disable-next-line react/prop-types
@@ -10,14 +11,14 @@ const SpanText = props => {
   let dom = null;
   switch (props.displayType) {
     case "text":
-      dom = <EditInput SpanText={ele} {...{ props }} />;
+      dom = <Input SpanText={ele} {...{ props }} />;
       break;
     case "select":
-      dom = <EditInput SpanText={ele} {...{ props }} />;
+      dom = <Select SpanText={ele} {...{ props }} />;
       break;
-    case "time":
-      dom = <EditInput SpanText={ele} {...{ props }} />;
-      break;
+    // case "time":
+    //   dom = <EditInput SpanText={ele} {...{ props }} />;
+    //   break;
     default:
       dom = ele(props);
       break;

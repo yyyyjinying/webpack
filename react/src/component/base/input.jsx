@@ -23,22 +23,20 @@ class EditInput extends React.Component {
     );
   }
 
-  inputChange(index, key, e) {
-    this._clickHandle(false);
-    const { props } = this.props;
-    props.editChange(index, key, e.currentTarget.value);
-  }
-
   render() {
     const {
       SpanText,
       props: {
+        onChange,
+        onBlur,
+        onPressEnter,
         props: { text, curColumn, index },
       },
     } = this.props;
+    const value = curColumn.format ? curColumn.format(text) : text;
 
     if (!curColumn.editable)
-      return <SpanText>{curColumn.format(text)}</SpanText>;
+      return <SpanText>{value}</SpanText>;
 
     return !this.state.editSign ? (
       <span
@@ -60,9 +58,10 @@ class EditInput extends React.Component {
             padding: "2px 11px",
             color: "rgba(0,0,0,.65)",
             lineHeight: "1.5",
+            width: "100%",
           }}
           onClick={this._clickHandle.bind(this, true)}
-          defaultValue={curColumn.format(text)}
+          defaultValue={value}
         />
         <Tooltip title="提示信息" placement="right">
           <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
@@ -74,8 +73,18 @@ class EditInput extends React.Component {
         disabled={false}
         defaultValue={text}
         ref={node => (this.input = node)}
-        onBlur={this.inputChange.bind(this, index, curColumn.dataIndex)}
-        onPressEnter={this.inputChange.bind(this, index, curColumn.dataIndex)}
+        onChange={e => {
+          e.persist(); // 开启nativeEvent
+          onChange && onChange(index, e);
+        }}
+        onBlur={(e) => {
+          this._clickHandle(false);
+          onBlur && onBlur(index, e);
+        }}
+        onPressEnter={(e) => {
+          this._clickHandle(false);
+          onPressEnter && onPressEnter(index, e);
+        }}
       />
     );
   }
