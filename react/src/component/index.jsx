@@ -45,7 +45,7 @@ class Index extends React.Component {
     this.rowSelection = this.columnRefs(this.props).rowSelection;
 
     // 防抖动
-    this._debounce = _.debounce(this.onChange, 500).bind(this);
+    this._debounce = _.debounce(this.onRequest, 500).bind(this);
   }
 
   componentDidUpdate() {
@@ -68,26 +68,21 @@ class Index extends React.Component {
     let { saveData, dataSource } = this.state;
     saveData[index] = { [key]: value };
     dataSource[index][key] = value;
-    this.setState(
-      {
-        saveData,
-        dataSource,
-      },
-      () => {
-        console.log(this.state.saveData);
-        console.log(this.state.dataSource);
-      }
-    );
+    this.setState({
+      saveData,
+      dataSource,
+    });
+  } 
+
+  onRequest(index, key, value) {
+    console.log("request", key, value);
   }
 
   render() {
     console.log("render");
-
     return (
       <div className="component_table">
         <Table
-          // components={components}
-          rowClassName={() => "editable-row"}
           bordered
           size="small"
           pagination={false}

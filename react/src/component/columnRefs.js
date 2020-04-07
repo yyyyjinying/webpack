@@ -8,6 +8,16 @@ import { SpanText } from "component/base";
 function columnRefs() {
   const columns = [
     {
+      title: "add",
+      dataIndex: "add",
+      key: "add",
+      width: 50,
+      fixed: "left",
+      renderElement: () => {
+        return <a>+</a>;
+      },
+    },
+    {
       title: "other",
       children: [
         {
@@ -26,9 +36,6 @@ function columnRefs() {
           width: 150,
           toolTip: {
             visible: true,
-          },
-          format: text => {
-            return utils.thousandSeparatorFormat(text);
           },
           editable: true, // 表格编辑框没有提示toolTip
           renderElement: props => {
@@ -60,12 +67,23 @@ function columnRefs() {
       rules: [{ required: true, message: "Please number!" }],
       width: 180,
       editable: true, // 表格编辑框没有提示toolTip
-      format: text => {
-        return utils.thousandSeparatorFormat(text);
-      },
       renderElement: props => (
         <SpanText
           displayType="text"
+          onPressEnter={(index, e) =>
+            this.onChange(
+              index,
+              props.curColumn.dataIndex,
+              e.currentTarget.value
+            )
+          }
+          onBlur={(index, e) =>
+            this.onChange(
+              index,
+              props.curColumn.dataIndex,
+              e.currentTarget.value
+            )
+          }
           onChange={(index, e) =>
             this._debounce(
               index,
@@ -92,6 +110,20 @@ function columnRefs() {
       renderElement: props => (
         <SpanText
           displayType="text"
+          onPressEnter={(index, e) =>
+            this.onChange(
+              index,
+              props.curColumn.dataIndex,
+              e.currentTarget.value
+            )
+          }
+          onBlur={(index, e) =>
+            this.onChange(
+              index,
+              props.curColumn.dataIndex,
+              e.currentTarget.value
+            )
+          }
           onChange={(index, e) =>
             this._debounce(
               index,
