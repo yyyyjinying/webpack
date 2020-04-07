@@ -18,6 +18,7 @@ class Index extends React.Component {
           age: 3454.54434,
           street: "Lake Park1212",
           building: "01",
+          createTime: "2020-04-08", // 1322195034000, // ,
           address:
             "西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号",
           description:
@@ -30,6 +31,7 @@ class Index extends React.Component {
           address: "西湖区湖底公园1号",
           street: "Lake Park",
           building: "02",
+          createTime: 1322195034000, // "2020-04-08",
           description:
             "My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.",
         },
@@ -65,6 +67,7 @@ class Index extends React.Component {
   }
 
   onChange(index, key, value) {
+    console.log(key, value)
     let { saveData, dataSource } = this.state;
     saveData[index] = { [key]: value };
     dataSource[index][key] = value;

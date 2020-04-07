@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "./input";
 import Select from "./select";
+import DatePicker from "./datePicker";
 
 const ele = props => {
   // eslint-disable-next-line react/prop-types
@@ -16,9 +17,9 @@ const SpanText = props => {
     case "select":
       dom = <Select SpanText={ele} {...{ props }} />;
       break;
-    // case "time":
-    //   dom = <EditInput SpanText={ele} {...{ props }} />;
-    //   break;
+    case "datePicker":
+      dom = <DatePicker SpanText={ele} {...{ props }} />;
+      break;
     default:
       dom = ele(props);
       break;

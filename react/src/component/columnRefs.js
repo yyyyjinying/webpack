@@ -39,7 +39,7 @@ function columnRefs() {
           },
           editable: true, // 表格编辑框没有提示toolTip
           renderElement: props => {
-            const { curColumn, index } = props;
+            const { curColumn } = props;
             return (
               <SpanText
                 displayType="select"
@@ -50,7 +50,7 @@ function columnRefs() {
                 onSelect={(index, value, option) => {
                   console.log(index, value, option);
                 }}
-                onSearch={value =>
+                onSearch={(index, value) =>
                   this._debounce(index, curColumn.dataIndex, value)
                 }
                 {...{ props }}
@@ -84,7 +84,7 @@ function columnRefs() {
               e.currentTarget.value
             )
           }
-          onChange={(index, e) =>
+          onSearch={(index, e) =>
             this._debounce(
               index,
               props.curColumn.dataIndex,
@@ -124,13 +124,32 @@ function columnRefs() {
               e.currentTarget.value
             )
           }
-          onChange={(index, e) =>
+          onSearch={(index, e) =>
             this._debounce(
               index,
               props.curColumn.dataIndex,
               e.currentTarget.value
             )
           }
+          {...{ props }}
+        />
+      ),
+    },
+    {
+      title: "时间",
+      dataIndex: "createTime",
+      key: "createTime",
+      width: 200,
+      toolTip: {
+        visible: true,
+      },
+      editable: true, // 表格编辑框没有提示toolTip
+      renderElement: props => (
+        <SpanText
+          displayType="datePicker"
+          onChange={(index, value) => {
+            this.onChange(index, props.curColumn.dataIndex, value.dateString);
+          }}
           {...{ props }}
         />
       ),

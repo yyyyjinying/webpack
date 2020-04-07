@@ -28,7 +28,7 @@ class EditSelect extends React.Component {
     return (
       <Select
         showSearch={true}
-        onSearch={value => onSearch && onSearch(value)}
+        onSearch={value => onSearch && onSearch(index, value)}
         onSelect={(value, itemOption) =>
           onSelect && onSelect(index, value, itemOption.props.option)
         }

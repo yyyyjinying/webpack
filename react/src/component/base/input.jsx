@@ -27,7 +27,7 @@ class EditInput extends React.Component {
     const {
       SpanText,
       props: {
-        onChange,
+        onSearch,
         onBlur,
         onPressEnter,
         props: { text, curColumn, index },
@@ -75,7 +75,7 @@ class EditInput extends React.Component {
         ref={node => (this.input = node)}
         onChange={e => {
           e.persist(); // 开启nativeEvent
-          onChange && onChange(index, e);
+          onSearch && onSearch(index, e);
         }}
         onBlur={(e) => {
           this._clickHandle(false);
