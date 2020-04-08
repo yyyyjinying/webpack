@@ -27,6 +27,7 @@ class EditSelect extends React.Component {
 
     return (
       <Select
+        // mode="multiple"
         showSearch={true}
         onSearch={value => onSearch && onSearch(index, value)}
         onSelect={(value, itemOption) =>
@@ -34,6 +35,8 @@ class EditSelect extends React.Component {
         }
         style={{ width: "100%", ...style }}
         defaultValue={text}
+        value={text}
+        allowClear
         disabled={disabled}>
         {options.map((itemOption, index) => {
           return (

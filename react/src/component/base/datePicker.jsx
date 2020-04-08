@@ -25,6 +25,7 @@ class Index extends React.Component {
     return (
       <DatePicker
         defaultValue={utils.getDateFormat(text)}
+        value={utils.getDateFormat(text)}
         onChange={(date, dateString) => {
           const value = {
             dateTimer: date.valueOf(),

@@ -10,11 +10,18 @@ function columnRefs() {
     {
       title: "add",
       dataIndex: "add",
-      key: "add",
       width: 50,
       fixed: "left",
-      renderElement: () => {
-        return <a>+</a>;
+      align: "center",
+      renderElement: props => {
+        const { index, record } = props;
+        return (
+          <a
+            style={{ fontSize: "20px" }}
+            onClick={this.addRow.bind(this, index, record)}>
+            +
+          </a>
+        );
       },
     },
     {
@@ -23,7 +30,6 @@ function columnRefs() {
         {
           title: "street",
           dataIndex: "street",
-          key: "street",
           width: 150,
           toolTip: {
             visible: true,
@@ -32,8 +38,7 @@ function columnRefs() {
         {
           title: "building",
           dataIndex: "building",
-          key: "building",
-          width: 150,
+          width: 250,
           toolTip: {
             visible: true,
           },
@@ -47,9 +52,13 @@ function columnRefs() {
                   { value: "01", text: "zhao" },
                   { value: "02", text: "zhao1" },
                 ]}
-                onSelect={(index, value, option) => {
-                  console.log(index, value, option);
-                }}
+                onSelect={(index, value) =>
+                  this.onChange(
+                    index,
+                    props.curColumn.dataIndex,
+                    value
+                  )
+                }
                 onSearch={(index, value) =>
                   this._debounce(index, curColumn.dataIndex, value)
                 }
@@ -63,7 +72,6 @@ function columnRefs() {
     {
       title: "姓名",
       dataIndex: "name",
-      key: "name",
       rules: [{ required: true, message: "Please number!" }],
       width: 180,
       editable: true, // 表格编辑框没有提示toolTip
@@ -98,7 +106,6 @@ function columnRefs() {
     {
       title: "年龄",
       dataIndex: "age",
-      key: "age",
       toolTip: {
         visible: true,
       },
@@ -138,7 +145,6 @@ function columnRefs() {
     {
       title: "时间",
       dataIndex: "createTime",
-      key: "createTime",
       width: 200,
       toolTip: {
         visible: true,
@@ -157,7 +163,6 @@ function columnRefs() {
     {
       title: "住址",
       dataIndex: "address",
-      key: "address",
       width: 800,
       toolTip: {
         visible: true,
@@ -176,7 +181,6 @@ function columnRefs() {
     {
       title: "Action",
       dataIndex: "Action",
-      key: "Action",
       width: 100,
       fixed: "right",
       renderElement: () => {

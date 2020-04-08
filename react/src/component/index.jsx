@@ -13,11 +13,10 @@ class Index extends React.Component {
       selectedRow: [], // 勾选的数据
       dataSource: [
         {
-          key: "1",
           name: "胡彦斌",
           age: 3454.54434,
           street: "Lake Park1212",
-          building: "01",
+          building: null,
           createTime: "2020-04-08", // 1322195034000, // ,
           address:
             "西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号",
@@ -25,7 +24,6 @@ class Index extends React.Component {
             "My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.",
         },
         {
-          key: "2",
           name: "胡彦祖",
           age: 0.678,
           address: "西湖区湖底公园1号",
@@ -66,8 +64,20 @@ class Index extends React.Component {
     });
   }
 
+  // 新增行
+  addRow(index, record) {
+    let { dataSource } = this.state;
+    let newRecord = {};
+    Object.keys(record).forEach(item => {
+      newRecord[item] = null;
+    })
+    dataSource.splice(index, 0, newRecord);
+    this.setState({
+        dataSource,
+      });
+  }
+
   onChange(index, key, value) {
-    console.log(key, value)
     let { saveData, dataSource } = this.state;
     saveData[index] = { [key]: value };
     dataSource[index][key] = value;
@@ -75,7 +85,7 @@ class Index extends React.Component {
       saveData,
       dataSource,
     });
-  } 
+  }
 
   onRequest(index, key, value) {
     console.log("request", key, value);
@@ -83,6 +93,7 @@ class Index extends React.Component {
 
   render() {
     console.log("render");
+
     return (
       <div className="component_table">
         <Table

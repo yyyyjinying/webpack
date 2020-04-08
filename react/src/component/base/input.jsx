@@ -2,6 +2,7 @@
 import React from "react";
 import { Input, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
+import * as utils from "common/utils";
 class EditInput extends React.Component {
   constructor(props) {
     super(props);
@@ -34,9 +35,7 @@ class EditInput extends React.Component {
       },
     } = this.props;
     const value = curColumn.format ? curColumn.format(text) : text;
-
-    if (!curColumn.editable)
-      return <SpanText>{value}</SpanText>;
+    if (!curColumn.editable) return <SpanText>{value}</SpanText>;
 
     return !this.state.editSign ? (
       <span
@@ -61,7 +60,7 @@ class EditInput extends React.Component {
             width: "100%",
           }}
           onClick={this._clickHandle.bind(this, true)}
-          defaultValue={value}
+          value={utils.getNotNull(value)} // 非null
         />
         <Tooltip title="提示信息" placement="right">
           <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
@@ -77,11 +76,11 @@ class EditInput extends React.Component {
           e.persist(); // 开启nativeEvent
           onSearch && onSearch(index, e);
         }}
-        onBlur={(e) => {
+        onBlur={e => {
           this._clickHandle(false);
           onBlur && onBlur(index, e);
         }}
-        onPressEnter={(e) => {
+        onPressEnter={e => {
           this._clickHandle(false);
           onPressEnter && onPressEnter(index, e);
         }}

@@ -1,7 +1,12 @@
 import moment from "moment";
 export const getDateFormat = timer => {
-  return moment(timer) || null;
+  return timer ? moment(timer) : null;
 };
+
+export const getNotNull = value => {
+  return value == null ? "" : value;
+}
+
 export const getArrayDateFormat = (Array = [1582732800000, 1585324800000]) => {
   return Array.map(item => moment(item));
 };
@@ -23,8 +28,10 @@ export const getYNBol = (val = "Y", equalValue = "Y") => {
 };
 
 export const thousandSeparatorFormat = (str, thousandSeparator = ",") => {
+  if (str == null) return null;
+
+  str = String(str);
   const thousandsGroupRegex = /(\d)(?=(\d{3})+(?!\d))/g;
-  str = str != null ? String(str) : "0";
 
   let beforeDecimal = "";
   let lastDecimal = "00";

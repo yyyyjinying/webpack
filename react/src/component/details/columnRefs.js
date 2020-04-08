@@ -85,6 +85,7 @@ function columnRefs() {
         showSearch: true,
         placeholder: "Select a person",
         allowClear: true,
+        // mode: "multiple",
         onChange: value => {
           console.log(`selected ${value}`);
         },
