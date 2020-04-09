@@ -7,8 +7,10 @@ import {
   getYNFormat,
   getYNBol,
   getNotNull,
+  isExistString,
 } from "./format.js";
 export {
+  isExistString,
   getNotNull,
   thousandSeparatorFormat,
   getDateFormat,

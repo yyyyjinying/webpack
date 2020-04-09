@@ -7,6 +7,10 @@ export const getNotNull = value => {
   return value == null ? "" : value;
 }
 
+export const isExistString = (str, val = "-") => {
+  return str ? String(str).indexOf(val) != -1 : false;
+}
+
 export const getArrayDateFormat = (Array = [1582732800000, 1585324800000]) => {
   return Array.map(item => moment(item));
 };

@@ -11,59 +11,47 @@ const Data = [
   {
     name: "胡彦斌",
     age: 3,
+    key: "0",
     street: "Lake Park1212",
     building: "01",
     createTime: "2020-04-08", // 1322195034000, // ,
     address:
       "西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号西湖区湖底公园1号",
-    children: [
-      {
-        name: "222",
-        age: 2,
-        street: "Lake Park1212",
-        building: "02",
-        createTime: "2020-04-08", // 1322195034000, // ,
-        address: "qwqwqw",
-      },
-    ],
+    // children: [
+    //   {
+    //     name: "222",
+    //     age: 2,
+    //     key: "0-1",
+    //     street: "Lake Park1212",
+    //     building: "02",
+    //     createTime: "2020-04-08", // 1322195034000, // ,
+    //     address: "qwqwqw",
+    //   },
+    // ],
   },
   {
+    parent: true,
     name: "胡彦祖",
     age: 1,
+    key: "1",
     address: "西湖区湖底公园1号",
     street: "Lake Park",
     building: "02",
     createTime: 1322195034000, // "2020-04-08",
-    children: [
-      {
-        name: "333",
-        age: 1,
-        street: "Lake Park1212",
-        building: "02",
-        createTime: "2020-04-08", // 1322195034000, // ,
-        address: "qwqwqw",
-        children: [
-          {
-            name: "333",
-            age: 1,
-            street: "Lake Park1212",
-            building: "02",
-            createTime: "2020-04-08", // 1322195034000, // ,
-            address: "qwqwqw",
-          },
-          {
-            name: "333",
-            age: 1,
-            street: "Lake Park1212",
-            building: "02",
-            createTime: "2020-04-08", // 1322195034000, // ,
-            address: "qwqwqw",
-          },
-        ],
-      },
-    ],
+    // children: [
+    //   {
+    //     key: "1-0",
+    //     name: "333",
+    //     age: 1,
+    //     street: "Lake Park1212",
+    //     building: "02",
+    //     createTime: "2020-04-08", // 1322195034000, // ,
+    //     address: "qwqwqw",
+    //   },
+    // ],
   },
 ];
+// const { Text } = Typography;
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -86,12 +74,11 @@ class Index extends React.Component {
     this._debounce = _.debounce(this.onRequest, 500).bind(this);
   }
 
-  _setIdentifiy(data, idx = 0) {
+  _setIdentifiy(data, idx = "") {
     return data.map((item, index) => {
-      let num = idx + index;
-      item["key"] = String(num);
+      item["tag"] = idx + "" + index + "";
       if (Array.isArray(item.children) && item.children.length > 0) {
-        this._setIdentifiy(item.children, num + "-");
+        this._setIdentifiy(item.children, index + "-");
       }
       return item;
     });
@@ -107,6 +94,7 @@ class Index extends React.Component {
       },
       () => {
         this.total();
+        console.log(this.state.dataSource);
       }
     );
   }
@@ -123,13 +111,13 @@ class Index extends React.Component {
   }
 
   // 新增行
-  addRow(key, curRecord) {
+  addRow(tag, curRecord) {
     let { dataSource } = this.state;
     let newRecord = {};
     Object.keys(curRecord).forEach(item => {
       newRecord[item] = null;
     });
-    this._setTagData(dataSource, key, (item, data, index) => {
+    this._setTagData(dataSource, tag, (item, data, index) => {
       data.splice(index + 1, 0, newRecord);
       dataSource = this._setIdentifiy(dataSource);
       this.setState(
@@ -144,9 +132,10 @@ class Index extends React.Component {
   }
 
   // 删除行
-  delRow(key) {
+  delRow(tag) {
+    debugger;
     let { dataSource } = this.state;
-    this._setTagData(dataSource, key, (item, data, index) => {
+    this._setTagData(dataSource, tag, (item, data, index) => {
       data.splice(index, 1);
       dataSource = this._setIdentifiy(dataSource);
       this.setState(
@@ -162,32 +151,31 @@ class Index extends React.Component {
 
   _setTagData(data, val, backCallFn) {
     data.forEach((item, index) => {
-      if (item.key == val) {
+      if (item.tag == val) {
+        debugger;
         backCallFn(item, data, index);
       }
-      if (Array.isArray(item.children) && item.children.length > 0) {
+      if (Array.isArray(item.children)) {
         this._setTagData(item.children, val, backCallFn);
       }
     });
   }
 
-
+  // total
+  _total(data, total) {
+    data.forEach(item => {
+      total = total + "-" + item.age;
+      if (Array.isArray(item.children)) {
+        this._total(item.children, total);
+      }
+    });
+    return total;
+  }
 
   total() {
     let { dataSource } = this.state;
     let total = 0;
-    function sum(data) {
-        for(let i = 0; i < data.length; i++) {
-            let item = data[i];
-            total = Number(total) + Number(item.age);
-            if (Array.isArray(item.children) && item.children.length > 0) {
-                sum(item.children);
-            }
-        }
-    }
-
-    sum(dataSource);
-
+    total = this._total(dataSource, total);
     console.log(total);
     this.setState({
       total,
@@ -195,10 +183,10 @@ class Index extends React.Component {
   }
 
   // 编辑
-  onChange(key, keyName, value) {
+  onChange(tag, key, value) {
     let { dataSource } = this.state;
-    this._setTagData(dataSource, key, record => {
-      record[keyName] = value;
+    this._setTagData(dataSource, tag, record => {
+      record[key] = value;
       this.setState(
         {
           dataSource,
@@ -211,24 +199,9 @@ class Index extends React.Component {
     });
   }
 
-  // 通过key获取children
-  _getChildrenToKey(keyArrs) {
-    const key = (keyArrs.length == 1) ? keyArrs[0] : null;
-    let {dataSource} = this.state;
-    let children = [];
-    dataSource.forEach(item => {
-      if(item.key == key){
-        children = item.children;
-      }
-    })
-
-    let newRecord = {};
-    return children.length == 0 && newRecord;
-  }
-
   // 搜索
-  onRequest(key, keyName, value) {
-    console.log("request", keyName, value);
+  onRequest(tag, key, value) {
+    console.log("request", key, value);
   }
 
   componentDidUpdate() {
@@ -253,12 +226,10 @@ class Index extends React.Component {
           // expandedRowRender={(record) => {
           //   return <p style={{ margin: 0 }}>{record.description}</p>
           // }}
+          rowKey={(record, i) => i}
           dataSource={this.state.dataSource}
           scroll={{ x: "100%" }}
           hideOnSinglePage={true} // 只有一页数据隐藏分页
-          onExpandedRowsChange={(keyArrs) => {
-                        console.log(keyArrs)
-          }}
           footer={() => {
             return (
               <div className="footer_total">

@@ -8,6 +8,7 @@ import { SpanText } from "component/base";
 function columnRefs() {
   const columns = [
     {
+      key: "key",
       title: "street",
       dataIndex: "street",
       width: 150,
@@ -16,6 +17,7 @@ function columnRefs() {
       },
     },
     {
+      key: "key",
       title: "building",
       dataIndex: "building",
       width: 250,
@@ -25,7 +27,7 @@ function columnRefs() {
       editable: true, // 表格编辑框没有提示toolTip
       renderElement: props => {
         const { curColumn } = props;
-        if (utils.isExistString(props.record.key, "-")) {
+        if (utils.isExistString(props.record.tag, "-")) {
           return (
             <SpanText
               displayType="select"
@@ -35,13 +37,13 @@ function columnRefs() {
               ]}
               onSelect={(index, value) =>
                 this.onChange(
-                  props.record.key,
+                  props.record.tag,
                   props.curColumn.dataIndex,
                   value
                 )
               }
               onSearch={(index, value) =>
-                this._debounce(props.record.key, curColumn.dataIndex, value)
+                this._debounce(props.record.tag, curColumn.dataIndex, value)
               }
               {...{ props }}
             />
@@ -52,33 +54,34 @@ function columnRefs() {
       },
     },
     {
+      key: "key",
       title: "姓名",
       dataIndex: "name",
       rules: [{ required: true, message: "Please number!" }],
       width: 180,
       editable: true, // 表格编辑框没有提示toolTip
       renderElement: props => {
-        if (utils.isExistString(props.record.key, "-")) {
+        if (utils.isExistString(props.record.tag, "-")) {
           return (
             <SpanText
               displayType="text"
               onPressEnter={(index, e) =>
                 this.onChange(
-                  props.record.key,
+                  props.record.tag,
                   props.curColumn.dataIndex,
                   e.currentTarget.value
                 )
               }
               onBlur={(index, e) =>
                 this.onChange(
-                  props.record.key,
+                  props.record.tag,
                   props.curColumn.dataIndex,
                   e.currentTarget.value
                 )
               }
               onSearch={(index, e) =>
                 this._debounce(
-                  props.record.key,
+                  props.record.tag,
                   props.curColumn.dataIndex,
                   e.currentTarget.value
                 )
@@ -92,6 +95,7 @@ function columnRefs() {
       },
     },
     {
+      key: "key",
       title: "年龄",
       dataIndex: "age",
       toolTip: {
@@ -103,27 +107,27 @@ function columnRefs() {
         return utils.thousandSeparatorFormat(text);
       },
       renderElement: props => {
-        if (utils.isExistString(props.record.key, "-")) {
+        if (utils.isExistString(props.record.tag, "-")) {
           return (
             <SpanText
               displayType="text"
               onPressEnter={(index, e) =>
                 this.onChange(
-                  props.record.key,
+                  props.record.tag,
                   props.curColumn.dataIndex,
                   e.currentTarget.value
                 )
               }
               onBlur={(index, e) =>
                 this.onChange(
-                  props.record.key,
+                  props.record.tag,
                   props.curColumn.dataIndex,
                   e.currentTarget.value
                 )
               }
               onSearch={(index, e) =>
                 this._debounce(
-                  props.record.key,
+                  props.record.tag,
                   props.curColumn.dataIndex,
                   e.currentTarget.value
                 )
@@ -137,6 +141,7 @@ function columnRefs() {
       },
     },
     {
+      key: "key",
       title: "时间",
       dataIndex: "createTime",
       width: 200,
@@ -145,13 +150,13 @@ function columnRefs() {
       },
       editable: true, // 表格编辑框没有提示toolTip
       renderElement: props => {
-        if (utils.isExistString(props.record.key, "-")) {
+        if (utils.isExistString(props.record.tag, "-")) {
           return (
             <SpanText
               displayType="datePicker"
               onChange={(index, value) => {
                 this.onChange(
-                  props.record.key,
+                  props.record.tag,
                   props.curColumn.dataIndex,
                   value.dateString
                 );
@@ -165,6 +170,7 @@ function columnRefs() {
       },
     },
     {
+      key: "key",
       title: "住址",
       dataIndex: "address",
       width: 800,
@@ -188,25 +194,26 @@ function columnRefs() {
       width: 100,
       fixed: "right",
       renderElement: props => {
-        return utils.isExistString(props.record.key, "-") ? (
+        return utils.isExistString(props.record.tag, "-") ? (
           <a
             style={{ fontSize: "20px" }}
-            onClick={this.addRow.bind(this, props.record.key, props.record)}>
+            onClick={this.addRow.bind(this, props.record.tag, props.record)}>
             +
           </a>
         ) : null;
       },
     },
     {
+      key: "key",
       title: "del",
       dataIndex: "del",
       width: 100,
       fixed: "right",
       renderElement: props => {
-        return utils.isExistString(props.record.key, "-") ? (
+        return utils.isExistString(props.record.tag, "-") ? (
           <a
             style={{ fontSize: "20px" }}
-            onClick={this.delRow.bind(this, props.record.key, props.record)}>
+            onClick={this.delRow.bind(this, props.record.tag, props.record)}>
             -
           </a>
         ) : null;
@@ -237,9 +244,6 @@ function columnRefs() {
       onChange: (selectedRowKeys, selectedRow) => {
         this._rowSelectionChange(selectedRowKeys, selectedRow);
       },
-      getCheckboxProps: record => ({
-        disabled: !utils.isExistString(record.key, "-"), // Column configuration not to be checked
-      }),
     },
     getColumns: () => getColumns(columns),
   };
