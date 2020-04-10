@@ -234,12 +234,18 @@ function columnRefs() {
       type: "checkbox",
       columnWidth: "60px",
       // fixed: 'left',
-      onChange: (selectedRowKeys, selectedRow) => {
-        this._rowSelectionChange(selectedRowKeys, selectedRow);
+      onSelect: (record, selected, selectedRows) => {
+        this._rowSelectionChange(record, selected, selectedRows)
       },
-      getCheckboxProps: record => ({
-        disabled: !utils.isExistString(record.key, "-"), // Column configuration not to be checked
-      }),
+      // selections:{
+      //   key: "0-0",
+      //   text: "aa"
+      // },
+      // getCheckboxProps: (record) => {
+      //   return ({
+      //   disabled: false,//!utils.isExistString(record.key, "-"), // Column configuration not to be checked
+      //   name: record.dataIndex,
+      // })
     },
     getColumns: () => getColumns(columns),
   };

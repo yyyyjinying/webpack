@@ -5,6 +5,8 @@ import { Table, Form, Typography } from "antd";
 import columnRefs from "./columnRefs";
 import "./index.less";
 import _ from "lodash";
+// eslint-disable-next-line no-unused-vars
+import * as utils from "utils";
 // import BigNumber from 'BignNumber.js'
 // import {bigNumber} from "./test_component/bigNumber";
 const Data = [
@@ -35,6 +37,14 @@ const Data = [
     building: "02",
     createTime: 1322195034000, // "2020-04-08",
     children: [
+      {
+        name: "222",
+        age: 2,
+        street: "Lake Park1212",
+        building: "02",
+        createTime: "2020-04-08", // 1322195034000, // ,
+        address: "qwqwqw",
+      },
       {
         name: "333",
         age: 1,
@@ -68,8 +78,9 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      manualSelectedRowKeys: [],
       selectedRowKeys: [], // 选项下标标示
-      selectedRow: [], // 勾选的数据
+      selectedRows: [], // 勾选的数据
       total: 0,
       dataSource: [],
       saveData: [],
@@ -90,7 +101,7 @@ class Index extends React.Component {
     return data.map((item, index) => {
       let num = idx + index;
       item["key"] = String(num);
-      if (Array.isArray(item.children) && item.children.length > 0) {
+      if (Array.isArray(item.children)) {
         this._setIdentifiy(item.children, num + "-");
       }
       return item;
@@ -113,12 +124,73 @@ class Index extends React.Component {
 
   componentDidMount() {}
 
+  _getUniqData(data, arrValue) {
+    return data.filter(item => !arrValue.includes(item));
+  }
+
+  _getChildrenKeys(record) {
+    let childrenKeys = [];
+    function getKey(data) {
+      data.forEach(item => {
+        childrenKeys.push(item.key);
+        if (Array.isArray(item.children)) {
+          getKey(item.children);
+        }
+      });
+    }
+    if (record.children) getKey(record.children);
+    return childrenKeys;
+  }
+
+  // 父级是否勾选
+  _getParent(dataSource, record) {
+    let childrenValue = [];
+    // eslint-disable-next-line no-inner-declarations
+    function getChildrenValue(dataSource, record) {
+      for (let i = 0; i < dataSource.length; i++) {
+        const item = dataSource[i];
+
+        if (item.key == record.key) {
+          for (let j = 0; j < dataSource.length; j++) {
+            const sItem = dataSource[j];
+            childrenValue.push(sItem.key);
+          }
+          break;
+        }
+        if (record.key.indexOf(item.key) == 0 && item.children) {
+          getChildrenValue(item.children, record);
+        }
+      }
+    }
+    getChildrenValue(dataSource, record);
+    return childrenValue;
+  }
+
+  _allSelect(dataSource, record, selected, selectedRowKeys) {
+    let arrs = this._getParent(dataSource, record);
+    // true 子项没有全选
+    let allSelectBol = this._getUniqData(arrs, selectedRowKeys).length > 0;
+    let allKeyString = arrs[0].substring(0, arrs[0].search(/(-\d)$/));
+    if(!allSelectBol){
+      return [...selectedRowKeys, allKeyString];
+    }
+    return this._getUniqData(selectedRowKeys, allKeyString);
+  }
+
   // 勾选
-  _rowSelectionChange(selectedRowKeys = [], selectedRow = []) {
+  _rowSelectionChange(record, selected, selectedRows) {
+    let { selectedRowKeys, dataSource } = this.state;
+    let recordKeys = [record.key, ...this._getChildrenKeys(record)];
+    if (selected) {
+      selectedRowKeys = [...selectedRowKeys, ...recordKeys];
+    } else {
+      selectedRowKeys = this._getUniqData(selectedRowKeys, recordKeys);
+    }
+    selectedRowKeys = this._allSelect(dataSource, record, selected, selectedRowKeys);
     this.rowSelection.selectedRowKeys = selectedRowKeys;
     this.setState({
       selectedRowKeys: selectedRowKeys,
-      selectedRow: selectedRow,
+      selectedRows: selectedRows,
     });
   }
 
@@ -171,24 +243,19 @@ class Index extends React.Component {
     });
   }
 
-
-
   total() {
     let { dataSource } = this.state;
     let total = 0;
     function sum(data) {
-        for(let i = 0; i < data.length; i++) {
-            let item = data[i];
-            total = Number(total) + Number(item.age);
-            if (Array.isArray(item.children) && item.children.length > 0) {
-                sum(item.children);
-            }
+      for (let i = 0; i < data.length; i++) {
+        let item = data[i];
+        total = Number(total) + Number(item.age);
+        if (Array.isArray(item.children) && item.children.length > 0) {
+          sum(item.children);
         }
+      }
     }
-
     sum(dataSource);
-
-    console.log(total);
     this.setState({
       total,
     });
@@ -213,14 +280,14 @@ class Index extends React.Component {
 
   // 通过key获取children
   _getChildrenToKey(keyArrs) {
-    const key = (keyArrs.length == 1) ? keyArrs[0] : null;
-    let {dataSource} = this.state;
+    const key = keyArrs.length == 1 ? keyArrs[0] : null;
+    let { dataSource } = this.state;
     let children = [];
     dataSource.forEach(item => {
-      if(item.key == key){
+      if (item.key == key) {
         children = item.children;
       }
-    })
+    });
 
     let newRecord = {};
     return children.length == 0 && newRecord;
@@ -256,8 +323,8 @@ class Index extends React.Component {
           dataSource={this.state.dataSource}
           scroll={{ x: "100%" }}
           hideOnSinglePage={true} // 只有一页数据隐藏分页
-          onExpandedRowsChange={(keyArrs) => {
-                        console.log(keyArrs)
+          onExpandedRowsChange={keyArrs => {
+            console.log(keyArrs);
           }}
           footer={() => {
             return (
