@@ -1,8 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { Form, InputNumber, Select, Input } from "antd";
+// eslint-disable-next-line no-unused-vars
 import NumberFormat from "react-number-format";
+// import ReactTree from "./reactTree";
+import ReactOrgCahrt from "./orgChart";
 class Test extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
   onInputChange(event) {
     // event.persist()
@@ -12,6 +19,7 @@ class Test extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
+        <ReactOrgCahrt/>
         <NumberFormat
           value={2456981.09344}
           displayType={"text"}

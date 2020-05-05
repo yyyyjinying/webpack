@@ -20,6 +20,16 @@ module.exports = {
   module: {
     rules: [
       {
+        test: require.resolve('jquery'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'jQuery'
+        },{
+          loader: 'expose-loader',
+          options: '$'
+        }]
+      },
+      {
         test: /\.html$/,
         exclude: /node_modules/,
         use: [
@@ -30,26 +40,30 @@ module.exports = {
         ],
       },
       {
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.less$/,
         use: [
           {
             loader: "style-loader",
           },
           {
-            loader: "css-loader",
-            options: {
-              importLoaders: 2,
-              // modules: true,
-              // localIndexName: "[name]__[local]__[hash:base64:5]", //配置class的名字
-            },
-          },
-          {
             loader: "postcss-loader",
             options: {
-              parser: 'postcss-less',
+              parser: "postcss-less",
               syntax: "postcss-less",
               ident: "postcss",
-              plugins: (loader) => [
+              plugins: loader => [
                 require("postcss-flexbugs-fixes"),
                 require("autoprefixer")({
                   browsers: [
@@ -60,8 +74,8 @@ module.exports = {
                   ],
                   flexbox: "no-2009",
                 }),
-                require('postcss-import')({ root: loader.resourcePath }),
-                require('cssnano')()
+                require("postcss-import")({ root: loader.resourcePath }),
+                require("cssnano")(),
               ],
             },
           },

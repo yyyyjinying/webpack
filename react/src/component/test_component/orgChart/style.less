@@ -1,0 +1,70 @@
+.reactOrgChart {
+    width: 100%;
+    overflow: auto;
+}
+
+.reactOrgChart .orgNodeChildGroup {
+    width: 160px;
+}
+.reactOrgChart .orgNodeChildGroup .node {
+    border: solid 1px #000000;
+    display: inline-block;
+    padding: 4px;
+}
+
+.reactOrgChart .orgNodeChildGroup .nodeCell {
+    text-align: center;
+}
+
+.reactOrgChart .orgNodeChildGroup .nodeGroupCell {
+    vertical-align: top;
+}
+
+.reactOrgChart .orgNodeChildGroup .nodeGroupLineVerticalMiddle {
+    height: 25px;
+    width: 50%;
+    border-right: 2px solid #000;
+}
+
+.reactOrgChart .nodeLineBorderTop {
+    border-top: solid 2px #000;
+}
+
+.reactOrgChart table {
+    border-collapse: collapse;
+    border: none;
+    margin: 0 auto;
+}
+
+.reactOrgChart td {
+    padding: 0;
+}
+
+.reactOrgChart table.nodeLineTable {
+    width: 100%;
+}
+
+.reactOrgChart table td.nodeCell {
+    width: 50%;
+}
+
+.initechNode {
+    border: solid 3px red;
+    border-radius: 3px;
+    padding: 5px 20px;
+    display: inline-block;
+    position: relative;
+
+    &::after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid red;
+        left: 50%;
+        top: -12px;
+        margin-left: -5px;
+    }
+}
