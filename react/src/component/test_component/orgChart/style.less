@@ -2,12 +2,8 @@
     width: 100%;
     overflow: auto;
 }
-
-.reactOrgChart .orgNodeChildGroup {
-    width: 160px;
-}
 .reactOrgChart .orgNodeChildGroup .node {
-    border: solid 1px #000000;
+    border: solid 2px rgba(216,216,216,1);
     display: inline-block;
     padding: 4px;
 }
@@ -23,11 +19,11 @@
 .reactOrgChart .orgNodeChildGroup .nodeGroupLineVerticalMiddle {
     height: 25px;
     width: 50%;
-    border-right: 2px solid #000;
+    border-right: 2px solid rgba(216,216,216,1);
 }
 
 .reactOrgChart .nodeLineBorderTop {
-    border-top: solid 2px #000;
+    border-top: solid 2px rgba(216,216,216,1);
 }
 
 .reactOrgChart table {
@@ -49,22 +45,42 @@
 }
 
 .initechNode {
-    border: solid 3px red;
-    border-radius: 3px;
-    padding: 5px 20px;
     display: inline-block;
-    position: relative;
-
-    &::after {
-        position: absolute;
-        content: "";
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 10px solid red;
-        left: 50%;
-        top: -12px;
-        margin-left: -5px;
+    line-height: 24px;
+    border-radius:4px;
+    border:1px solid rgba(0,0,0,0.25);
+    font-size:14px;
+    font-family:MicrosoftYaHei;
+    color:rgba(0,0,0,1);
+    line-height:19px;
+    padding: 8px 24px;
+    &.level-first {
+        color: #E95504;
+        font-size: 24px;
+        padding: 18px 25px;
     }
+    &.level-second {
+        font-weight:bold;
+        color:rgba(6,19,52,1);
+    }
+    &.level-three {
+        width:34px;
+        margin: 0 auto;  
+        padding: 24px 8px;
+        
+    }
+
+
+    // &::after {
+    //     position: absolute;
+    //     content: "";
+    //     width: 0;
+    //     height: 0;
+    //     border-left: 5px solid transparent;
+    //     border-right: 5px solid transparent;
+    //     border-top: 10px solid red;
+    //     left: 50%;
+    //     top: -12px;
+    //     margin-left: -5px;
+    // }
 }
