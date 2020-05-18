@@ -33,7 +33,8 @@
         "handleMissingStyleName": "warn", // 没有时进行警告
         "exclude": ".css$"
       }
-    ]
+    ],
+    ["@babel/plugin-proposal-class-properties"]
   ],
   "env": {
     "development": {

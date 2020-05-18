@@ -7,9 +7,6 @@ import {
     Switch,
     Route,
     Link,
-    useRouteMatch,
-    useParams,
-    BrowserRouter as Router,
     withRouter,
   } from "react-router-dom";
 import Topic from "./topic";

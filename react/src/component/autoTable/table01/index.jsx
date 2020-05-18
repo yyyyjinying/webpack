@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 // eslint-disable-next-line no-unused-vars
-import { Table, Form, Typography } from "antd";
+import { Table, Form } from "antd";
 import columnRefs from "./columnRefs";
 import "./index.less";
 import _ from "lodash";
