@@ -4,12 +4,13 @@ const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = merge(common, {
   entry: {
     app: "./src/index.jsx",
+    table: "./src/component/autoTable/table01/index.jsx",
   },
   output: {
     filename: "[name].bundle.js",
@@ -41,7 +42,10 @@ module.exports = merge(common, {
     alias: {
       src: path.resolve(__dirname, "../src"),
       component: path.resolve(__dirname, "../src/component"),
-      utils: path.resolve(__dirname, "../src/utils"),
+      common: path.resolve(__dirname, "../src/common"),
+      utils: path.resolve(__dirname, "../src/common/utils"),
+      style: path.resolve(__dirname, "../src/common/style"),
+      mock: path.resolve(__dirname, "../src/mock"),
     },
     modules: ["node_modules"],
   },
@@ -55,11 +59,6 @@ module.exports = merge(common, {
           },
           {
             loader: "css-loader",
-            // options: {
-            //   importLoaders: 1,
-            //   modules: true,
-            //   localIndexName: "[name]__[local]___[hash:base64:5]", //配置class的名字
-            // },
           },
           {
             loader: "postcss-loader",
@@ -89,16 +88,10 @@ module.exports = merge(common, {
       },
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
         use: [
           {
             loader: "babel-loader",
           },
-        ],
-      },
-      {
-        test: /\.(js|jsx)$/,
-        use: [
           {
             loader: "eslint-loader",
           },
@@ -117,7 +110,7 @@ module.exports = merge(common, {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "[name].css",
-      chunkFilename: "[id].css"
+      chunkFilename: "[id].css",
     }),
   ],
 });
