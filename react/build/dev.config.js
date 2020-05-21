@@ -37,16 +37,10 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
         use: [
           {
             loader: "babel-loader",
           },
-        ],
-      },
-      {
-        test: /\.(js|jsx)$/,
-        use: [
           {
             loader: "eslint-loader",
           },
@@ -54,18 +48,13 @@ module.exports = merge(common, {
         enforce: "pre", // 编译前检查
         exclude: /node_modules/, // 不检测的文件
         include: [path.resolve(__dirname, "../src")], // 指定检查的目录
-        // options: {
-        // emitError: true,
-        // formatter: "stylish"
-        //   formatter: require("eslint-friendly-formatter") // community formatter
-        // }
       },
     ],
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.ROOT_URL': JSON.stringify("http://localhost:3030"),
-      'process.env.MOCK_URL': JSON.stringify("https://easy-mock.com"),
-    })
+      "process.env.ROOT_URL": JSON.stringify("http://localhost:3030"),
+      "process.env.MOCK_URL": JSON.stringify("https://easy-mock.com"),
+    }),
   ],
 });

@@ -10,7 +10,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = merge(common, {
   entry: {
     app: "./src/index.jsx",
-    table: "./src/component/autoTable/table01/index.jsx",
+    table1: "./src/component/autoTable/table01/index.jsx",
   },
   output: {
     filename: "[name].bundle.js",
