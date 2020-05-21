@@ -15,19 +15,22 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
   ],
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".json", ".css"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
   },
   module: {
     rules: [
       {
-        test: require.resolve('jquery'),
-        use: [{
-          loader: 'expose-loader',
-          options: 'jQuery'
-        },{
-          loader: 'expose-loader',
-          options: '$'
-        }]
+        test: require.resolve("jquery"),
+        use: [
+          {
+            loader: "expose-loader",
+            options: "jQuery",
+          },
+          {
+            loader: "expose-loader",
+            options: "$",
+          },
+        ],
       },
       {
         test: /\.html$/,
@@ -45,10 +48,23 @@ module.exports = {
           { loader: "style-loader" },
           {
             loader: "css-loader",
-            options: {
-              modules: true,
-            },
+            // options: {
+            //   modules: true,
+            //   importLoaders: 1,
+            // },
           },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: (loader) => [
+                require('postcss-import')({ root: loader.resourcePath }),
+                require('postcss-cssnext')(),
+                require('autoprefixer')(),
+                require('cssnano')()
+              ]
+            }
+          }
         ],
       },
       {

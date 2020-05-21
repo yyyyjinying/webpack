@@ -12,13 +12,14 @@ import {
   } from "react-router-dom";
 
 import AutoTable from "../component/autoTable/table01";
+import "./css/style.less";
 
-@inject('store')
+@inject('Store01')
 @observer
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.store = props.store;
+        this.store = props.Store01;
     }
     componentDidMount(){
     }
@@ -26,7 +27,7 @@ class Home extends React.Component {
         console.log("store", this.store)
         let params = this.props.match.params;
         return <div>
-            <h1>home</h1>
+            <h1 className="bac">home</h1>
             <AutoTable />
         </div>;
     }

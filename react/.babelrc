@@ -20,20 +20,20 @@
         "style": true
       }
     ],
-    [
-      "react-css-modules",
-      {
-        "generateScopedName": "[local]-[hash:base64:10]",
-        "filetypes": {
-          ".less": {
-            "syntax": "postcss-less"
-          }
-        },
-        "webpackHotModuleReloading": true, // 支持热加载
-        "handleMissingStyleName": "warn", // 没有时进行警告
-        "exclude": ".css$"
-      }
-    ],
+    // [
+    //   "react-css-modules",
+    //   {
+    //     "generateScopedName": "[local]-[hash:base64:10]",
+    //     "filetypes": {
+    //       ".less": {
+    //         "syntax": "postcss-less"
+    //       }
+    //     },
+    //     "webpackHotModuleReloading": true, // 支持热加载
+    //     "handleMissingStyleName": "warn", // 没有时进行警告
+    //     "exclude": ".css$"
+    //   }
+    // ],
     ["@babel/plugin-proposal-class-properties"]
   ],
   "env": {
