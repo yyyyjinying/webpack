@@ -10,19 +10,51 @@ module.exports = merge(common, {
   },
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "../dist"),
+    path: path.resolve(__dirname, "../dist/test"),
   },
   devtool: "inline-source-map", // 打包后是否可以定位bug
   mode: "development",
   devServer: {
-    contentBase: path.resolve(__dirname, "../dist"),
+    contentBase: path.resolve(__dirname, "../dist/test"),
     open: true,
     hot: true,
     compress: true,
     port: 3030,
+    host: "0.0.0.0",
+    headers: {
+      "X-foo": "112233",
+    },
+    overlay: true,
+    stats: "errors-only",
+    proxy: {
+      "/api": {
+        target: "http://news.baidu.com", // 目标接口的域名
+        // secure: true,  // https 的时候 使用该参数
+        changeOrigin: true, // 是否跨域
+        pathRewrite: {
+          "^/api": "", // 重写路径
+        },
+      },
+    },
+    historyApiFallback: {
+      // 使用正则来匹配路由
+      rewrites: [
+        { from: /^\/user/, to: "/index.html" },
+        { from: /^\/home/, to: "/home.html" },
+      ],
+    },
   },
   resolve: {
-    extensions: [".js", ".jsx", ".tsx", ".ts", ".json", ".scss",".less", ".css"],
+    extensions: [
+      ".js",
+      ".jsx",
+      ".tsx",
+      ".ts",
+      ".json",
+      ".scss",
+      ".less",
+      ".css",
+    ],
     alias: {
       src: path.resolve(__dirname, "../src"),
       component: path.resolve(__dirname, "../src/component"),
