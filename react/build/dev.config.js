@@ -22,7 +22,7 @@ module.exports = merge(common, {
     port: 3030,
   },
   resolve: {
-    extensions: [".js", ".tsx", ".ts", ".json", ".scss", "css"],
+    extensions: [".js", ".jsx", ".tsx", ".ts", ".json", ".scss",".less", ".css"],
     alias: {
       src: path.resolve(__dirname, "../src"),
       component: path.resolve(__dirname, "../src/component"),
