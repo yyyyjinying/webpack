@@ -10,7 +10,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = merge(common, {
   entry: {
     app: "./src/index.jsx",
-    table1: "./src/component/autoTable/table01/index.jsx",
+    table2: "./src/component/autoTable/table01/index.jsx",
   },
   output: {
     filename: "[name].bundle.js",
@@ -51,6 +51,29 @@ module.exports = merge(common, {
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          { loader: "style-loader" },
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: (loader) => [
+                require('postcss-import')({ root: loader.resourcePath }),
+                require('postcss-cssnext')(),
+                require('autoprefixer')(),
+              ]
+            }
+          }
+        ],
+      },
       {
         test: /\.less$/,
         use: [
