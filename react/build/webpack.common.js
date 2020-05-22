@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   devtool: "inline-source-map", // 打包后是否可以定位bug
   plugins: [
-    new CleanWebpackPlugin({ protectWebpackAssets: ["test"] }),
+    new CleanWebpackPlugin({ protectWebpackAssets: ["dist"] }),
     new HtmlWebpackPlugin({
       title: "react",
       template: "./src/index.html",

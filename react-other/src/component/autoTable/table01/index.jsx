@@ -74,7 +74,7 @@ const Data = [
     ],
   },
 ];
-class Index extends React.Component {
+class XTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -339,4 +339,4 @@ class Index extends React.Component {
     );
   }
 }
-export default Form.create({})(Index);
+export default Form.create({})(XTable);

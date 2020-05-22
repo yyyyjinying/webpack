@@ -17,6 +17,9 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.store = props.Store01;
+    this.state = {
+      test: "zhaojinying"
+    }
   }
   componentDidMount() {
     axios.get("/api/widget?ajax=json&id=ad").then(res => {

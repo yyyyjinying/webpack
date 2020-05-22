@@ -7,15 +7,16 @@ const common = require("./webpack.common.js");
 module.exports = merge(common, {
   entry: {
     app: "./src/index.jsx",
+    xTable: "./src/component/autoTable/table01/index.jsx",
   },
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "../dist/test"),
+    path: path.resolve(__dirname, "../dist"),
   },
   devtool: "inline-source-map", // 打包后是否可以定位bug
   mode: "development",
   devServer: {
-    contentBase: path.resolve(__dirname, "../dist/test"),
+    contentBase: path.resolve(__dirname, "../dist"),
     open: true,
     hot: true,
     compress: true,
