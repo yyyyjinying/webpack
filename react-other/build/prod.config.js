@@ -27,7 +27,7 @@ module.exports = merge(common, {
         // //返回true以uglify块，否则返回false。
         chunkFilter: chunk => {
           // `vendor` 模块不压缩
-          if (chunk.name === "table2") {
+          if (chunk.name === "vendor") {
             return false;
           }
           return true;

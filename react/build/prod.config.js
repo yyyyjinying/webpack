@@ -38,7 +38,7 @@ module.exports = merge(common, {
   },
   mode: "production",
   resolve: {
-    extensions: [".js", ".jsx", ".tsx", ".ts", ".json", ".scss",".less", ".css"],
+    extensions: [".js",".jsx", ".tsx", ".ts", ".json", ".scss",".less", ".css"],
     alias: {
       src: path.resolve(__dirname, "../src"),
       component: path.resolve(__dirname, "../src/component"),
@@ -80,25 +80,29 @@ module.exports = merge(common, {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          {
-            loader: "css-loader",
-          },
+          { loader: "style-loader" },
           {
             loader: "postcss-loader",
             options: {
               ident: "postcss",
-              plugins: () => [
-                require("postcss-flexbugs-fixes"),
-                require("autoprefixer")({
-                  browsers: [
-                    ">1%",
-                    "last 4 versions",
-                    "Firefox ESR",
-                    "not ie < 9", // React doesn't support IE8 anyway
-                  ],
-                  flexbox: "no-2009",
-                }),
+              plugins: (loader) => [
+                require('postcss-import')({ root: loader.resourcePath }),
+                require('postcss-cssnext')(),
+                require('autoprefixer')(),
               ],
+              // plugins: () => [
+              //   require("postcss-flexbugs-fixes"),
+              //   require("autoprefixer")(),
+                // require("autoprefixer")({
+                //   browsers: [
+                //     ">1%",
+                //     "last 4 versions",
+                //     "Firefox ESR",
+                //     "not ie < 9", // React doesn't support IE8 anyway
+                //   ],
+                //   flexbox: "no-2009",
+                // }),
+              // ],
             },
           },
           {
