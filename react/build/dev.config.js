@@ -35,6 +35,14 @@ module.exports = merge(common, {
           "^/api": "", // 重写路径
         },
       },
+      "/origin": {
+        target: "http://localhost:3045/", // 目标接口的域名
+        // secure: true,  // https 的时候 使用该参数
+        changeOrigin: true, // 是否跨域
+        pathRewrite: {
+          "^/origin": "", // 重写路径
+        },
+      },
     },
     historyApiFallback: {
       // 使用正则来匹配路由

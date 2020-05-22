@@ -35,14 +35,17 @@ class Index extends React.Component {
         <Button onClick={this.sendChildrenData}>向子窗口发送数据</Button>
         <div>
           <div id="xtable"></div>
-          <iframe
-            onLoad={() => {
-            }}
-            id="xTableRef"
-            width="100%"
-            height="100%"
-            src="http://localhost:3045/"
-            name="iframe_a"></iframe>
+          <div style={{height: "400px", border: "1px solid #ccc"}}>
+            <iframe
+              onLoad={() => {
+              }}
+              id="xTableRef"
+              width="100%"
+              height="100%"
+              src="http://localhost:3045/"
+              name="iframe_a"></iframe>
+
+          </div>
         </div>
       </div>
     );

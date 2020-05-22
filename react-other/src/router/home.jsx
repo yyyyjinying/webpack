@@ -40,7 +40,6 @@ class Home extends React.Component {
 
   sendParent() {
     console.log(parent);
-    debugger;
   }
   render() {
     console.log("store", this.store);
