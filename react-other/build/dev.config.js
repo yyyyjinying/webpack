@@ -19,7 +19,7 @@ module.exports = merge(common, {
     open: true,
     hot: true,
     compress: true,
-    port: 3031,
+    port: 3045,
     host: "localhost",
     headers: {
       "X-foo": "112233",
