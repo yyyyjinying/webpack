@@ -8,7 +8,7 @@ import { observer, inject } from "mobx-react";
 import { Switch, Route, Link, withRouter } from "react-router-dom";
 
 import AutoTable from "../component/autoTable/table01";
-import "./css/style.css";
+// import "./css/style.css";
 
 @inject("Store01")
 @observer

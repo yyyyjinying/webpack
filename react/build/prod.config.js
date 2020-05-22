@@ -10,7 +10,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = merge(common, {
   entry: {
     app: "./src/index.jsx",
-    table2: "./src/component/autoTable/table01/index.jsx",
+    table1: "./src/component/autoTable/table01/index.jsx",
   },
   output: {
     filename: "[name].bundle.js",
@@ -38,7 +38,7 @@ module.exports = merge(common, {
   },
   mode: "production",
   resolve: {
-    extensions: [".js",".jsx", ".tsx", ".ts", ".json", ".scss",".less", ".css"],
+    extensions: [".js", ".tsx", ".ts", ".json", ".scss", "css"],
     alias: {
       src: path.resolve(__dirname, "../src"),
       component: path.resolve(__dirname, "../src/component"),
@@ -69,6 +69,7 @@ module.exports = merge(common, {
                 require('postcss-import')({ root: loader.resourcePath }),
                 require('postcss-cssnext')(),
                 require('autoprefixer')(),
+                require('cssnano')()
               ]
             }
           }
@@ -80,29 +81,25 @@ module.exports = merge(common, {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          { loader: "style-loader" },
+          {
+            loader: "css-loader",
+          },
           {
             loader: "postcss-loader",
             options: {
               ident: "postcss",
-              plugins: (loader) => [
-                require('postcss-import')({ root: loader.resourcePath }),
-                require('postcss-cssnext')(),
-                require('autoprefixer')(),
+              plugins: () => [
+                require("postcss-flexbugs-fixes"),
+                require("autoprefixer")({
+                  browsers: [
+                    ">1%",
+                    "last 4 versions",
+                    "Firefox ESR",
+                    "not ie < 9", // React doesn't support IE8 anyway
+                  ],
+                  flexbox: "no-2009",
+                }),
               ],
-              // plugins: () => [
-              //   require("postcss-flexbugs-fixes"),
-              //   require("autoprefixer")(),
-                // require("autoprefixer")({
-                //   browsers: [
-                //     ">1%",
-                //     "last 4 versions",
-                //     "Firefox ESR",
-                //     "not ie < 9", // React doesn't support IE8 anyway
-                //   ],
-                //   flexbox: "no-2009",
-                // }),
-              // ],
             },
           },
           {
