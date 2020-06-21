@@ -8,8 +8,10 @@ import {
   getYNBol,
   getNotNull,
   isExistString,
+  getEllipsisValueByWidth,
 } from "./format.js";
 export {
+  getEllipsisValueByWidth,
   isExistString,
   getNotNull,
   thousandSeparatorFormat,

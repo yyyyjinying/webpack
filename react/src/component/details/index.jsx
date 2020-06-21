@@ -122,7 +122,7 @@ class Details extends React.Component {
         centered
         title="detail"
         okText={this.isDisabled() ? "修改" : "保存"}
-        visible={this.props.isShow}
+        visible={true}
         onOk={e => this.submit(e)}
         onCancel={() => this.cancel()}
         afterClose={() => this.reset()}

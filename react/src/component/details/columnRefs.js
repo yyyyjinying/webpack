@@ -12,27 +12,27 @@ const COLUMNTYPE = {
 const SPAN_COLUMN_NUM = 8;
 function columnRefs() {
   const columns = [
-    {
-      title: "numbernumbe",
-      dataIndex: "number",
-      type: COLUMNTYPE.numberType,
-      visible: true,
-      className: "number",
-      props: {
-        // readOnly: true, // 只读
-        disabled: this.isDisabled(), // true:禁用 false:开启
-        onChange: (date, dateString) => {
-          console.log(date, dateString);
-        },
-        placeholder: "自定义number",
-        formatter: value => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-        parser: value => String(value).replace(/\$\s?|(,*)/g, ''),
-      },
-      decorator: {
-        initialValue: 2345,
-        rules: [{ type: 'number', required: true, message: 'Please input number!' }]
-      }
-    },
+    // {
+    //   title: "numbernumbe",
+    //   dataIndex: "number",
+    //   type: COLUMNTYPE.numberType,
+    //   visible: true,
+    //   className: "number",
+    //   props: {
+    //     // readOnly: true, // 只读
+    //     disabled: this.isDisabled(), // true:禁用 false:开启
+    //     onChange: (date, dateString) => {
+    //       console.log(date, dateString);
+    //     },
+    //     placeholder: "自定义number",
+    //     formatter: value => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+    //     parser: value => String(value).replace(/\$\s?|(,*)/g, ''),
+    //   },
+    //   decorator: {
+    //     initialValue: 2345,
+    //     rules: [{ type: 'number', required: true, message: 'Please input number!' }]
+    //   }
+    // },
     {
       title: "beginTim",
       dataIndex: "beginTime",
@@ -44,32 +44,35 @@ function columnRefs() {
         onChange: (date, dateString) => {
           console.log(date, dateString);
         },
-        format: "YYYY-MM-DD",
+        // mode: "month",
+        format: "YYYY",
         placeholder: "自定义文本",
+        readonly: "true",
+        // open: "true",
       },
       decorator: {
-        initialValue: utils.getDateFormat(this.props.detail["beginTime"]),// utils.getDateFormat(this.props.detail["beginTime"], "YYYY-MM-DD"),
+        initialValue: utils.getDateFormat(String((new Date()).getFullYear())),// utils.getDateFormat(this.props.detail["beginTime"], "YYYY-MM-DD"),
         rules: [{ type: 'object', required: true, message: 'Please select time!' }]
       }
     },
-    {
-      title: "timeRange",
-      dataIndex: "timeRange",
-      type: COLUMNTYPE.timeRangeType,
-      visible: true,
-      props: {
-        disabled: this.isDisabled(), // true:禁用 false:开启
-        onChange: (date, dateString) => {
-          console.log(date, dateString);
-        },
-        format: "YYYY-MM-DD",
-        placeholder: ["start01", "end01"],
-      },
-      decorator: {
-        initialValue: utils.getArrayDateFormat(this.props.detail["timeRange"]),
-        rules: [{ type: 'array', required: true, message: 'Please select time!' }]
-      }
-    },
+    // {
+    //   title: "timeRange",
+    //   dataIndex: "timeRange",
+    //   type: COLUMNTYPE.timeRangeType,
+    //   visible: true,
+    //   props: {
+    //     disabled: this.isDisabled(), // true:禁用 false:开启
+    //     onChange: (date, dateString) => {
+    //       console.log(date, dateString);
+    //     },
+    //     format: "YYYY-MM-DD",
+    //     placeholder: ["start01", "end01"],
+    //   },
+    //   decorator: {
+    //     initialValue: utils.getArrayDateFormat(this.props.detail["timeRange"]),
+    //     rules: [{ type: 'array', required: true, message: 'Please select time!' }]
+    //   }
+    // },
     {
       title: "select",
       dataIndex: "select",
@@ -80,6 +83,7 @@ function columnRefs() {
         { text: "pic", value: "02" },
         { text: "tom", value: "03" },
       ],
+      ref: "aa",
       props: {
         disabled: this.isDisabled(), // true:禁用 false:开启
         showSearch: true,
@@ -100,98 +104,98 @@ function columnRefs() {
         },
       },
       decorator: {
-        initialValue: this.props.detail["select"],
+        initialValue: "01",
         rules: [{ required: true, message: "必填11" }],
       },
     },
-    {
-      title: "03",
-      dataIndex: "03",
-      type: COLUMNTYPE.inputType,
-      visible: true,
-      props: {
-        placeholder: "请输入",
-        allowClear: true,
-        disabled: this.isDisabled(), // true:禁用 false:开启
-        onChange: (e) => {
-          console.log("onChange", e.target.value);
-        }
-      },
-      decorator: {
-        initialValue: this.props.detail["03"],
-        rules: [{ required: false, message: "必填11" }],
-      },
-    },
-    {
-      title: "03",
-      dataIndex: "03",
-      type: COLUMNTYPE.inputType,
-      visible: true,
-      props: {
-        placeholder: "请输入",
-        allowClear: true,
-        disabled: this.isDisabled(), // true:禁用 false:开启
-        onChange: (e) => {
-          console.log("onChange", e.target.value);
-        }
-      },
-      decorator: {
-        initialValue: this.props.detail["03"],
-        rules: [{ required: false, message: "必填11" }],
-      },
-    },
-    {
-      title: "04",
-      dataIndex: "04",
-      type: COLUMNTYPE.inputType,
-      visible: true,
-      props: {
-        placeholder: "请输入",
-        allowClear: true,
-        disabled: this.isDisabled(), // true:禁用 false:开启
-        onChange: (e) => {
-          console.log("onChange", e.target.value);
-        }
-      },
-      decorator: {
-        initialValue: this.props.detail["03"],
-        rules: [{ required: false, message: "必填11" }],
-      },
-    },
-    {
-      title: "05",
-      dataIndex: "05",
-      type: COLUMNTYPE.inputType,
-      visible: true,
-      props: {
-        placeholder: "请输入",
-        allowClear: true,
-        disabled: this.isDisabled(), // true:禁用 false:开启
-        onChange: (e) => {
-          console.log("onChange", e.target.value);
-        }
-      },
-      decorator: {
-        initialValue: this.props.detail["03"],
-        rules: [{ required: false, message: "必填11" }],
-      },
-    },
-    {
-      title: null,
-      dataIndex: "check",
-      type: COLUMNTYPE.checkboxType,
-      visible: true,
-      props: {
-        disabled: this.isDisabled(), // true:禁用 false:开启
-        onChange: (param) => {
-          console.log("checked", param.target.checked);
-        }
-      },
-      decorator: {
-        valuePropName: 'checked',
-        initialValue: utils.getYNBol(this.props.detail["check"])
-      },
-    },
+    // {
+    //   title: "03",
+    //   dataIndex: "03",
+    //   type: COLUMNTYPE.inputType,
+    //   visible: true,
+    //   props: {
+    //     placeholder: "请输入",
+    //     allowClear: true,
+    //     disabled: this.isDisabled(), // true:禁用 false:开启
+    //     onChange: (e) => {
+    //       console.log("onChange", e.target.value);
+    //     }
+    //   },
+    //   decorator: {
+    //     initialValue: this.props.detail["03"],
+    //     rules: [{ required: false, message: "必填11" }],
+    //   },
+    // },
+    // {
+    //   title: "03",
+    //   dataIndex: "03",
+    //   type: COLUMNTYPE.inputType,
+    //   visible: true,
+    //   props: {
+    //     placeholder: "请输入",
+    //     allowClear: true,
+    //     disabled: this.isDisabled(), // true:禁用 false:开启
+    //     onChange: (e) => {
+    //       console.log("onChange", e.target.value);
+    //     }
+    //   },
+    //   decorator: {
+    //     initialValue: this.props.detail["03"],
+    //     rules: [{ required: false, message: "必填11" }],
+    //   },
+    // },
+    // {
+    //   title: "04",
+    //   dataIndex: "04",
+    //   type: COLUMNTYPE.inputType,
+    //   visible: true,
+    //   props: {
+    //     placeholder: "请输入",
+    //     allowClear: true,
+    //     disabled: this.isDisabled(), // true:禁用 false:开启
+    //     onChange: (e) => {
+    //       console.log("onChange", e.target.value);
+    //     }
+    //   },
+    //   decorator: {
+    //     initialValue: this.props.detail["03"],
+    //     rules: [{ required: false, message: "必填11" }],
+    //   },
+    // },
+    // {
+    //   title: "05",
+    //   dataIndex: "05",
+    //   type: COLUMNTYPE.inputType,
+    //   visible: true,
+    //   props: {
+    //     placeholder: "请输入",
+    //     allowClear: true,
+    //     disabled: this.isDisabled(), // true:禁用 false:开启
+    //     onChange: (e) => {
+    //       console.log("onChange", e.target.value);
+    //     }
+    //   },
+    //   decorator: {
+    //     initialValue: this.props.detail["03"],
+    //     rules: [{ required: false, message: "必填11" }],
+    //   },
+    // },
+    // {
+    //   title: null,
+    //   dataIndex: "check",
+    //   type: COLUMNTYPE.checkboxType,
+    //   visible: true,
+    //   props: {
+    //     disabled: this.isDisabled(), // true:禁用 false:开启
+    //     onChange: (param) => {
+    //       console.log("checked", param.target.checked);
+    //     }
+    //   },
+    //   decorator: {
+    //     valuePropName: 'checked',
+    //     initialValue: utils.getYNBol(this.props.detail["check"])
+    //   },
+    // },
   ];
   return {
     COLUMNTYPE,

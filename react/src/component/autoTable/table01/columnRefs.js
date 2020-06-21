@@ -9,16 +9,20 @@ function columnRefs() {
   const columns = [
     {
       title: "street",
+      // fixed: "left",
       dataIndex: "street",
       width: 150,
       toolTip: {
         visible: true,
       },
+      renderElement:(props)=> {
+        return <SpanText>{props.index + 1}</SpanText>;
+      }
     },
     {
       title: "building",
       dataIndex: "building",
-      width: 250,
+      width: 200,
       toolTip: {
         visible: true,
       },
@@ -54,41 +58,13 @@ function columnRefs() {
     {
       title: "姓名",
       dataIndex: "name",
-      rules: [{ required: true, message: "Please number!" }],
-      width: 180,
-      editable: true, // 表格编辑框没有提示toolTip
+      width: 210,
+      toolTip: {
+        visible: true,
+      },
+      // editable: true, // 表格编辑框没有提示toolTip
       renderElement: props => {
-        if (utils.isExistString(props.record.key, "-")) {
-          return (
-            <SpanText
-              displayType="text"
-              onPressEnter={(index, e) =>
-                this.onChange(
-                  props.record.key,
-                  props.curColumn.dataIndex,
-                  e.currentTarget.value
-                )
-              }
-              onBlur={(index, e) =>
-                this.onChange(
-                  props.record.key,
-                  props.curColumn.dataIndex,
-                  e.currentTarget.value
-                )
-              }
-              onSearch={(index, e) =>
-                this._debounce(
-                  props.record.key,
-                  props.curColumn.dataIndex,
-                  e.currentTarget.value
-                )
-              }
-              {...{ props }}
-            />
-          );
-        } else {
-          return <SpanText>{props.text}</SpanText>;
-        }
+        return <SpanText width={props.curColumn.width}>{props.text}</SpanText>;
       },
     },
     {
@@ -97,7 +73,7 @@ function columnRefs() {
       toolTip: {
         visible: true,
       },
-      width: 500,
+      width: 200,
       editable: true, // 表格编辑框没有提示toolTip
       format: text => {
         return utils.thousandSeparatorFormat(text);
@@ -167,7 +143,7 @@ function columnRefs() {
     {
       title: "住址",
       dataIndex: "address",
-      width: 800,
+      width: 520,
       toolTip: {
         visible: true,
       },
@@ -180,13 +156,15 @@ function columnRefs() {
         // onMouseEnter: event => {}, // 鼠标移入行
         // onMouseLeave: event => {},
       }),
-      renderElement: props => <SpanText>{props.text}</SpanText>,
+      renderElement: (props) => {
+        return <SpanText width={2 * props.curColumn.width}>{props.text}</SpanText>;
+      }
     },
     {
       title: "add",
       dataIndex: "add",
       width: 100,
-      fixed: "right",
+      // fixed: "right",
       renderElement: props => {
         return utils.isExistString(props.record.key, "-") ? (
           <a
@@ -201,7 +179,7 @@ function columnRefs() {
       title: "del",
       dataIndex: "del",
       width: 100,
-      fixed: "right",
+      // fixed: "right",
       renderElement: props => {
         return utils.isExistString(props.record.key, "-") ? (
           <a
@@ -233,9 +211,9 @@ function columnRefs() {
     rowSelection: {
       type: "checkbox",
       columnWidth: "60px",
-      // fixed: 'left',
+      // fixed: "left",
       onSelect: (record, selected, selectedRows) => {
-        this._rowSelectionChange(record, selected, selectedRows)
+        this._rowSelectionChange(record, selected, selectedRows);
       },
       // selections:{
       //   key: "0-0",

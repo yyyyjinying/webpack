@@ -26,15 +26,17 @@ const FormItem = Props => {
         getFieldDecorator(dataIndex, decorator)(<InputNumber {...props} />),
       [COLUMNTYPE.inputType]: () =>
         getFieldDecorator(dataIndex, decorator)(<Input {...props} />),
-      [COLUMNTYPE.timeRangeType]: () =>
-        getFieldDecorator(
-          dataIndex,
-          decorator
-        )(<DatePicker.RangePicker {...props} />),
-      [COLUMNTYPE.timeType]: () =>
-        getFieldDecorator(dataIndex, decorator)(<DatePicker {...props} />),
-      [COLUMNTYPE.selectType]: () =>
-        getFieldDecorator(
+      [COLUMNTYPE.timeRangeType]:() => {
+        const props = {...props, getCalendarContainer:triggerNode => triggerNode.parentNode};
+        return getFieldDecorator(dataIndex, decorator)(<DatePicker.RangePicker {...props} />);
+      },
+      [COLUMNTYPE.timeType]: () =>{
+        const props = {...props, getCalendarContainer:triggerNode => triggerNode.parentNode};
+        return getFieldDecorator(dataIndex, decorator)(<DatePicker {...props} />);
+      },
+      [COLUMNTYPE.selectType]: () => {
+        const props = {...props, getPopupContainer:triggerNode => triggerNode.parentNode};
+        return getFieldDecorator(
           dataIndex,
           decorator
         )(
@@ -48,7 +50,9 @@ const FormItem = Props => {
                 );
               })}
           </Select>
-        ),
+        );
+      }
+        
     };
     return domObj[item.type]();
   };

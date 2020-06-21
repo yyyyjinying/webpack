@@ -21,16 +21,8 @@ class Topics extends React.Component {
             <ul>
                 <li onClick={() => {
                    let history = this.props.history;
-                   history.push(`${match.url}/1`, {id: 34}); 
+                   history.push(`${match.url}/detail/1`, {id: 34}); 
                 }}>路由跳转</li>
-              <li>
-                <Link to={`${match.url}/1`}>Components</Link>
-              </li>
-              <li>
-                <Link to={`${match.url}/props-v-state`}>
-                  Props v. State
-                </Link>
-              </li>
             </ul>
       
             {/* The Topics page has its own <Switch> with more routes
@@ -38,11 +30,11 @@ class Topics extends React.Component {
                 2nd <Route> here as an "index" page for all topics, or
                 the page that is shown when no topic is selected */}
             <Switch>
-              <Route path={`${match.path}/:id`}>
-                <Topic />
-              </Route>
-              <Route path={match.path}>
+              <Route exact path={match.path}>
                 <h3>Please select a topic.</h3>
+              </Route>
+              <Route exact path={`${match.path}/detail/:id`}>
+                <Topic />
               </Route>
             </Switch>
           </div>

@@ -3,6 +3,26 @@ export const getDateFormat = timer => {
   return timer ? moment(timer) : null;
 };
 
+export const getEllipsisValueByWidth = (str, width = 200) => {
+  var strlen = 0;
+  var le = 0;
+  str = str ? String(str) : "";
+  for (var i = 0; i < str.length; i++) {
+    if (le >= (width - 8)) {
+      return str.substr(0, Math.floor(strlen)) + "...";
+    }
+    if (str.charCodeAt(i) > 255){
+      strlen ++;
+      le = le + 16;
+    } else {
+      //  如果是非汉字，则字符串长度加2
+      strlen += 0.95;
+      le = le + 10;
+    }
+  }
+  return str;
+}
+
 export const getNotNull = value => {
   return value == null ? "" : value;
 }

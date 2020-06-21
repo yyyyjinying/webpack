@@ -1,11 +1,13 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Input from "./input";
 import Select from "./select";
 import DatePicker from "./datePicker";
-
+import * as utils from "../../common/utils";
 const ele = props => {
+  let str = utils.getEllipsisValueByWidth(props.children, props.width);
   // eslint-disable-next-line react/prop-types
-  return <span className="span_text">{props.children}</span>;
+  return <span className="span_text">{str}</span>;
 };
 
 const SpanText = props => {

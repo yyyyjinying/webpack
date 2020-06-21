@@ -16,6 +16,8 @@ import {
   BrowserRouter as Router,
   withRouter,
 } from "react-router-dom";
+
+import Detail from "../component/details";
 class Index extends React.Component {
   componentDidMount() {
     //  const xTable = this.refs.xTableRef;
@@ -34,6 +36,7 @@ class Index extends React.Component {
         <h3>Requested dashboard: {params.id}</h3>
         <Button onClick={this.sendChildrenData}>向子窗口发送数据</Button>
         <div>
+          <Detail/>
           <div id="xtable"></div>
           <div style={{height: "400px", border: "1px solid #ccc"}}>
             <iframe
