@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 const path = require("path");
+const webpack = require("webpack");
 const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
@@ -86,8 +87,8 @@ module.exports = merge(common, {
           {
             loader: "postcss-loader",
             options: {
-              parser: "postcss-less",
-              syntax: "postcss-less",
+              parser: "postcss-less", // less
+              syntax: "postcss-less", // less
               ident: "postcss",
               plugins: (loader) => [
                 require("postcss-flexbugs-fixes"),
@@ -111,6 +112,9 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css",
+    }),
+    new webpack.DefinePlugin({
+      "NODE_ENV": "production",
     }),
   ],
 });
