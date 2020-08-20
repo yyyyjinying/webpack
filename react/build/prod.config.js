@@ -37,6 +37,7 @@ module.exports = merge(common, {
       new OptimizeCSSAssetsPlugin({}),
     ],
   },
+  devtool: "eval",
   mode: "production",
   resolve: {
     extensions: [".js", ".tsx", ".ts", ".json", ".scss", "css"],
@@ -62,17 +63,17 @@ module.exports = merge(common, {
             loader: "css-loader",
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
-              ident: 'postcss',
-              plugins: (loader) => [
+              ident: "postcss",
+              plugins: loader => [
                 require("postcss-flexbugs-fixes"),
-                require('postcss-import')({ root: loader.resourcePath }),
-                require('postcss-cssnext')(), // css
-                require('autoprefixer')(),
-              ]
-            }
-          }
+                require("postcss-import")({ root: loader.resourcePath }),
+                require("postcss-cssnext")(), // css
+                require("autoprefixer")(),
+              ],
+            },
+          },
         ],
       },
       {
@@ -90,10 +91,10 @@ module.exports = merge(common, {
               parser: "postcss-less", // less
               syntax: "postcss-less", // less
               ident: "postcss",
-              plugins: (loader) => [
+              plugins: loader => [
                 require("postcss-flexbugs-fixes"),
-                require('postcss-import')({ root: loader.resourcePath }),
-                require('autoprefixer')(),
+                require("postcss-import")({ root: loader.resourcePath }),
+                require("autoprefixer")(),
               ],
             },
           },
@@ -105,7 +106,6 @@ module.exports = merge(common, {
           },
         ],
       },
-      
     ],
   },
   plugins: [
@@ -114,7 +114,7 @@ module.exports = merge(common, {
       chunkFilename: "[id].css",
     }),
     new webpack.DefinePlugin({
-      "NODE_ENV": "production",
+      NODE_ENV: "production",
     }),
   ],
 });

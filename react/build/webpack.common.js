@@ -70,17 +70,24 @@ module.exports = {
             loader: "css-loader",
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
-              ident: 'postcss',
-              plugins: (loader) => [
-                require('postcss-import')({ root: loader.resourcePath }),
-                require('postcss-cssnext')(),
-                require('autoprefixer')({browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie> 8']}),
-                require('cssnano')()
-              ]
-            }
-          }
+              ident: "postcss",
+              plugins: loader => [
+                require("postcss-import")({ root: loader.resourcePath }),
+                require("postcss-cssnext")(),
+                require("autoprefixer")({
+                  browsers: [
+                    "last 10 Chrome versions",
+                    "last 5 Firefox versions",
+                    "Safari >= 6",
+                    "ie> 8",
+                  ],
+                }),
+                require("cssnano")(),
+              ],
+            },
+          },
         ],
       },
       {
