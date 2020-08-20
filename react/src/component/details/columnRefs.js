@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as utils from "common/utils";
 
 const COLUMNTYPE = {
@@ -11,7 +12,7 @@ const COLUMNTYPE = {
 
 const SPAN_COLUMN_NUM = 8;
 function columnRefs() {
-  const columns = [
+  let columns = [
     // {
     //   title: "numbernumbe",
     //   dataIndex: "number",
@@ -33,28 +34,28 @@ function columnRefs() {
     //     rules: [{ type: 'number', required: true, message: 'Please input number!' }]
     //   }
     // },
-    {
-      title: "beginTim",
-      dataIndex: "beginTime",
-      type: COLUMNTYPE.timeType,
-      className: "beginTime",
-      visible: true,
-      props: {
-        disabled: this.isDisabled(), // true:禁用 false:开启
-        onChange: (date, dateString) => {
-          console.log(date, dateString);
-        },
-        // mode: "month",
-        format: "YYYY",
-        placeholder: "自定义文本",
-        readonly: "true",
-        // open: "true",
-      },
-      decorator: {
-        initialValue: utils.getDateFormat(String((new Date()).getFullYear())),// utils.getDateFormat(this.props.detail["beginTime"], "YYYY-MM-DD"),
-        rules: [{ type: 'object', required: true, message: 'Please select time!' }]
-      }
-    },
+    // {
+    //   title: "beginTim",
+    //   dataIndex: "beginTime",
+    //   type: COLUMNTYPE.timeType,
+    //   className: "beginTime",
+    //   visible: true,
+    //   props: {
+    //     disabled: this.isDisabled(), // true:禁用 false:开启
+    //     onChange: (date, dateString) => {
+    //       console.log(date, dateString);
+    //     },
+    //     // mode: "month",
+    //     format: "YYYY",
+    //     placeholder: "自定义文本",
+    //     readonly: "true",
+    //     // open: "true",
+    //   },
+    //   decorator: {
+    //     initialValue: utils.getDateFormat(String((new Date()).getFullYear())),// utils.getDateFormat(this.props.detail["beginTime"], "YYYY-MM-DD"),
+    //     rules: [{ type: 'object', required: true, message: 'Please select time!' }]
+    //   }
+    // },
     // {
     //   title: "timeRange",
     //   dataIndex: "timeRange",
@@ -122,64 +123,64 @@ function columnRefs() {
     //     }
     //   },
     //   decorator: {
-    //     initialValue: this.props.detail["03"],
+    //     initialValue: '',
     //     rules: [{ required: false, message: "必填11" }],
     //   },
     // },
-    // {
-    //   title: "03",
-    //   dataIndex: "03",
-    //   type: COLUMNTYPE.inputType,
-    //   visible: true,
-    //   props: {
-    //     placeholder: "请输入",
-    //     allowClear: true,
-    //     disabled: this.isDisabled(), // true:禁用 false:开启
-    //     onChange: (e) => {
-    //       console.log("onChange", e.target.value);
-    //     }
-    //   },
-    //   decorator: {
-    //     initialValue: this.props.detail["03"],
-    //     rules: [{ required: false, message: "必填11" }],
-    //   },
-    // },
-    // {
-    //   title: "04",
-    //   dataIndex: "04",
-    //   type: COLUMNTYPE.inputType,
-    //   visible: true,
-    //   props: {
-    //     placeholder: "请输入",
-    //     allowClear: true,
-    //     disabled: this.isDisabled(), // true:禁用 false:开启
-    //     onChange: (e) => {
-    //       console.log("onChange", e.target.value);
-    //     }
-    //   },
-    //   decorator: {
-    //     initialValue: this.props.detail["03"],
-    //     rules: [{ required: false, message: "必填11" }],
-    //   },
-    // },
-    // {
-    //   title: "05",
-    //   dataIndex: "05",
-    //   type: COLUMNTYPE.inputType,
-    //   visible: true,
-    //   props: {
-    //     placeholder: "请输入",
-    //     allowClear: true,
-    //     disabled: this.isDisabled(), // true:禁用 false:开启
-    //     onChange: (e) => {
-    //       console.log("onChange", e.target.value);
-    //     }
-    //   },
-    //   decorator: {
-    //     initialValue: this.props.detail["03"],
-    //     rules: [{ required: false, message: "必填11" }],
-    //   },
-    // },
+    {
+      title: "add1",
+      dataIndex: "add1",
+      type: COLUMNTYPE.inputType,
+      visible: true,
+      props: {
+        placeholder: "请输入",
+        allowClear: true,
+        disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (e) => {
+          console.log("onChange", e.target.value);
+        }
+      },
+      decorator: {
+        initialValue: '',
+        rules: [{ required: false, message: "必填11" }],
+      },
+    },
+    {
+      title: "add2",
+      dataIndex: "add2",
+      type: COLUMNTYPE.inputType,
+      visible: true,
+      props: {
+        placeholder: "请输入",
+        allowClear: true,
+        disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (e) => {
+          console.log("onChange", e.target.value);
+        }
+      },
+      decorator: {
+        initialValue: '',//this.props.detail["03"],
+        rules: [{ required: false, message: "必填11" }],
+      },
+    },
+    {
+      title: "add3",
+      dataIndex: "add3",
+      type: COLUMNTYPE.inputType,
+      visible: true,
+      props: {
+        placeholder: "请输入",
+        allowClear: true,
+        disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (e) => {
+          console.log("onChange", e.target.value);
+        }
+      },
+      decorator: {
+        initialValue: '',//this.props.detail["03"],
+        rules: [{ required: false, message: "必填11" }],
+      },
+    },
     // {
     //   title: null,
     //   dataIndex: "check",
@@ -199,6 +200,15 @@ function columnRefs() {
   ];
   return {
     COLUMNTYPE,
+    delColumn: (key) => {
+      columns = columns.filter(item => item.key != key);
+    },
+    addColumn: (cItem) => {
+      debugger;
+      columns.push(cItem);
+      console.log(columns)
+      // return columns;
+    },
     spanColumn: () => {
       return columns.map(item => {
         item.span = SPAN_COLUMN_NUM;

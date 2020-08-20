@@ -1,66 +1,91 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from "react";
 import { Provider } from "mobx-react";
-import Home from "./home";
-import Topics from "./topics";
-import Dashboard from "./dashboard";
-import * as Store from "../store";
-
+import RouteWithSubRoutes from "./routeWithSubRoutes";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
+  Link
 } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import home from "./home";
+import Form from "../component/form/index";
+// import Form from "../component/form/index2";
+import * as Store from "../store";
+import Tacos from "./tacos";
+import Detail from "../component/details";
 
-const customHistory = createBrowserHistory();
+const routes = [
+  {
+    path: "/",
+    exact: true, // 顶级加
+    name: "home",
+    component: Form //home
+  },
+  {
+    path: "/home",
+    name: "home",
+    exact: true, // 顶级加
+    component: home
+  },
+  {
+    path: "/sandwiches",
+    name: "sandwiches",
+    exact: true, // 顶级加
+    component: Detail
+  },
+  {
+    path: "/tacos",
+    name: "tacos",
+    component: Tacos,
+    routes: [
+      {
+        path: "/tacos/bus",
+        name: "bus",
+        component: Bus
+      },
+      {
+        path: "/tacos/cart",
+        name: "cart",
+        component: Cart
+      }
+    ]
+  }
+];
 
-export default function App() {
+export default function RouteConfigExample() {
   return (
-    <div>
-      <Provider {...Store}>
-        <Router>
-        <div>
+    <Provider {...Store}>
+    <Router>
+      <div>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/tacos">Tacos</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/sandwiches">Sandwiches</Link>
           </li>
         </ul>
 
-        <hr />
-
-        {/*
-          A <Switch> looks through all its children <Route>
-          elements and renders the first one whose path
-          matches the current URL. Use a <Switch> any time
-          you have multiple routes, but you want only one
-          of them to render at a time
-        */}
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <Topics />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
+          {routes.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))}
         </Switch>
       </div>
-
-          
-        </Router>
-      </Provider>
-    </div>
+    </Router>
+    </Provider>
   );
+}
+
+// function Sandwiches() {
+//   return <h2>Sandwiches</h2>;
+// }
+
+
+function Bus() {
+  return <h3>Bus</h3>;
+}
+
+function Cart() {
+  return <h3>Cart</h3>;
 }

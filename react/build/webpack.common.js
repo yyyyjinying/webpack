@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+const path = require("path");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -19,6 +20,25 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        use: [
+          {
+            loader: "babel-loader",
+          },
+          {
+            loader: "eslint-loader",
+          },
+        ],
+        enforce: "pre", // 编译前检查
+        exclude: /node_modules/, // 不检测的文件
+        include: [path.resolve(__dirname, "../src")], // 指定检查的目录
+        // options: {
+        // emitError: true,
+        // formatter: "stylish"
+        //   formatter: require("eslint-friendly-formatter") // community formatter
+        // }
+      },
       {
         test: require.resolve("jquery"),
         use: [
@@ -56,7 +76,7 @@ module.exports = {
               plugins: (loader) => [
                 require('postcss-import')({ root: loader.resourcePath }),
                 require('postcss-cssnext')(),
-                require('autoprefixer')(),
+                require('autoprefixer')({browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie> 8']}),
                 require('cssnano')()
               ]
             }

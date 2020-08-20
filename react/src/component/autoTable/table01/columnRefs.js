@@ -79,7 +79,9 @@ function columnRefs() {
         return utils.thousandSeparatorFormat(text);
       },
       renderElement: props => {
-        if (utils.isExistString(props.record.key, "-")) {
+        const lock = true;
+        if (lock) {
+        // if (utils.isExistString(props.record.key, "-")) {
           return (
             <SpanText
               displayType="text"

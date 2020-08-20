@@ -66,10 +66,10 @@ module.exports = merge(common, {
             options: {
               ident: 'postcss',
               plugins: (loader) => [
+                require("postcss-flexbugs-fixes"),
                 require('postcss-import')({ root: loader.resourcePath }),
-                require('postcss-cssnext')(),
+                require('postcss-cssnext')(), // css
                 require('autoprefixer')(),
-                require('cssnano')()
               ]
             }
           }
@@ -87,18 +87,13 @@ module.exports = merge(common, {
           {
             loader: "postcss-loader",
             options: {
+              parser: "postcss-less",
+              syntax: "postcss-less",
               ident: "postcss",
-              plugins: () => [
+              plugins: (loader) => [
                 require("postcss-flexbugs-fixes"),
-                require("autoprefixer")({
-                  browsers: [
-                    ">1%",
-                    "last 4 versions",
-                    "Firefox ESR",
-                    "not ie < 9", // React doesn't support IE8 anyway
-                  ],
-                  flexbox: "no-2009",
-                }),
+                require('postcss-import')({ root: loader.resourcePath }),
+                require('autoprefixer')(),
               ],
             },
           },
@@ -110,25 +105,7 @@ module.exports = merge(common, {
           },
         ],
       },
-      {
-        test: /\.(js|jsx)$/,
-        use: [
-          {
-            loader: "babel-loader",
-          },
-          {
-            loader: "eslint-loader",
-          },
-        ],
-        enforce: "pre", // 编译前检查
-        exclude: /node_modules/, // 不检测的文件
-        include: [path.resolve(__dirname, "../src")], // 指定检查的目录
-        // options: {
-        // emitError: true,
-        // formatter: "stylish"
-        //   formatter: require("eslint-friendly-formatter") // community formatter
-        // }
-      },
+      
     ],
   },
   plugins: [

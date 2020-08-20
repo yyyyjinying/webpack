@@ -11,7 +11,7 @@ import {
 } from "antd";
 
 const FormItem = Props => {
-  const { spanColumn, COLUMNTYPE } = Props;
+  const { columns, COLUMNTYPE } = Props;
   const domType = item => {
     const { dataIndex, props, decorator } = item;
     // 展示add和edit
@@ -59,7 +59,7 @@ const FormItem = Props => {
   return (
     <Form className="detailForm" layout="inline">
       <Row className="detailRow" gutter={24}>
-        {spanColumn().map((item, index) => {
+        {columns.map((item, index) => {
           return (
             item.visible && (
               <Col span={item.span} key={index}>
@@ -68,6 +68,7 @@ const FormItem = Props => {
                   className={item.className + " item"}
                   label={item.title}>
                   {domType(item)}
+                  {item.children && item.children(item)}
                 </Form.Item>
               </Col>
             )

@@ -2,10 +2,20 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { columnRefs, mapFields } from "./columnRefs";
-import { Modal, Form } from "antd";
+import { Modal, Form,Button } from "antd";
 import * as utils from "common/utils";
 import "./style.less";
 import { FormItem } from "component/base";
+import _ from "lodash";
+
+const COLUMNTYPE = {
+  checkboxType: 'checkbox',
+  timeRangeType: "timeRange",
+  timeType: 'time',
+  inputType: "input",
+  selectType: "select",
+  numberType: "number",
+};
 @observer
 class Details extends React.Component {
   constructor(props) {
@@ -19,6 +29,7 @@ class Details extends React.Component {
     this.state = {
       editStatus: false, // 编辑按钮的状态 false：修改 true： 保存
       test: "",
+      columns: this.columnRefs().spanColumn()
     };
   }
 
@@ -115,8 +126,57 @@ class Details extends React.Component {
   inputNumberOnChange(val, option) {
     console.log(val, option);
   }
+  delClick(item){
+    let num = 1;
+    let columns = this.state.columns.filter(xItem => xItem.dataIndex !== item.dataIndex);
+    columns = columns.map(item => {
+      if(item.dataIndex.search(/[0-9]/) !== -1){
+        num++;
+        item.title = "add" + num;
+        item.dataIndex = "add" + num;
+      }
+      return item;
+    })
+    this.setState({
+      columns
+    });
+  }
+  
+  addClick(){
+    let {dataIndex} = _.last(this.state.columns);
+    let idx = dataIndex.search(/[0-9]/);
+    let first = dataIndex.slice(0,idx);
+    let last = dataIndex.slice(idx);
+    dataIndex = first + (++last);
+    let cItem = {
+      title: dataIndex,
+      dataIndex: dataIndex,
+      type: COLUMNTYPE.inputType,
+      visible: true,
+      children: (item) => {
+        return <button onClick={this.delClick.bind(this, item)}>x</button>
+      },
+      props: {
+        placeholder: "请输入",
+        allowClear: true,
+        disabled: this.isDisabled(), // true:禁用 false:开启
+        onChange: (e) => {
+          console.log("onChange", e.target.value);
+        }
+      },
+      decorator: {
+        initialValue: '',//this.props.detail["03"],
+        rules: [{ required: false, message: "必填11" }],
+      },
+    };
+    this.state.columns.push(cItem);
+    this.setState({
+      columns: this.state.columns
+    })
+  }
 
   render() {
+    let {COLUMNTYPE} = this.columnRefs();
     return (
       <Modal
         centered
@@ -128,7 +188,8 @@ class Details extends React.Component {
         afterClose={() => this.reset()}
         width="1200px"
         className="detail">
-        <FormItem {...{ form: this.props.form, ...this.columnRefs() }} />
+          <Button type="primary" onClick={this.addClick.bind(this)}>add</Button>
+        <FormItem form={this.props.form} columns={this.state.columns} COLUMNTYPE={COLUMNTYPE}/>
         {/* <button onClick={this.settimeHandle.bind(this)}>设置时间</button> */}
       </Modal>
     );

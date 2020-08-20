@@ -75,20 +75,7 @@ module.exports = merge(common, {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: [
-          {
-            loader: "babel-loader",
-          },
-          {
-            loader: "eslint-loader",
-          },
-        ],
-        enforce: "pre", // 编译前检查
-        exclude: /node_modules/, // 不检测的文件
-        include: [path.resolve(__dirname, "../src")], // 指定检查的目录
-      },
+      
     ],
   },
   plugins: [
