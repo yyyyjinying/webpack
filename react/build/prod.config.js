@@ -42,6 +42,7 @@ module.exports = merge(common, {
   resolve: {
     extensions: [".js", ".tsx", ".ts", ".json", ".scss", "css"],
     alias: {
+      "@": path.resolve(__dirname, "../src"),
       src: path.resolve(__dirname, "../src"),
       component: path.resolve(__dirname, "../src/component"),
       common: path.resolve(__dirname, "../src/common"),

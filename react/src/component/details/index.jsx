@@ -3,7 +3,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { columnRefs, mapFields } from "./columnRefs";
 import { Modal, Form,Button } from "antd";
-import * as utils from "common/utils";
+import * as utils from "@/common/utils";
 import "./style.less";
 import { FormItem } from "component/base";
 import _ from "lodash";
