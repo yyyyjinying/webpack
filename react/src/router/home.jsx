@@ -13,10 +13,6 @@ import AutoTable from "../component/autoTable/table01";
 import Dashboard from "./dashboard";
 import "./home.less";
 
-import {HeartIcon} from "../common/icon";
-
-// const HeartIcon = props => <Icon component={HeartSvg} {...props} />;
-
 @inject("Store01")
 @observer
 class Home extends React.Component {
@@ -51,9 +47,6 @@ class Home extends React.Component {
     return (
       <div>
         <h1 className="bac">home</h1>
-        <div>
-          <HeartIcon style={{ color: "hotpink", fontSize: "16px" }} />
-        </div>
         <div className="table">
           <iframe
             onLoad={() => {}}
