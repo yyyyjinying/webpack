@@ -75,6 +75,12 @@
     "start": "npx webpack --config ./build/dev.config.js",
     "prod": "npx webpack --config ./build/prod.config.js"
   },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 5 Firefox versions",
+    "Safari >= 6",
+    "ie> 8"
+  ],
   "author": "",
   "license": "ISC"
 }

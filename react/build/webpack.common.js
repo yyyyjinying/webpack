@@ -76,14 +76,7 @@ module.exports = {
               plugins: loader => [
                 require("postcss-import")({ root: loader.resourcePath }),
                 require("postcss-cssnext")(),
-                require("autoprefixer")({
-                  browsers: [
-                    "last 10 Chrome versions",
-                    "last 5 Firefox versions",
-                    "Safari >= 6",
-                    "ie> 8",
-                  ],
-                }),
+                require("autoprefixer")(),
                 require("cssnano")(),
               ],
             },
@@ -104,15 +97,7 @@ module.exports = {
               ident: "postcss",
               plugins: loader => [
                 require("postcss-flexbugs-fixes"),
-                require("autoprefixer")({
-                  browsers: [
-                    ">1%",
-                    "last 4 versions",
-                    "Firefox ESR",
-                    "not ie < 9", // React doesn't support IE8 anyway
-                  ],
-                  flexbox: "no-2009",
-                }),
+                require("autoprefixer")(),
                 require("postcss-import")({ root: loader.resourcePath }),
                 require("cssnano")(),
               ],
