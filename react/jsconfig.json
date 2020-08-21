@@ -7,7 +7,8 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "experimentalDecorators": true, // 支持注解
+    "experimentalDecorators": true // 支持注解
   },
+
   "exclude": ["node_modules"]
 }
