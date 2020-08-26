@@ -2,13 +2,10 @@
 import React from "react";
 import { Provider } from "mobx-react";
 import RouteWithSubRoutes from "./routeWithSubRoutes";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import home from "./home";
-import Form from "../component/form/index";
+// import Form from "../component/form/index";
+import Form from "@/component/pdf";
 // import Form from "../component/form/index2";
 import * as Store from "../store";
 import Tacos from "./tacos";
@@ -19,19 +16,19 @@ const routes = [
     path: "/",
     exact: true, // 顶级加
     name: "home",
-    component: Form //home
+    component: Form, //home
   },
   {
     path: "/home",
     name: "home",
     exact: true, // 顶级加
-    component: home
+    component: home,
   },
   {
     path: "/sandwiches",
     name: "sandwiches",
     exact: true, // 顶级加
-    component: Detail
+    component: Detail,
   },
   {
     path: "/tacos",
@@ -41,38 +38,38 @@ const routes = [
       {
         path: "/tacos/bus",
         name: "bus",
-        component: Bus
+        component: Bus,
       },
       {
         path: "/tacos/cart",
         name: "cart",
-        component: Cart
-      }
-    ]
-  }
+        component: Cart,
+      },
+    ],
+  },
 ];
 
 export default function RouteConfigExample() {
   return (
     <Provider {...Store}>
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/tacos">Tacos</Link>
-          </li>
-          <li>
-            <Link to="/sandwiches">Sandwiches</Link>
-          </li>
-        </ul>
+      <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/tacos">Tacos</Link>
+            </li>
+            <li>
+              <Link to="/sandwiches">Sandwiches</Link>
+            </li>
+          </ul>
 
-        <Switch>
-          {routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} />
-          ))}
-        </Switch>
-      </div>
-    </Router>
+          <Switch>
+            {routes.map((route, i) => (
+              <RouteWithSubRoutes key={i} {...route} />
+            ))}
+          </Switch>
+        </div>
+      </Router>
     </Provider>
   );
 }
@@ -80,7 +77,6 @@ export default function RouteConfigExample() {
 // function Sandwiches() {
 //   return <h2>Sandwiches</h2>;
 // }
-
 
 function Bus() {
   return <h3>Bus</h3>;
