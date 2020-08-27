@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
-import { PDFReader } from "reactjs-pdf-reader";
-// import { PDFReader } from "react-read-pdf";
+// import { PDFReader, MobilePDFReader } from "reactjs-pdf-reader";
+import { PDFReader, MobilePDFReader } from "react-read-pdf";
 class Test extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +10,8 @@ class Test extends React.Component {
   render() {
     return (
       <div style={{ overflow: "scroll", height: 600 }}>
-        <PDFReader url="http://0.0.0.0:3030/common/file/index.pdf" />
+        {/* <PDFReader url="http://0.0.0.0:3030/common/file/test.pdf" /> */}
+        <MobilePDFReader page={2} url="/common/file/test.pdf" />
       </div>
     );
   }
