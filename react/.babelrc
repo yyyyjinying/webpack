@@ -6,11 +6,13 @@
       {
         // options
         "loose": false, // 低版本的浏览器开启true
-        "modules": false
+        "modules": false,
+        "targets": { "node": "current" }
       }
     ]
   ],
   "plugins": [
+    ["transform-es2015-modules-commonjs"],
     ["@babel/plugin-proposal-decorators", { "legacy": true }], // 配置支持装饰器
     [
       "import",
