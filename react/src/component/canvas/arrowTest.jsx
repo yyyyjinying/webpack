@@ -40,6 +40,8 @@ class Index extends React.Component {
     const ctx = canvas.getContext("2d");
     let W = (canvas.width = 800);
     let H = (canvas.height = 600);
+
+    // 箭头跟随鼠标移动
     this.mouseMove(W, H, ctx, canvas);
   }
   render() {
