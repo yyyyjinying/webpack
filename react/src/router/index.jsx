@@ -5,9 +5,9 @@ import RouteWithSubRoutes from "./routeWithSubRoutes";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import home from "./home";
 // import Form from "../component/form/index";
-// import Form from "@/component/pdf";
+import Pdf from "@/component/pdf";
 // import Form from "../component/form/index2";
-import Canvas from "../component/canvas";
+// import Canvas from "../component/canvas";
 import * as Store from "../store";
 import Tacos from "./tacos";
 import Detail from "../component/details";
@@ -17,7 +17,7 @@ const routes = [
     path: "/",
     exact: true, // 顶级加
     name: "home",
-    component: Canvas, //home
+    component: Pdf, //home
   },
   {
     path: "/home",
