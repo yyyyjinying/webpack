@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import C from "./utils";
-import "./style.less";
 import Arrow from "./utils/arrow";
 class Index extends React.Component {
   mouseMove(W, H, ctx, canvas) {
