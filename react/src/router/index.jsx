@@ -5,19 +5,20 @@ import RouteWithSubRoutes from "./routeWithSubRoutes";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import home from "./home";
 // import Form from "../component/form/index";
-import Pdf from "@/component/pdf";
+// import Pdf from "@/component/pdf";
 // import Form from "../component/form/index2";
 // import Canvas from "../component/canvas";
 import * as Store from "../store";
 import Tacos from "./tacos";
 import Detail from "../component/details";
+import str02 from "../test/string/lesson02";
 
 const routes = [
   {
     path: "/",
     exact: true, // 顶级加
     name: "home",
-    component: Pdf, //home
+    component: home, //home
   },
   {
     path: "/home",
@@ -50,7 +51,10 @@ const routes = [
   },
 ];
 
+
+
 export default function RouteConfigExample() {
+  str02("00110011");
   return (
     <Provider {...Store}>
       <Router>
