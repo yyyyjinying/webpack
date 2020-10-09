@@ -42,8 +42,6 @@ class Home extends React.Component {
     }
   }
   render() {
-    console.log("store", this.store);
-    let params = this.props.match.params;
     return (
       <div>
         <h1 className="bac">home</h1>
@@ -55,27 +53,9 @@ class Home extends React.Component {
             height="100%"
             src="http://localhost:3045/"
             name="iframe_a"></iframe>
-
-          {/* <AutoTable /> */}
         </div>
 
         <div className="autoTip" id="view"></div>
-        <div>
-          {/* <Button onClick={this.sendChildrenData}>向子窗口发送数据</Button>
-        <div>
-          <div style={{height: "400px", border: "1px solid #ccc"}}>
-            <iframe
-              onLoad={() => {
-              }}
-              id="xTableRef"
-              width="100%"
-              height="100%"
-              src="http://localhost:3045/"
-              name="iframe_a"></iframe>
-
-          </div>
-        </div> */}
-        </div>
       </div>
     );
   }

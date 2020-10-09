@@ -11,7 +11,8 @@ import home from "./home";
 import * as Store from "../store";
 import Tacos from "./tacos";
 import Detail from "../component/details";
-import str02 from "../test/string/lesson02";
+// eslint-disable-next-line no-unused-vars
+import * as Arr from "../test/array/lesson01";
 
 const routes = [
   {
@@ -51,10 +52,8 @@ const routes = [
   },
 ];
 
-
-
 export default function RouteConfigExample() {
-  str02("00110011");
+  // console.log(Arr.sort05([7,5,2,4,6], 2));
   return (
     <Provider {...Store}>
       <Router>
