@@ -4,6 +4,7 @@ import { Provider } from "mobx-react";
 import RouteWithSubRoutes from "./routeWithSubRoutes";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import home from "./home";
+import Bus from "../component/bus";
 // import Form from "../component/form/index";
 // import Pdf from "@/component/pdf";
 // import Form from "../component/form/index2";
@@ -39,11 +40,13 @@ const routes = [
     component: Tacos,
     routes: [
       {
+        exact: true,
         path: "/tacos/bus",
         name: "bus",
         component: Bus,
       },
       {
+        exact: true,
         path: "/tacos/cart",
         name: "cart",
         component: Cart,
@@ -60,7 +63,7 @@ export default function RouteConfigExample() {
         <div>
           <ul>
             <li>
-              <Link to="/tacos">Tacos</Link>
+              <Link to="/tacos/bus">Tacos</Link>
             </li>
             <li>
               <Link to="/sandwiches">Sandwiches</Link>
@@ -82,9 +85,9 @@ export default function RouteConfigExample() {
 //   return <h2>Sandwiches</h2>;
 // }
 
-function Bus() {
-  return <h3>Bus</h3>;
-}
+// function Bus() {
+//   return <h3>Bus</h3>;
+// } 
 
 function Cart() {
   return <h3>Cart</h3>;
