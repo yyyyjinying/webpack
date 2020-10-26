@@ -10,14 +10,15 @@ module.exports = merge(common, {
   },
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "../dist"),
+    path: path.resolve(__dirname, "../dist"), // 必须是一个绝对路径
   },
   devtool: "source-map", // eval
-  mode: "development",
+  mode: "development", // 开发模式 
   devServer: {
-    contentBase: path.resolve(__dirname, "../src"),
+    contentBase: path.resolve(__dirname, "../dist"),
     open: true,
     hot: true,
+    progress: true,
     compress: true,
     port: 3030,
     host: "0.0.0.0",

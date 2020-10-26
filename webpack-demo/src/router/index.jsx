@@ -3,7 +3,8 @@ import React from "react";
 import { Provider } from "mobx-react";
 import RouteWithSubRoutes from "./routeWithSubRoutes";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
-
+import "./style";
+// import "./style/ls";
 const routes = [
   {
     path: "/",
@@ -11,23 +12,23 @@ const routes = [
     name: "home",
     component: Cart, //home
   },
+  {
+    path: "/home",
+    exact: true, // 顶级加
+    name: "home",
+    component: Home, //home
+  },
 ];
 
 export default function RouteConfigExample() {
 
   return (
-    <Provider {...Store}>
+    <Provider>
       <Router>
         <div>
           <ul>
             <li>
-              <Link to="/md">md</Link>
-            </li>
-            <li>
-              <Link to="/tacos/bus">Tacos</Link>
-            </li>
-            <li>
-              <Link to="/sandwiches">Sandwiches</Link>
+              <Link to="/home">home</Link>
             </li>
           </ul>
           <Switch>
@@ -45,9 +46,9 @@ export default function RouteConfigExample() {
 //   return <h2>Sandwiches</h2>;
 // }
 
-// function Bus() {
-//   return <h3>Bus</h3>;
-// } 
+function Home() {
+  return <h3 className="home"><span>Home</span>Home</h3>;
+} 
 
 function Cart() {
   return <h3>Cart</h3>;

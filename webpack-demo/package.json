@@ -87,7 +87,9 @@
     "test": "jest",
     "dev": "npx webpack-dev-server --config ./build/dev.config.js",
     "start": "npx webpack --config ./build/dev.config.js",
-    "prod": "npx webpack --config ./build/prod.config.js"
+    "prod": "npx webpack --config ./build/prod.config.js",
+    "my": "npx webpack --config ./build/webpack.my.js",
+    "my-dev": "npx webpack-dev-server --config ./build/webpack.my.js"
   },
   "browserslist": [
     "last 10 Chrome versions",
