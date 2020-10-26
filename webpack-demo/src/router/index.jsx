@@ -21,7 +21,7 @@ const routes = [
 ];
 
 export default function RouteConfigExample() {
-
+console.log("1212".includes("2"));
   return (
     <Provider>
       <Router>
