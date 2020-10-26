@@ -1,0 +1,46 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env", // 配置名
+      {
+        // options
+        "loose": false, // 低版本的浏览器开启true
+        "modules": false,
+        "targets": { "node": "current" }
+      }
+    ]
+  ],
+  "plugins": [
+    ["transform-es2015-modules-commonjs"],
+    ["@babel/plugin-proposal-decorators", { "legacy": true }], // 配置支持装饰器
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "pg": "es",
+        "style": true
+      }
+    ],
+    // [
+    //   "react-css-modules",
+    //   {
+    //     "generateScopedName": "[local]-[hash:base64:10]",
+    //     "filetypes": {
+    //       ".less": {
+    //         "syntax": "postcss-less"
+    //       }
+    //     },
+    //     "webpackHotModuleReloading": true, // 支持热加载
+    //     "handleMissingStyleName": "warn", // 没有时进行警告
+    //     "exclude": ".css$"
+    //   }
+    // ],
+    ["@babel/plugin-proposal-class-properties"]
+  ],
+  "env": {
+    "development": {
+      "presets": [["@babel/preset-react", { "development": true }]]
+    }
+  }
+}
