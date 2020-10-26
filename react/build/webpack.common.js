@@ -112,12 +112,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(pdf|png|svg|jpg|gif)$/,
-        exclude: /node_modules/,
-        use: ["file-loader"],
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.(woff|woff2|eot|ttf|otf|pdf|png|svg|jpg|gif|jpeg)$/,
         exclude: /node_modules/,
         use: ["file-loader"],
       },
@@ -125,6 +120,11 @@ module.exports = {
         test: /\.(csv|tsv)$/,
         exclude: /node_modules/,
         use: ["csv-loader"],
+      },
+      {
+        test: /\.(txt|md)$/,
+        exclude: /node_modules/,
+        use: ["raw-loader"],
       },
       {
         test: /\.xml$/,

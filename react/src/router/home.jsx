@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/react-in-jsx-scope */
@@ -23,11 +24,26 @@ class Home extends React.Component {
       test: "zhaojinying",
     };
   }
+
+  imgLoad() {
+    let obj = document.getElementById("oImage");
+    obj.src = "../common/img/load.gif";
+
+    let oImg = new Image();
+    oImg.src = "../common/img/timg.jpeg";
+    oImg.onload = function() {
+      obj.src = oImg.src;
+    };
+  }
+
   componentDidMount() {
+    this.imgLoad();
     axios.get("/api/widget?ajax=json&id=ad").then(res => {
       console.log(res);
-    });
+    });    
+  }
 
+  toStr() {
     let s =
       "11111qqqq这是一个文本这是一个文本这是一个文本这是一个文本这是一个文本这是一个文本11111qqqq这是一个文本这是一个文本这是一个文本这是一个文本这是一个文本这是一个文本";
     let el = document.getElementById("view");
@@ -42,10 +58,12 @@ class Home extends React.Component {
     }
   }
   render() {
+    
     return (
       <div>
         <h1 className="bac">home</h1>
-        <div className="table">
+        <img style={{ display: "none" }} id="oImage" src="" />        
+        {/* <div className="table">
           <iframe
             onLoad={() => {}}
             id="xTableRef"
@@ -53,9 +71,9 @@ class Home extends React.Component {
             height="100%"
             src="http://localhost:3045/"
             name="iframe_a"></iframe>
-        </div>
+        </div> */}
 
-        <div className="autoTip" id="view"></div>
+        {/* <div className="autoTip" id="view"></div> */}
       </div>
     );
   }

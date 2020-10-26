@@ -5,6 +5,7 @@ import RouteWithSubRoutes from "./routeWithSubRoutes";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import home from "./home";
 import Bus from "../component/bus";
+import MD from "../component/md";
 // import Form from "../component/form/index";
 // import Pdf from "@/component/pdf";
 // import Form from "../component/form/index2";
@@ -21,6 +22,12 @@ const routes = [
     exact: true, // 顶级加
     name: "home",
     component: home, //home
+  },
+  {
+    path: "/md",
+    exact: true, // 顶级加
+    name: "md",
+    component: MD, //home
   },
   {
     path: "/home",
@@ -57,11 +64,15 @@ const routes = [
 
 export default function RouteConfigExample() {
   // console.log(Arr.sort05([7,5,2,4,6], 2));
+
   return (
     <Provider {...Store}>
       <Router>
         <div>
           <ul>
+            <li>
+              <Link to="/md">md</Link>
+            </li>
             <li>
               <Link to="/tacos/bus">Tacos</Link>
             </li>
@@ -69,7 +80,6 @@ export default function RouteConfigExample() {
               <Link to="/sandwiches">Sandwiches</Link>
             </li>
           </ul>
-
           <Switch>
             {routes.map((route, i) => (
               <RouteWithSubRoutes key={i} {...route} />
