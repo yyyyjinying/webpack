@@ -3,20 +3,29 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+// const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
-  // entry: ["./src/index.jsx"],
-  entry: ["@babel/polyfill", "./src/index.js"],
-  output: {
-    filename: "bundle.[hash:8].js",
-    path: path.resolve(__dirname, "../dist"), // 必须是一个绝对路径
-    publicPath: "http://baidu.com/",
+  entry: {
+    home: "./src/index.js",
+    other: "./src/other.js",
   },
-  mode: "production", //"production",//"development", // 开发模式
+  // entry: ["./src/index.jsx"],
+  // entry: ["@babel/polyfill", "./src/index.js"],
+  output: {
+    filename: "[name].js",
+    path: path.resolve(__dirname, "../dist"), // 必须是一个绝对路径
+    // publicPath: "http://baidu.com",
+  },
+  // devtool: "source-map", // eval
+  mode: "development", //"production",//"development", // 开发模式
   devServer: {
+    // outputPath: path.join(__dirname, 'build')
     contentBase: path.resolve(__dirname, "../dist"),
+    index: "home.html",
+    // openPage: "home.html",
     open: true,
-    port: 8080,
+    port: 9080,
   },
   optimization: {
     minimizer: [
@@ -39,22 +48,41 @@ module.exports = {
         },
       }),
       new OptimizeCSSAssetsPlugin(), // 压缩css
+      // new CopyWebpackPlugin([
+      //   {
+      //     from: __dirname + "/src/components",
+      //     to: __dirname + "/dist",
+      //     ignore: [".*"],
+      //   },
+      // ]),
     ],
   },
   plugins: [
+    new CleanWebpackPlugin({ protectWebpackAssets: ["dist"] }),
     new MiniCssExtractPlugin({
       filename: "css/[name].css",
-
     }),
     new HtmlWebpackPlugin({
       title: "webpack-test",
       template: "./src/index.html",
-      filename: "index.html",
-      minify: {
-        removeEmptyAttributes: true,
-        collapseWhitespace: true,
-      },
-      hash: true,
+      filename: "home.html",
+      chunks: ["home"],
+      // minify: {
+      //   removeEmptyAttributes: true,
+      //   collapseWhitespace: true,
+      // },
+      // hash: true,
+    }),
+    new HtmlWebpackPlugin({
+      title: "webpack-test",
+      template: "./src/index.html",
+      filename: "other.html",
+      chunks: ["home", "other"],
+      // minify: {
+      //   removeEmptyAttributes: true,
+      //   collapseWhitespace: true,
+      // },
+      // hash: true,
     }),
   ],
   resolve: {
@@ -79,7 +107,8 @@ module.exports = {
           loader: "url-loader",
           options: {
             limit: 1,
-            outputPath: 'img/'
+            outputPath: "img/",
+            // publicPath: "http://baidu.com/img",
           },
         },
       },
