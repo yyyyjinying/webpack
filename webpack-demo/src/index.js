@@ -10,6 +10,8 @@ console.log("test");
 
 import Car from "./car.jpg";
 
+import $ from "jquery";
+
 const Img = new Image();
 Img.src = Car;
 

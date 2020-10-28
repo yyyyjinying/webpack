@@ -5,6 +5,8 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // const CopyWebpackPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
+
 module.exports = {
   entry: {
     home: "./src/index.js",
@@ -15,6 +17,8 @@ module.exports = {
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "../dist"), // 必须是一个绝对路径
+    library: "[name]",
+    libraryTarget: "var", // commonjs cmd
     // publicPath: "http://baidu.com",
   },
   // devtool: "source-map", // eval
@@ -58,6 +62,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.BannerPlugin({
+      banner: 'hello world'
+    }),
     new CleanWebpackPlugin({ protectWebpackAssets: ["dist"] }),
     new MiniCssExtractPlugin({
       filename: "css/[name].css",
@@ -86,9 +93,12 @@ module.exports = {
     }),
   ],
   resolve: {
+    alias:{},
+    // mainFields: ["main","style"],
     extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".less", ".css"], // 简化文件路径的引用
   },
   module: {
+    noParse: /jquery/, //不去解析jquery中的依赖库
     rules: [
       {
         test: /\.html$/,
