@@ -46,6 +46,9 @@ module.exports = merge({}, {
     new webpack.BannerPlugin({
       banner: 'hello world'
     }),
+    new webpack.DefinePlugin({ // 自定义常量
+      ENV: JSON.stringify("development"),
+    }),
     new CleanWebpackPlugin({ protectWebpackAssets: ["dist"] }),
   ],
   module: {

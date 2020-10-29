@@ -62,8 +62,11 @@ module.exports = merge(
           },
         ],
       }),
-      new webpack.BannerPlugin({
+      new webpack.BannerPlugin({ // 版权
         banner: "hello world",
+      }),
+      new webpack.DefinePlugin({ // 自定义常量
+        ENV: JSON.stringify("production"),
       }),
       new CleanWebpackPlugin({ protectWebpackAssets: ["dist"] }),
 
