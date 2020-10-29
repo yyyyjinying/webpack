@@ -62,6 +62,7 @@
     "file-loader": "^4.3.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "html-withimg-loader": "^0.1.16",
     "jest": "^26.4.2",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
@@ -93,8 +94,9 @@
     "dev": "npx webpack-dev-server --config ./build/dev.config.js",
     "start": "npx webpack --config ./build/dev.config.js",
     "prod": "npx webpack --config ./build/prod.config.js",
+    "my-build": "npx webpack --config ./build/webpack.my.build.js",
     "my": "npx webpack --config ./build/webpack.my.js",
-    "my-dev": "npx webpack-dev-server --config ./build/webpack.my.js"
+    "my-dev": "npx webpack-dev-server --config ./build/webpack.my.dev.js"
   },
   "browserslist": [
     "last 10 Chrome versions",
