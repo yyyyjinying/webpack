@@ -14,7 +14,11 @@ module.exports = merge(
   {},
   {
     entry: {
-      home: "./src/index.js",
+
+      react: ["react", "react-dom"],
+
+      home: "./src/index.jsx",
+      // home: "./src/index.js",
       other: "./src/other.js",
     },
     output: {
@@ -29,6 +33,7 @@ module.exports = merge(
       alias: {},
       // mainFields: ["main","style"],
       extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".less", ".css"], // 简化文件路径的引用
+      modules: ["node_modules"],
     },
     optimization: {
       minimizer: [
@@ -54,21 +59,29 @@ module.exports = merge(
       ],
     },
     plugins: [
+      new CleanWebpackPlugin({ protectWebpackAssets: ["dist"] }),
       new CopyPlugin({
         patterns: [
+          // {
+          //   from: path.resolve(__dirname, "./manifest"),
+          //   to: path.resolve(__dirname, "../dist/manifest"),
+          // },  
           {
             from: path.resolve(__dirname, "../src/doc"),
             to: path.resolve(__dirname, "../dist/doc"),
           },
         ],
       }),
+      // new webpack.DllReferencePlugin({
+      //   manifest: path.resolve(__dirname, "../dist/manifest", "manifest.json"),
+      // }),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new webpack.BannerPlugin({ // 版权
         banner: "hello world",
       }),
       new webpack.DefinePlugin({ // 自定义常量
         ENV: JSON.stringify("production"),
       }),
-      new CleanWebpackPlugin({ protectWebpackAssets: ["dist"] }),
 
       new MiniCssExtractPlugin({
         filename: "css/[name].css",
@@ -128,7 +141,7 @@ module.exports = merge(
               loader: "babel-loader",
               options: {
                 // @babel/preset-env 将es6转化为es5
-                presets: ["@babel/preset-env"],
+                presets: ["@babel/preset-react", "@babel/preset-env"],
                 plugins: [
                   ["@babel/plugin-proposal-decorators", { legacy: true }],
                   ["@babel/plugin-proposal-class-properties", { loose: true }],
