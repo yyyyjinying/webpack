@@ -5,6 +5,7 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
+    "less": "^3.12.2",
     "webpack": "4.43.0",
     "webpack-cli": "3.3.10"
   }

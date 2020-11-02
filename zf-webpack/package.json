@@ -1,0 +1,16 @@
+{
+  "name": "zf-webpack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "bin": {
+    "zf-pack": "./bin/zf-pack.js"
+  },
+  "devDependencies": {
+    "@babel/generator": "^7.12.1",
+    "@babel/traverse": "^7.12.1",
+    "@babel/types": "^7.12.1",
+    "babylon": "^6.18.0",
+    "ejs": "^3.1.5"
+  }
+}
