@@ -61,7 +61,6 @@ class Compiler {
       if (test.test(modulePath)) {
         function normalLoader() {
           let loader = require(use[len--]);
-          console.log("loader", loader);
           content = loader(content);
           if (len >= 0) {
             normalLoader();
