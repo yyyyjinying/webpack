@@ -199,7 +199,7 @@ function columnRefs() {
   ];
 
   const getColumns = columns => {
-    return columns.map(item => {
+    return columns.map((item, idx) => {
       if (typeof item.render != "function") {
         item.render = (text, record, index) => {
           return AutoToolTip(text, record, index, item);
@@ -209,7 +209,16 @@ function columnRefs() {
       if (Array.isArray(item.children)) {
         getColumns(item.children);
       }
-      return item;
+      // return item;
+      return {
+        ...item,
+        onHeaderCell: props => {
+          return {
+            width: props.width,
+            onResize: this.handleResize(idx),
+          };
+        },
+      };
     });
   };
 
@@ -231,7 +240,15 @@ function columnRefs() {
       //   name: record.dataIndex,
       // })
     },
-    getColumns: () => getColumns(columns),
+    getColumns: (index, size) => {
+      if (typeof index === "number" && size) {
+        columns[index] = {
+          ...this.columns[index],
+          width: size.width,
+        };
+      }
+      return getColumns(columns);
+    },
   };
 }
 

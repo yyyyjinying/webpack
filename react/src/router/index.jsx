@@ -13,6 +13,7 @@ import MD from "../component/md";
 import * as Store from "../store";
 import Tacos from "./tacos";
 import Detail from "../component/details";
+import TableResizable from "../component/autoTable/tableResizable";
 // eslint-disable-next-line no-unused-vars
 import * as Arr from "../test/array/lesson01";
 
@@ -21,7 +22,7 @@ const routes = [
     path: "/",
     exact: true, // 顶级加
     name: "home",
-    component: home, //home
+    component: TableResizable, //home
   },
   {
     path: "/md",
@@ -97,7 +98,7 @@ export default function RouteConfigExample() {
 
 // function Bus() {
 //   return <h3>Bus</h3>;
-// } 
+// }
 
 function Cart() {
   return <h3>Cart</h3>;
