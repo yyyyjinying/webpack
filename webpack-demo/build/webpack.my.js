@@ -77,6 +77,7 @@ let config = {
           loader: "url-loader",
           options: {
             limit: 1,
+            name: "[name].[ext]",
             outputPath: "img/",
             // publicPath: "http://baidu.com/img",
           },
