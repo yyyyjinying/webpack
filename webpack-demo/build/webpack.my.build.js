@@ -57,13 +57,13 @@ module.exports = merge(
     },
     plugins: [
       new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: ["**/*", "!manifest", "!manifest/*"],
+        cleanOnceBeforeBuildPatterns: ["**/*", "!manifest", "!manifest/*"], // **/* 删除所有文件 ！不删除
       }),
       new CopyPlugin({
         patterns: [
           {
-            from: path.resolve(__dirname, "../src/doc"),
-            to: path.resolve(__dirname, "../dist/doc"),
+            from: path.resolve(__dirname, "../src/public"),
+            to: path.resolve(__dirname, "../dist/public"),
           },
         ],
       }),
