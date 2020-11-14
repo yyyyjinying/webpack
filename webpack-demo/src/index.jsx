@@ -18,13 +18,28 @@ const sub = React.createElement(
 );
 // eslint-disable-next-line no-unused-vars
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      num: 0,
+    };
+  }
+  emitFn(params, num) {
+    console.log("emitfn", num, params);
+    this.setState(state => {
+      return { num: ++state.num };
+    });
+  }
   render() {
     return (
       <div>
         <div>
           <h1>2324466322</h1>
           {sub}
-          <window.other.default />
+          <window.other.default
+            num={this.state.num}
+            emitFn={this.emitFn.bind(this)}
+          />
         </div>
       </div>
     );

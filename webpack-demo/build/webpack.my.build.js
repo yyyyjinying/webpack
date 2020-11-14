@@ -83,7 +83,7 @@ module.exports = merge(
       new MiniCssExtractPlugin({
         filename: "css/[name].css",
       }),
-      new HtmlWebpackPlugin({
+      /*new HtmlWebpackPlugin({
         title: "webpack-test",
         template: "./src/index.html",
         filename: "home.html",
@@ -94,12 +94,13 @@ module.exports = merge(
         // },
         // hash: true,
       }),
+      */
       new HtmlWebpackPlugin({
         title: "webpack-test",
         template: "./src/index.html",
         filename: "other.html",
-        chunks: ["other"],
-        // chunks: ["home", "other"],
+        // chunks: ["other"],
+        chunks: ["home", "other"],
         // minify: {
         //   removeEmptyAttributes: true,
         //   collapseWhitespace: true,
