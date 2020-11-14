@@ -14,6 +14,7 @@ import * as Store from "../store";
 import Tacos from "./tacos";
 import Detail from "../component/details";
 import TableResizable from "../component/autoTable/tableResizable";
+import Font from "../component/font";
 // eslint-disable-next-line no-unused-vars
 import * as Arr from "../test/array/lesson01";
 
@@ -23,6 +24,12 @@ const routes = [
     exact: true, // 顶级加
     name: "home",
     component: TableResizable, //home
+  },
+  {
+    path: "/font",
+    exact: true, // 顶级加
+    name: "font",
+    component: Font, //home
   },
   {
     path: "/md",
@@ -71,6 +78,9 @@ export default function RouteConfigExample() {
       <Router>
         <div>
           <ul>
+            <li>
+              <Link to="/font">font</Link>
+            </li>
             <li>
               <Link to="/md">md</Link>
             </li>

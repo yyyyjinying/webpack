@@ -59,6 +59,8 @@ const ResizableTitle = props => {
       width={width}
       height={0}
       // lockAspectRatio={true}
+      // lockAspectRatio={16 / 9}
+      axis="x"
       handle={
         <span
           className="react-resizable-handle"
