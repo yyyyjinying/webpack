@@ -14,7 +14,6 @@ module.exports = merge(
   {},
   {
     entry: {
-
       react: ["react", "react-dom"],
 
       home: "./src/index.jsx",
@@ -65,7 +64,7 @@ module.exports = merge(
           // {
           //   from: path.resolve(__dirname, "./manifest"),
           //   to: path.resolve(__dirname, "../dist/manifest"),
-          // },  
+          // },
           {
             from: path.resolve(__dirname, "../src/doc"),
             to: path.resolve(__dirname, "../dist/doc"),
@@ -76,10 +75,12 @@ module.exports = merge(
       //   manifest: path.resolve(__dirname, "../dist/manifest", "manifest.json"),
       // }),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-      new webpack.BannerPlugin({ // 版权
+      new webpack.BannerPlugin({
+        // 版权
         banner: "hello world",
       }),
-      new webpack.DefinePlugin({ // 自定义常量
+      new webpack.DefinePlugin({
+        // 自定义常量
         ENV: JSON.stringify("production"),
       }),
 
@@ -101,7 +102,8 @@ module.exports = merge(
         title: "webpack-test",
         template: "./src/index.html",
         filename: "other.html",
-        chunks: ["home", "other"],
+        chunks: ["other"],
+        // chunks: ["home", "other"],
         // minify: {
         //   removeEmptyAttributes: true,
         //   collapseWhitespace: true,
