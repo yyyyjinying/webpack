@@ -22,7 +22,7 @@ module.exports = merge(
       filename: "[name].js",
       path: path.resolve(__dirname, "../dist"),
       library: "[name]",
-      libraryTarget: "var", // commonjs cmd
+      libraryTarget: "window", // commonjs commonjs2 window” or “global” or “this umd
       // publicPath: "http://baidu.com",
     },
     mode: "production", //"production",//"development", // 开发模式
