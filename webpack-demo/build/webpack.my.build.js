@@ -14,8 +14,6 @@ module.exports = merge(
   {},
   {
     entry: {
-      react: ["react", "react-dom"],
-
       home: "./src/index.jsx",
       // home: "./src/index.js",
       other: "./src/other.js",
@@ -58,22 +56,20 @@ module.exports = merge(
       ],
     },
     plugins: [
-      new CleanWebpackPlugin({ protectWebpackAssets: ["dist"] }),
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: ["**/*", "!manifest", "!manifest/*"],
+      }),
       new CopyPlugin({
         patterns: [
-          // {
-          //   from: path.resolve(__dirname, "./manifest"),
-          //   to: path.resolve(__dirname, "../dist/manifest"),
-          // },
           {
             from: path.resolve(__dirname, "../src/doc"),
             to: path.resolve(__dirname, "../dist/doc"),
           },
         ],
       }),
-      // new webpack.DllReferencePlugin({
-      //   manifest: path.resolve(__dirname, "../dist/manifest", "manifest.json"),
-      // }),
+      new webpack.DllReferencePlugin({
+        manifest: path.resolve(__dirname, "../dist/manifest", "manifest.json"),
+      }),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new webpack.BannerPlugin({
         // 版权

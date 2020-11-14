@@ -96,7 +96,8 @@
     "prod": "npx webpack --config ./build/prod.config.js",
     "my-build": "npx webpack --config ./build/webpack.my.build.js",
     "my": "npx webpack --config ./build/webpack.my.js",
-    "my-dev": "npx webpack-dev-server --config ./build/webpack.my.dev.js"
+    "my-dev": "npx webpack-dev-server --config ./build/webpack.my.dev.js",
+    "build:dll": "npx webpack --config ./build/webpack.dll.js"
   },
   "browserslist": [
     "last 10 Chrome versions",
