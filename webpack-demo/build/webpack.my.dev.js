@@ -57,13 +57,15 @@ module.exports = merge(
       new CopyPlugin({
         patterns: [
           {
-            from: path.resolve(__dirname, "../src/doc"),
-            to: path.resolve(__dirname, "../dist/doc"),
+            from: path.resolve(__dirname, "../src/public"),
+            to: path.resolve(__dirname, "../dist/public"),
           },
         ],
       }),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-      new CleanWebpackPlugin({ protectWebpackAssets: ["dist"] }),
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: ["**/*", "!manifest", "!manifest/*"], // **/* 删除所有文件 ！不删除
+      }),
     ],
     module: {
       noParse: /jquery/, //不去解析jquery中的依赖库
