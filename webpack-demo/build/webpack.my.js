@@ -1,37 +1,41 @@
-// const webpack = require("webpack");
-// const path = require("path");
+const webpack = require("webpack");
+const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-// const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
-module.exports = {
+let config = {
   entry: {},
   output: {},
+  resolve: {
+    alias: {},
+    // mainFields: ["main","style"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".less", ".css"], // 简化文件路径的引用
+    modules: ["node_modules"],
+  },
   plugins: [
-    // new webpack.BannerPlugin({
-    //   banner: "hello world",
-    // }),
-    // new webpack.DefinePlugin({
-    //   // 自定义常量
-    //   ENV: JSON.stringify("development"),
-    // }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: path.resolve(__dirname, "../src/public"),
-    //       to: path.resolve(__dirname, "../dist/public"),
-    //     },
-    //   ],
-    // }),
-    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    // new CleanWebpackPlugin({
-    //   cleanOnceBeforeBuildPatterns: ["**/*", "!manifest", "!manifest/*"], // **/* 删除所有文件 ！不删除
-    // }),
-    new MiniCssExtractPlugin({
-      filename: "css/[name].css",
+    new webpack.BannerPlugin({
+      banner: "hello world",
+    }),
+    new webpack.DefinePlugin({
+      // 自定义常量
+      ENV: JSON.stringify("development"),
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "../src/public"),
+          to: path.resolve(__dirname, "../dist/public"),
+        },
+      ],
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ["**/*", "!manifest", "!manifest/*"], // **/* 删除所有文件 ！不删除
     }),
   ],
   module: {
+    noParse: /jquery/, //不去解析jquery中的依赖库
     rules: [
       {
         test: /\.html$/,
@@ -42,6 +46,41 @@ module.exports = {
             options: { minimize: true },
           },
         ],
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              // @babel/preset-env 将es6转化为es5
+              presets: ["@babel/preset-react", "@babel/preset-env"],
+              plugins: [
+                ["@babel/plugin-proposal-decorators", { legacy: true }],
+                ["@babel/plugin-proposal-class-properties", { loose: true }],
+                ["@babel/plugin-transform-runtime"],
+              ],
+            },
+          },
+          {
+            loader: "eslint-loader",
+          },
+        ],
+        enforce: "pre", // 编译前检查
+        exclude: /node_modules/, // 不检测的文件
+        include: [path.resolve(__dirname, "../src")], // 指定检查的目录
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf|pdf|png|svg|jpg|gif|jpeg)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 1,
+            outputPath: "img/",
+            // publicPath: "http://baidu.com/img",
+          },
+        },
       },
       {
         test: /\.css$/,
@@ -128,3 +167,11 @@ module.exports = {
     ],
   },
 };
+
+process.env.NODE_ENV === "production" &&
+  config.plugins.push(
+    new MiniCssExtractPlugin({
+      filename: "css/[name].css",
+    })
+  );
+module.exports = config;
