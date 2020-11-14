@@ -71,12 +71,12 @@ module.exports = merge(
         manifest: path.resolve(__dirname, "../dist/manifest", "manifest.json"),
       }),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      // 版权
       new webpack.BannerPlugin({
-        // 版权
-        banner: "hello world",
+        banner: "1020066395@qq.com",
       }),
+      // 自定义常量
       new webpack.DefinePlugin({
-        // 自定义常量
         ENV: JSON.stringify("production"),
       }),
 
