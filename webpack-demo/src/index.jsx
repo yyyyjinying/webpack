@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { render } from "react-dom";
+import "./public/rem";
 import "./style.less";
 // import "./tapable";
 // import Car from "./car.jpg";
@@ -31,8 +32,14 @@ class App extends React.Component {
     });
   }
   render() {
+    console.log("用户代理: " + navigator.userAgent);
+
     return (
       <div>
+        <div className="box">
+          <div>part01</div>
+          <div>part02</div>
+        </div>
         <div>
           <h1>2324466322</h1>
           {sub}

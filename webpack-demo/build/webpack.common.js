@@ -3,6 +3,37 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
+const pxtorem = require("postcss-pxtorem");
+
+const postcssPlugins = loader => {
+  let arr = [
+    require("postcss-import")({ root: loader.resourcePath }),
+    require("autoprefixer")(),
+    require("cssnano")(),
+  ];
+  process.env.clientType === "iPhone" &&
+    arr.push(
+      pxtorem({
+        rootValue: 16, //表示根元素html的fontSize值,也可以是100,获取任意其他值
+        propList: ["*"], //设置px转换成rem的属性值，*表示所有属性的px转换为rem
+      })
+    );
+  return arr;
+};
+
+const cssLoader = () => {
+  return process.env.NODE_ENV === "development"
+    ? {
+        loader: "style-loader",
+      }
+    : {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          publicPath: "../",
+        },
+      };
+};
 
 let config = {
   entry: {},
@@ -14,6 +45,7 @@ let config = {
     modules: ["node_modules"],
   },
   plugins: [
+    new CaseSensitivePathsPlugin(),
     new webpack.BannerPlugin({
       banner: "hello world",
     }),
@@ -76,7 +108,7 @@ let config = {
         use: {
           loader: "url-loader",
           options: {
-            limit: 1,
+            limit: 5 * 1024, // 5kb
             name: "[name].[ext]",
             outputPath: "img/",
             // publicPath: "http://baidu.com/img",
@@ -86,24 +118,7 @@ let config = {
       {
         test: /\.css$/,
         use: [
-          // 顺序问题 先右后左 先下后上
-          process.env.NODE_ENV === "development"
-            ? {
-                loader: "style-loader",
-                options: {
-                  insert: function(element) {
-                    // // 将css插入head 可以指定位置
-                    var parent = document.querySelector("head");
-                    parent.insertBefore(element, parent.firstChild);
-                  },
-                },
-              }
-            : {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  publicPath: "../",
-                },
-              },
+          cssLoader(),
           {
             loader: "css-loader", // @import 语法
           },
@@ -111,11 +126,7 @@ let config = {
             loader: "postcss-loader", // 补充前缀浏览器兼容问题
             options: {
               ident: "postcss",
-              plugins: loader => [
-                require("postcss-import")({ root: loader.resourcePath }),
-                require("autoprefixer")(),
-                require("cssnano")(),
-              ],
+              plugins: postcssPlugins,
             },
           },
         ],
@@ -123,24 +134,7 @@ let config = {
       {
         test: /\.less$/,
         use: [
-          // 顺序问题 先右后左 先下后上
-          process.env.NODE_ENV === "development"
-            ? {
-                loader: "style-loader",
-                options: {
-                  insert: function(element) {
-                    // // 将css插入head 可以指定位置
-                    var parent = document.querySelector("head");
-                    parent.insertBefore(element, parent.firstChild);
-                  },
-                },
-              }
-            : {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  publicPath: "../",
-                },
-              },
+          cssLoader(),
           {
             loader: "css-loader", // @import 语法
           },
@@ -150,11 +144,7 @@ let config = {
               parser: "postcss-less",
               syntax: "postcss-less",
               ident: "postcss",
-              plugins: loader => [
-                require("postcss-import")({ root: loader.resourcePath }),
-                require("autoprefixer")(),
-                require("cssnano")(),
-              ],
+              plugins: postcssPlugins,
             },
           },
           {
@@ -175,4 +165,5 @@ process.env.NODE_ENV === "production" &&
       filename: "css/[name].css",
     })
   );
+
 module.exports = config;
