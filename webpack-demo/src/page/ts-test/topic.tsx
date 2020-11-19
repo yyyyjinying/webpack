@@ -1,6 +1,5 @@
-import * as React from 'react';
-
-class tsTest extends React.Component<any, any>{
+import React from "react";
+class Topic extends React.Component{
     onClickHandle() {
         let str: number = 12;
 
@@ -9,10 +8,9 @@ class tsTest extends React.Component<any, any>{
     render(){
         return (
             <div onClick={this.onClickHandle.bind(this)}>
-                dfdfdf
+                dfdfdfdfdfdfffffff
             </div>
         )
     }
 }
-
-export default tsTest;
+export default Topic;

@@ -43,6 +43,7 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.12.1",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
     "antd": "^3.24.3",
     "antd-dayjs-webpack-plugin": "^0.0.8",

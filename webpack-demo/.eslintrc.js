@@ -23,16 +23,16 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react'],
+  plugins: ['@typescript-eslint'], // 'react'
   rules: {
-    '@typescript-eslint/no-empty-function': 0,
-    '@typescript-eslint/explicit-module-boundary-types': 0,
-    '@typescript-eslint/no-empty-function': 1,
     /**
             "off"或0 -关闭规则
             "warn" 或1 - 开启规则, 使用警告 程序不会退出
             "error"或2 - 开启规则, 使用错误 程序退出
         */
+    '@typescript-eslint/no-empty-function': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-empty-function': 1,
     '@typescript-eslint/rule-name': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-inferrable-types': 0,
