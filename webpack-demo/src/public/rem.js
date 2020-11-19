@@ -1,9 +1,6 @@
 (function() {
   // 判断移动端时转换rem
-  if (
-    process.env.clientType === "iPhone" &&
-    /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
-  ) {
+  if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
     var initFontSize = 16;
     var iPhone6Width = 375;
     var clientWidth =
