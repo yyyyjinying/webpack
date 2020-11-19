@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { render } from "react-dom";
+import Home from "./page/coreDecorators";
 import "./public/rem";
 import "./style.less";
 // import "./tapable";
@@ -36,18 +37,13 @@ class App extends React.Component {
 
     return (
       <div>
-        <div className="box">
-          <div>part01</div>
-          <div>part02</div>
-        </div>
-        <div>
-          <h1>2324466322</h1>
-          {sub}
-          <window.other.default
+        iphone
+        <Home />
+        {/* {sub} */}
+        {/* <window.other.default
             num={this.state.num}
             emitFn={this.emitFn.bind(this)}
-          />
-        </div>
+          /> */}
       </div>
     );
   }
