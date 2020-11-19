@@ -1,4 +1,5 @@
 import React from "react";
+import "./style";
 class Topic extends React.Component{
     onClickHandle() {
         let str: number = 12;
@@ -7,7 +8,7 @@ class Topic extends React.Component{
     }
     render(){
         return (
-            <div onClick={this.onClickHandle.bind(this)}>
+            <div className="box" onClick={this.onClickHandle.bind(this)}>
                 dfdfdfdfdfdfffffff
             </div>
         )

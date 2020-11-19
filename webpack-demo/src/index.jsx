@@ -4,7 +4,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Home from './page/coreDecorators';
-import TSTest from './page/ts-test/topic';
+import TSTest from './page/ts-test/topics';
 import './public/rem';
 import './style.less';
 // import "./tapable";
