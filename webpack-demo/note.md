@@ -53,5 +53,21 @@
         },
     }
 ```
+## 配置typescript
+react react-dom react-route-dom typescript @types/react @types/react-dom
 
 
+npm i eslint -D
+npm i @typescript-eslint/parser @typescript-eslint/eslint-plugin -D
+npm i eslint-plugin-react -D
+npm i eslint-config-alloy -D
+npm i eslint-loader -D
+
+npm install --save-dev eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-react eslint-config-alloy
+
+"eslint": "^6.8.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-react": "^7.18.0",
+    "@typescript-eslint/parser": "^4.8.1",
+     "babel-eslint": "^10.0.3",

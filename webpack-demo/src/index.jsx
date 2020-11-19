@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React from "react";
-import { render } from "react-dom";
-import Home from "./page/coreDecorators";
-import "./public/rem";
-import "./style.less";
+import React from 'react';
+import { render } from 'react-dom';
+import Home from './page/coreDecorators';
+import TSTest from './page/ts-test';
+import './public/rem';
+import './style.less';
 // import "./tapable";
 // import Car from "./car.jpg";
 
@@ -13,11 +14,8 @@ import "./style.less";
 // Img.src = Car;
 
 // document.body.appendChild(Img);
-const sub = React.createElement(
-  "h1",
-  { id: "zhao", title: "一个子节点" },
-  "标题文本01"
-);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const sub = React.createElement('h1', { id: 'zhao', title: '一个子节点' }, '标题文本01');
 // eslint-disable-next-line no-unused-vars
 class App extends React.Component {
   constructor(props) {
@@ -27,17 +25,18 @@ class App extends React.Component {
     };
   }
   emitFn(params, num) {
-    console.log("emitfn", num, params);
-    this.setState(state => {
+    console.log('emitfn', num, params);
+    this.setState((state) => {
       return { num: ++state.num };
     });
   }
   render() {
-    console.log("用户代理: " + navigator.userAgent);
+    console.log('用户代理: ' + navigator.userAgent);
 
     return (
       <div>
         iphone
+        <TSTest />
         <Home />
         {/* {sub} */}
         {/* <window.other.default
@@ -50,4 +49,4 @@ class App extends React.Component {
 }
 
 // render(sub, document.getElementById("app"));
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById('app'));
