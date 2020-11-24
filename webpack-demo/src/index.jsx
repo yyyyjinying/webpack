@@ -39,10 +39,7 @@ class App extends React.Component {
         <TSTest />
         <Home />
         {/* {sub} */}
-        {/* <window.other.default
-            num={this.state.num}
-            emitFn={this.emitFn.bind(this)}
-          /> */}
+        <window.other.default num={this.state.num} emitFn={this.emitFn.bind(this)} />
       </div>
     );
   }

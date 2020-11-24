@@ -1,6 +1,11 @@
 import React from "react";
 import "./style";
+
 class Topic extends React.Component{
+    constructor(Iprops: any){
+        super(Iprops);
+
+    }
     onClickHandle() {
         let str: number = 12;
 
