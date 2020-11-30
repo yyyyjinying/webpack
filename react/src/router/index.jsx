@@ -17,6 +17,7 @@ import TableResizable from "../component/autoTable/tableResizable";
 import Font from "../component/font";
 // eslint-disable-next-line no-unused-vars
 import * as Arr from "../test/array/lesson01";
+import Cart from "../component/Cart";
 
 const routes = [
   {
@@ -109,7 +110,3 @@ export default function RouteConfigExample() {
 // function Bus() {
 //   return <h3>Bus</h3>;
 // }
-
-function Cart() {
-  return <h3>Cart</h3>;
-}
